@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -53,7 +54,8 @@ const Contact = () => {
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Form */}
-          <Card>
+          <AnimatedSection animation="fade-in-left">
+            <Card>
             <CardContent className="p-8">
               <h2 className="text-2xl font-bold mb-6 font-['Playfair_Display']">
                 Send Us a Message
@@ -123,9 +125,11 @@ const Contact = () => {
               </form>
             </CardContent>
           </Card>
+          </AnimatedSection>
 
           {/* Contact Information */}
-          <div className="space-y-6">
+          <AnimatedSection animation="fade-in-right">
+            <div className="space-y-6">
             <div>
               <h2 className="text-2xl font-bold mb-6 font-['Playfair_Display']">
                 Contact Information
@@ -195,7 +199,8 @@ const Contact = () => {
                 </div>
               </CardContent>
             </Card>
-          </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

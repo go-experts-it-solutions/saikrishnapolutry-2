@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
+import AnimatedSection from "@/components/AnimatedSection";
 import { products } from "@/data/products";
 
 const Products = () => {
@@ -23,8 +24,10 @@ const Products = () => {
       {/* Products Grid */}
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {products.map((product, index) => (
+            <AnimatedSection key={product.id} animation="fade-up" delay={index % 3 + 1}>
+              <ProductCard product={product} />
+            </AnimatedSection>
           ))}
         </div>
       </section>
