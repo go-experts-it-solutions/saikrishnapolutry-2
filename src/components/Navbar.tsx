@@ -182,7 +182,7 @@ const navigate = useNavigate();
       {/* Premium Top Bar */}
       <motion.div 
         className="bg-gradient-to-r from-red-600 to-red-700 text-white overflow-hidden hidden md:block"
-        variants={topBarVariants}
+        // variants={topBarVariants}
         initial="initial"
         animate="animate"
       >
@@ -238,7 +238,7 @@ const navigate = useNavigate();
             ? "bg-white/98 backdrop-blur-xl shadow-xl border-b-2 border-red-100"
             : "bg-white/95 backdrop-blur-md border-b border-gray-100"
         }`}
-        variants={navBarVariants}
+        // variants={navBarVariants}
         initial="initial"
         animate="animate"
       >
@@ -249,7 +249,7 @@ const navigate = useNavigate();
             <Link to="/" className="flex items-center gap-3 group">
               <motion.div
                 className="relative"
-                variants={logoVariants}
+                // variants={logoVariants}
                 initial="initial"
                 animate="animate"
                 whileHover={{ scale: 1.08 }}
@@ -294,7 +294,7 @@ const navigate = useNavigate();
                 <motion.div
                   key={link.path}
                   custom={index}
-                  variants={linkVariants}
+                  // variants={linkVariants}
                   initial="initial"
                   animate="animate"
                   className="relative"
@@ -340,7 +340,7 @@ const navigate = useNavigate();
                   <AnimatePresence>
                     {link.hasDropdown && productsDropdownOpen && (
                       <motion.div
-                        variants={dropdownVariants}
+                        // variants={dropdownVariants}
                         initial="hidden"
                         animate="visible"
                         exit="exit"
@@ -401,7 +401,7 @@ const navigate = useNavigate();
             <div className="hidden lg:flex items-center gap-3">
               <motion.div
                 custom={0}
-                variants={buttonVariants}
+                // variants={buttonVariants}
                 initial="initial"
                 animate="animate"
                 whileHover={{ scale: 1.05 }}
@@ -417,7 +417,7 @@ const navigate = useNavigate();
 
               <motion.div
                 custom={1}
-                variants={buttonVariants}
+                // variants={buttonVariants}
                 initial="initial"
                 animate="animate"
                 whileHover={{ scale: 1.05, x: 3 }}
