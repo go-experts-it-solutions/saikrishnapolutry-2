@@ -1,8 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-// import { useRouter } from "next/router";
-// import { motion } from "framer-motion";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
+
 import { 
   Fan, 
   Wind, 
@@ -27,8 +32,10 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+import heroImages from "../assets/hero-farm.jpg";
+
 // Placeholder for poultry farm images - replace with actual images
-const heroImage = "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1920&h=1080&fit=crop";
+const heroImage = heroImages;
 const aboutImage = "https://afi.com.ph/wp-content/uploads/2022/09/Day2_AFI-06368-1024x683.jpg";
 const serviceImage1 = "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQXjth1ym32MSgeWxwnT_fpI28tL5oiXtxHPtWAiVhba0GaI95uedQMGLtSsM7jqEMZRfHSkksh7kayYZy8-UYas6cCVCBmmjshBTI_asdxg65aVfh-mj2Dcg";
 const serviceImage2 = "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=400&h=300&fit=crop";
@@ -71,7 +78,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Google Fonts */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Libre+Franklin:wght@300;400;500;600;700;800;900&display=swap');
@@ -235,7 +242,7 @@ const Index = () => {
           <Button 
             size="lg" 
             variant="outline"
-            className="border-2 border-white text-white hover:bg-white hover:text-red-600 px-6 py-4 rounded-md text-sm font-accent font-semibold transition-all duration-300 group relative overflow-hidden"
+            className="border-2 border-white text-white hover:bg-background hover:text-red-600 px-6 py-4 rounded-md text-sm font-accent font-semibold transition-all duration-300 group relative overflow-hidden"
           >
             <span className="relative z-10 flex items-center">
               Contact Us
@@ -288,7 +295,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <Card className="bg-white hover:shadow-xl transition-all duration-300 border-none">
+                <Card className="bg-background hover:shadow-xl transition-all duration-300 border-none">
                   <CardContent className="p-6 text-center">
                     <feature.icon className={`w-12 h-12 ${feature.color} mx-auto mb-3`} />
                     <div className="text-3xl font-bold text-gray-900 mb-1 font-display">
@@ -320,7 +327,7 @@ const Index = () => {
             transition: { duration: 0.4, ease: "backOut" }
           }}
         >
-          <Card className="bg-white hover:shadow-2xl transition-all duration-500 border-none relative overflow-hidden group">
+          <Card className="bg-background hover:shadow-2xl transition-all duration-500 border-none relative overflow-hidden group">
             {/* Animated Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
             
@@ -398,7 +405,7 @@ const Index = () => {
 
 
       {/* About Section - Two Column with Image */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
@@ -417,17 +424,27 @@ const Index = () => {
                   className="w-full h-[600px] object-cover"
                 />
                 {/* Overlay Badge */}
-                <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm px-6 py-4 rounded-lg shadow-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
-                      <Award className="w-6 h-6 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-gray-900 font-accent">BESS LAB Certified</p>
-                      <p className="text-xs text-gray-600 font-body">University of Illinois</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="absolute bottom-6 left-6 bg-background backdrop-blur-sm px-6 py-4 rounded-lg shadow-xl">
+  <div className="flex items-center gap-3">
+    
+    {/* Logo Circle (Same size as before) */}
+    <div className="w-12 h-12  overflow-hidden flex items-center justify-center ">
+      <img 
+        src="/favicon.png" 
+        alt="Logo" 
+        className="w-full h-full object-cover" 
+      />
+    </div>
+
+    {/* Text Section (unchanged) */}
+    <div>
+      <p className="text-sm font-bold text-gray-900 font-accent">SKPE</p>
+      <p className="text-xs text-gray-600 font-body">Saikrishna Polutry Equipments</p>
+    </div>
+
+  </div>
+</div>
+
               </div>
             </motion.div>
 
@@ -496,7 +513,7 @@ const Index = () => {
       </section>
 
       {/* Services Section - Grid with Images */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-background-50">
         <div className="container mx-auto px-4">
           {/* Section Header */}
           <motion.div
@@ -559,7 +576,7 @@ const Index = () => {
       </section>
 
       {/* Team/Experts Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -587,6 +604,68 @@ const Index = () => {
         </div>
       </section>
 
+
+ <section className="py-20 bg-background">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold text-center mb-12 font-Poppins">
+      Our Core Values
+    </h2>
+
+    <Swiper
+      modules={[Pagination, Autoplay]}
+      spaceBetween={20}
+      slidesPerView={1}
+      autoplay={{ delay: 2500 }}
+      pagination={{ clickable: true }}
+      breakpoints={{
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1280: { slidesPerView: 4 },
+      }}
+    >
+      {[
+        {
+          title: "Leadership",
+          description:
+            "Under the guidance of our Managing Partners with 25+ years of expertise, the company has grown consistently.",
+        },
+        {
+          title: "Infrastructure & Capabilities",
+          description:
+            "We operate with modern machinery, large-scale storage, and a strategic location in Hyderabad.",
+        },
+        {
+          title: "Key Strengths",
+          description:
+            "25+ years experience, advanced tech, pan-India supply, global exports, on-time delivery, and customer-first service.",
+        },
+        {
+          title: "Product Portfolio",
+          description:
+            "We offer a complete lineup of poultry equipment including feeders, drinkers, brooders, and more.",
+        },
+      ].map((value, index) => (
+        <SwiperSlide key={index}>
+          <div className="h-full">
+            <Card className="hover-lift h-full">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-lg font-semibold mb-2 font-Poppins">
+                  {value.title}
+                </h3>
+                <p className="text-sm text-muted-foreground font-Poppins">
+                  {value.description}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+</section>
+
+
       {/* Newsletter/CTA Section */}
       <section className="py-24 bg-gradient-to-br from-red-600 via-red-700 to-red-900 text-white">
         <div className="container mx-auto px-4">
@@ -609,7 +688,7 @@ const Index = () => {
                   placeholder="Your Email Address"
                   className="flex-1 px-6 py-4 rounded-md text-gray-900 font-body focus:outline-none focus:ring-2 focus:ring-white"
                 />
-                <Button className="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 rounded-md font-accent font-bold">
+                <Button className="bg-background text-red-600 hover:bg-gray-100 px-8 py-4 rounded-md font-accent font-bold">
                   Subscribe
                 </Button>
               </div>
@@ -661,7 +740,7 @@ const ServiceCard = ({ service, index }) => {
             </div>
           </div>
 
-          <CardContent className="p-6 bg-white">
+          <CardContent className="p-6 bg-background">
             <h3 className="text-xl font-bold mb-3 text-gray-900 font-heading">
               {service.title}
             </h3>

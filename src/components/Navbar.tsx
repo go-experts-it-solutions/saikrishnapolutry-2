@@ -1,8 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation ,useNavigate} from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail, Download, ChevronRight, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,8 @@ const Navbar = () => {
   const [hasAnimated, setHasAnimated] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
   const location = useLocation();
+  
+const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,90 +31,23 @@ const Navbar = () => {
 
   const navLinks = [
     { path: "/", label: "Home" },
-    { path: "/products", label: "Products", hasDropdown: true },
     { path: "/about", label: "About Us" },
+    { path: "/products", label: "Our Products", hasDropdown: true },
+    { path: "/ourspeciality", label: "Our Speciality" },
+    { path: "/ourprojects", label: "Our Projects" },
     { path: "/contact", label: "Contact" },
   ];
 
-  // Comprehensive product categories with all items
+  // Product categories
   const productCategories = [
-    {
-      title: "DRINKING SYSTEM",
-      color: "text-green-600",
-      items: [
-        { name: "Bell Drinkers", path: "/products/bell-drinkers" },
-        { name: "Manual Drinkers", path: "/products/manual-drinkers" },
-        { name: "Nipple Accessories", path: "/products/nipple-accessories" },
-        { name: "Nipple Drinking System", path: "/products/nipple-drinking-system" }
-      ]
-    },
-    {
-      title: "FEEDING SYSTEM",
-      color: "text-blue-600",
-      items: [
-        { name: "Auto. Feeding System Breeder", path: "/products/auto-feeding-breeder" },
-        { name: "Auto. Feeding System Broiler", path: "/products/auto-feeding-broiler" },
-        { name: "Feed Partition", path: "/products/feed-partition" },
-        { name: "Manual Feeders", path: "/products/manual-feeders" },
-        { name: "Silo System", path: "/products/silo-system" }
-      ]
-    },
-    {
-      title: "CLIMATE CONTROL",
-      color: "text-purple-600",
-      items: [
-        { name: "Clima Therm", path: "/products/clima-therm" },
-        { name: "Controllers", path: "/products/controllers" },
-        { name: "Fogger System", path: "/products/fogger-system" },
-        { name: "Ventilation", path: "/products/ventilation" }
-      ]
-    },
-    {
-      title: "HOUSING",
-      color: "text-orange-600",
-      items: [
-        { name: "Clima Shield", path: "/products/clima-shield" },
-        { name: "Curtain Winching System", path: "/products/curtain-winching" },
-        { name: "Laying Nest", path: "/products/laying-nest" },
-        { name: "Slatt", path: "/products/slatt" },
-        { name: "Tiny Homes For The Rural...", path: "/products/tiny-homes" }
-      ]
-    },
-    {
-      title: "BIRD TRANSPORT",
-      color: "text-pink-600",
-      items: [
-        { name: "Chick Transport Box (4...)", path: "/products/chick-transport-box" },
-        { name: "Chicken Carrier With Plastic...", path: "/products/chicken-carrier-plastic" },
-        { name: "Meat Crate", path: "/products/meat-crate" },
-        { name: "Poultry Transport Crate (Poultr...)", path: "/products/poultry-transport-crate" }
-      ]
-    },
-    {
-      title: "OTHER",
-      color: "text-red-600",
-      items: [
-        { name: "Face Shield", path: "/products/face-shield" },
-        { name: "Medicator", path: "/products/medicator" },
-        { name: "Other", path: "/products/other" },
-        { name: "Vaccinator", path: "/products/vaccinator" }
-      ]
-    },
-    {
-      title: "HATCHERY / FEEDMILL / PROCESSING",
-      color: "text-teal-600",
-      items: [
-        { name: "Roofing Sheets", path: "/products/roofing-sheets" }
-      ]
-    },
-    {
-      title: "VERTICAL FARMING",
-      color: "text-indigo-600",
-      items: [
-        { name: "Vertical Farming For Breeders", path: "/products/vertical-farming-breeders" },
-        { name: "Vertical Farming For Layers", path: "/products/vertical-farming-layers" }
-      ]
-    }
+    { name: "Drinking System", path: "/products/drinking-system" },
+    { name: "Feeding System", path: "/products/feeding-system" },
+    { name: "Climate Control", path: "/products/climate-control" },
+    { name: "Housing", path: "/products/housing" },
+    { name: "Bird Transport", path: "/products/bird-transport" },
+    { name: "Other Equipment", path: "/products/other-equipment" },
+    { name: "Hatchery & Processing", path: "/products/hatchery-processing" },
+    { name: "Vertical Farming", path: "/products/vertical-farming" },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -350,27 +286,9 @@ const Navbar = () => {
                   transition={{ scale: { delay: 1.4, duration: 0.4 }, opacity: { delay: 1.4, duration: 0.4 } }}
                 />
               </motion.div>
-
-              <motion.div 
-                className="hidden md:flex flex-col"
-                initial={{ x: -30, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.1, duration: 0.5 }}
-              >
-                <motion.span 
-                  className="text-xs font-body font-semibold text-gray-500 uppercase tracking-wider leading-tight"
-                  whileHover={{ letterSpacing: "0.05em" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  Manufacturers of
-                </motion.span>
-                <span className="text-xs font-body font-bold text-red-600 uppercase tracking-wider leading-tight">
-                  Innovative Equipment
-                </span>
-              </motion.div>
             </Link>
 
-            {/* Desktop Navigation with Mega Menu */}
+            {/* Desktop Navigation with Left Margin Dropdown */}
             <div className="hidden lg:flex items-center gap-2">
               {navLinks.map((link, index) => (
                 <motion.div
@@ -418,48 +336,63 @@ const Navbar = () => {
                     />
                   </Link>
 
-                  {/* Mega Menu Dropdown */}
-                {/* Mega Menu Dropdown - Centered */}
-{/* Mega Menu Dropdown - Perfectly Centered */}
-<AnimatePresence>
-  {link.hasDropdown && productsDropdownOpen && (
-    <motion.div
-      variants={dropdownVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="fixed left-1/2 -translate-x-1/2 mt-2 w-[1000px] max-w-[95vw] bg-white rounded-xl shadow-2xl border-2 border-gray-100 overflow-hidden"
-      style={{ top: '80px' }}
-    >
-      <div className="p-6 grid grid-cols-4 gap-6">
-        {productCategories.map((category, idx) => (
-          <div key={idx} className="space-y-3">
-            {/* Category Title */}
-            <h3 className={`text-xs font-body font-bold uppercase tracking-wider ${category.color} pb-2 border-b-2 border-gray-100`}>
-              {category.title}
-            </h3>
-            
-            {/* Category Items */}
-            <div className="space-y-1">
-              {category.items.map((item, itemIdx) => (
-                <Link
-                  key={itemIdx}
-                  to={item.path}
-                  onClick={() => setProductsDropdownOpen(false)}
-                  className="block text-xs font-body text-gray-700 hover:text-red-600 hover:translate-x-1 transition-all duration-200 py-1"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+                  {/* Dropdown with Left Margin */}
+                  <AnimatePresence>
+                    {link.hasDropdown && productsDropdownOpen && (
+                      <motion.div
+                        variants={dropdownVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
+                        className="fixed left-14 bg-white shadow-xl border-t border-gray-200"
+                        style={{ top: isScrolled ? '120px' : '122px' }}
+                        onMouseEnter={() => setProductsDropdownOpen(true)}
+                        onMouseLeave={() => setProductsDropdownOpen(false)}
+                      >
+                        <div className="container mx-auto px-2">
+                          <div className="flex rounded-lg overflow-hidden  ml-0 w-[900px] max-w-full">
+                            {/* Left Sidebar Section */}
+                            <div className="w-80 bg-gray-50 p-8 border-r border-gray-200">
+                              <h2 className="text-2xl font-heading text-gray-900 font-bold mb-3">
+                                Our All Products
+                              </h2>
+                              <p className="text-sm font-body text-gray-600 mb-6 leading-relaxed">
+                                Check out our all products and hire your personal professional.
+                              </p>
+                              <Button 
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-body font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                             onClick={() => {
+  setProductsDropdownOpen(false);
+  navigate("/products");
+}}
+                                
+                              >
+                                Explore All Products
+                                <ChevronRight className="w-4 h-4" />
+                              </Button>
+                            </div>
 
-
+                            {/* Right Content Section - 2 Column Grid */}
+                            <div className="flex-1 p-8 grid grid-cols-2 gap-x-8 gap-y-4">
+                              {productCategories.map((category, idx) => (
+                                <Link
+                                  key={idx}
+                                  to={category.path}
+                                  onClick={() => setProductsDropdownOpen(false)}
+                                  className="flex items-center justify-between py-3 px-4 hover:bg-gray-50 rounded-lg transition-colors duration-200 group"
+                                >
+                                  <span className="text-base font-body text-gray-900 group-hover:text-red-600 transition-colors">
+                                    {category.name}
+                                  </span>
+                                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
             </div>
@@ -532,7 +465,7 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu (keeping existing mobile menu code) */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <>
