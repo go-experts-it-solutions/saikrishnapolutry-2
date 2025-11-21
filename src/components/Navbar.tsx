@@ -430,7 +430,8 @@ useEffect(() => {
   initial="hidden"
   animate="visible"
   exit="exit"
-className="absolute left-0 bg-white shadow-xl border-t border-gray-200"
+className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
+
     style={{
     top: "100%",      // attach exactly below the nav item
     left: "0px",      // no shifting, stays aligned to nav item
