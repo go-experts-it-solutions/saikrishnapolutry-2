@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 
+
+
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,7 +23,35 @@ const Navbar = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
+
+
   
+
+
+  const DYNAMIC_API = "https://saikrishnapolutary-backend.onrender.com/api/products/getallproducts";
+
+// Add at top
+const [productCategories, setProductCategories] = useState([]);
+
+useEffect(() => {
+  fetch(DYNAMIC_API)
+    .then((res) => res.json())
+    .then((data) => {
+      const products = data.products || data;
+      const seen = {};
+      const categories = products
+        .map((p) => p.category)
+        .filter(cat => cat && !seen[cat] && (seen[cat] = true));
+      setProductCategories(
+        categories.map(category => ({
+          name: category,
+          path: "/products/" +
+            category.toLowerCase().replace(/[^a-z0-9]/gi, "-").replace(/-+/g, "-").replace(/(^-|-$)/g, "")
+        }))
+      );
+    })
+    .catch(() => setProductCategories([]));
+}, []);
   
 
     const handleLogin = async (e) => {
@@ -81,17 +112,7 @@ const Navbar = () => {
     { path: "/contact", label: "Contact" },
   ];
 
-  // Product categories
-  const productCategories = [
-    { name: "Drinking System", path: "/products/drinking-system" },
-    { name: "Feeding System", path: "/products/feeding-system" },
-    { name: "Climate Control", path: "/products/climate-control" },
-    { name: "Housing", path: "/products/housing" },
-    { name: "Bird Transport", path: "/products/bird-transport" },
-    { name: "Other Equipment", path: "/products/other-equipment" },
-    { name: "Hatchery & Processing", path: "/products/hatchery-processing" },
-    { name: "Vertical Farming", path: "/products/vertical-farming" },
-  ];
+
 
   const isActive = (path) => location.pathname === path;
 
@@ -172,7 +193,7 @@ const Navbar = () => {
   const dropdownVariants = {
     hidden: { 
       opacity: 0, 
-      y: -10,
+      y: 10,
       scale: 0.95
     },
     visible: { 
@@ -180,16 +201,16 @@ const Navbar = () => {
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.2,
+        duration: 0.25,
         ease: "easeOut"
       }
     },
     exit: {
       opacity: 0,
-      y: -10,
+      y: 10,
       scale: 0.95,
       transition: {
-        duration: 0.15
+        duration: 0.2
       }
     }
   };
@@ -222,67 +243,6 @@ const Navbar = () => {
         .font-bold { font-weight: 700; }
       `}</style>
 
-      {/* Premium Top Bar */}
-      {/* <motion.div 
-        className="bg-gradient-to-r from-red-600 to-red-700 text-white overflow-hidden hidden md:block"
-        // variants={topBarVariants}
-        initial="initial"
-        animate="animate"
-      >
-        <motion.div 
-          className="py-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.4 }}
-        >
-          <div className="container mx-auto px-4 relative">
-            <div className="flex items-center justify-between text-xs font-body">
-              <div className="flex items-center gap-6">
-                <motion.a
-                  href="tel:+919440406200"
-                  className="flex items-center gap-1.5 hover:text-white/80 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 1, duration: 0.4 }}
-                >
-                  <Phone className="w-3 h-3" />
-                  <span>+91 94404 06200</span>
-                </motion.a>
-                <motion.a
-                  href="mailto:info@saikrishnapoultry.com"
-                  className="flex items-center gap-1.5 hover:text-white/80 transition-colors"
-                  whileHover={{ scale: 1.05 }}
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 1.1, duration: 0.4 }}
-                >
-                  <Mail className="w-3 h-3" />
-                  <span>info@saikrishnapoultry.com</span>
-                </motion.a>
-              </div>
-
-              
-                <Button 
- 
-    className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full  shadow-md transition-all"
-     onClick={() => setShowLogin(true)}
-  >
-    Login
-  </Button>
-              <motion.div 
-                className="font-body font-medium tracking-wide"
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: [0, 1, 1] }}
-                transition={{ x: { delay: 1, duration: 0.4 }, opacity: { delay: 1, duration: 0.4 } }}
-              >
-                Certified by University of Illinois BESS LAB
-              </motion.div>
-
-            </div>
-          </div>
-        </motion.div>
-      </motion.div> */}
 
 
       <motion.div 
@@ -486,12 +446,13 @@ className="absolute left-0 bg-white shadow-xl border-t border-gray-200"
   <img
     src="/favicon.png"
     alt="favicon"
-  className="w-14 h-auto ml-10 object-contain"
+  className="w-20 h-auto ml-12 object-contain"
   />
 
   <h2 className="text-2xl font-heading text-gray-900 font-bold mt-12">
     Our All Products
   </h2>
+  <p>Pioneering Innovations in the Global Agriculture</p>
 </div>
 
 
@@ -509,21 +470,33 @@ className="absolute left-0 bg-white shadow-xl border-t border-gray-200"
                             </div>
 
                             {/* Right Content Section - 2 Column Grid */}
-                            <div className="flex-1 p-8 grid grid-cols-2 gap-x-8 gap-y-4">
-                              {productCategories.map((category, idx) => (
-                                <Link
-                                  key={idx}
-                                  to={category.path}
-                                  onClick={() => setProductsDropdownOpen(false)}
-                                  className="flex items-center justify-between py-3 px-4 hover:bg-gray-50 rounded-lg transition-colors duration-200 group"
-                                >
-                                  <span className="text-base font-body text-gray-900 group-hover:text-red-600 transition-colors">
-                                    {category.name}
-                                  </span>
-                                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
-                                </Link>
-                              ))}
-                            </div>
+
+
+<div className="flex-1 p-8 grid grid-cols-2 gap-x-8 gap-y-4">
+  {productCategories && productCategories.length > 0 ? (
+    productCategories.map((category, idx) => (
+      <Link
+        key={idx}
+        to={
+          // Generate slug route /products/drinking-equipments from name
+          "/products"
+        }
+        onClick={() => setProductsDropdownOpen(false)}
+        className="flex items-center justify-between py-3 px-4 hover:bg-gray-50 rounded-lg transition-colors duration-200 group"
+      >
+        <span className="text-base font-body text-gray-900 group-hover:text-red-600 transition-colors">
+          {category.name}
+        </span>
+        <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
+      </Link>
+    ))
+  ) : (
+    <div className="py-3 px-4 text-gray-400 col-span-2">No categories found</div>
+  )}
+</div>
+
+
+                          
                           </div>
                         </div>
                       </motion.div>

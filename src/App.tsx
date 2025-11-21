@@ -8,7 +8,7 @@ import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
+
 import OurSpeciality from "./pages/OurSpeciality"
 import OurProjects from "./pages/Ourprojects";
 import Admin from "./pages/Admin"
@@ -21,6 +21,7 @@ import AdminContactList from "./pages/AdminContactList";
 import AdminEditProduct from "./pages/AdminProductEdit";
 import AdminEditProject from "./pages/AdminEditProject";
 import AdminEditContact from "./pages/AdminEditContact";
+import CategoryProduct from "./pages/CategoryProducts"
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,9 @@ const App = () => (
               <Route path="/admin/edit/:id" element={<AdminEditProduct />} />
                     <Route path="/admin/:id" element={<AdminEditProject />} />
                        <Route path="/admin/editcontact/:id" element={<AdminEditContact />} />
+                       {/* <Route path="/products/:category" element={<ProductsPage />} /> */}
+
+                       <Route path="/products/:category" element={<CategoryProduct />} />
 
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

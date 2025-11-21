@@ -41,6 +41,9 @@ const serviceImage1 = "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQ
 const serviceImage2 = "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=400&h=300&fit=crop";
 const serviceImage3 = "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=400&h=300&fit=crop";
 
+
+
+
 const Index = () => {
   const navigate = useNavigate();
 
@@ -229,31 +232,45 @@ const Index = () => {
         </motion.div>
 
         <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ duration: 0.2 }}
-        >
-          <Button 
-            size="lg" 
-            variant="outline"
-            className="border-2 border-white text-white hover:bg-background hover:text-red-600 px-6 py-4 rounded-md text-sm font-accent font-semibold transition-all duration-300 group relative overflow-hidden"
-          >
-            <span className="relative z-10 flex items-center">
-              Contact Us
-              <motion.div
-                animate={{ x: [0, 3, 0] }}
-                transition={{ 
-                  repeat: Infinity, 
-                  duration: 1.5,
-                  ease: "easeInOut",
-                  delay: 0.3
-                }}
-              >
-                <ChevronRight className="w-4 h-4 ml-2" />
-              </motion.div>
-            </span>
-          </Button>
-        </motion.div>
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  transition={{ duration: 0.2 }}
+>
+  <Button
+    size="lg"
+    variant="outline"
+    className="
+      bg-white 
+      text-red-600 
+      border-2 border-red-600
+      px-6 py-4 
+      rounded-md 
+      text-sm 
+      font-accent font-semibold 
+      transition-all duration-300 
+      group relative overflow-hidden
+      hover:bg-white 
+      hover:text-red-600 
+      hover:border-red-600
+    "
+  >
+    <span className="relative z-10 flex items-center">
+      Contact Us
+      <motion.div
+        animate={{ x: [0, 3, 0] }}
+        transition={{
+          repeat: Infinity,
+          duration: 1.5,
+          ease: "easeInOut",
+          delay: 0.3
+        }}
+      >
+        <ChevronRight className="w-4 h-4 ml-2 text-red-600" />
+      </motion.div>
+    </span>
+  </Button>
+</motion.div>
+
       </motion.div>
     </motion.div>
   </div>
@@ -305,12 +322,13 @@ const Index = () => {
       </section> */}
 
 
-      <section className="relative -mt-20 z-10"> 
-  <div className="container mx-auto px-4">
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+<section className="relative -mt-20 z-10"> 
+  <div className="w-full flex justify-center">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-0 place-items-center">
       {features.map((feature, index) => (
         <motion.div
           key={index}
+          className="mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -321,14 +339,19 @@ const Index = () => {
             transition: { duration: 0.4, ease: "backOut" }
           }}
         >
-          <Card className="bg-background hover:shadow-2xl transition-all duration-500 border-none relative overflow-hidden group">
-            {/* Animated Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+          <Card className="bg-background hover:shadow-2xl transition-all duration-500 
+            border-none relative overflow-hidden group 
+            w-40 h-37 mr-7 flex items-center justify-center rounded-xl">
             
-            <CardContent className="p-6 text-center relative z-10">
-              {/* Animated Icon */}
+            {/* Background Hover Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 
+              opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+
+            <CardContent className="p-2 text-center relative z-10 flex flex-col items-center justify-center">
+              
+              {/* Icon Animation */}
               <motion.div
-                className="relative inline-block mb-3"
+                className="relative inline-block mb-2"
                 whileHover={{
                   scale: 1.2,
                   rotate: [0, -10, 10, -10, 0],
@@ -338,7 +361,6 @@ const Index = () => {
                   }
                 }}
               >
-                {/* Pulsing Circle */}
                 <motion.div
                   className="absolute inset-0 bg-red-100 rounded-full -z-10"
                   initial={{ scale: 0, opacity: 0 }}
@@ -352,12 +374,13 @@ const Index = () => {
                     }
                   }}
                 />
-                <feature.icon className={`w-12 h-12 ${feature.color} mx-auto`} />
+                <feature.icon className={`w-12 h-12 ${feature.color}`} />
               </motion.div>
 
-              {/* Animated Counter */}
+              {/* Number Animation */}
               <motion.div 
-                className="text-3xl font-bold text-gray-900 mb-1 font-display group-hover:text-red-600 group-hover:scale-115 transition-all duration-300"
+                className="text-3xl font-bold text-gray-900 mb-1 font-display 
+                group-hover:text-red-600 group-hover:scale-115 transition-all duration-300"
                 initial={{ scale: 0.5, opacity: 0 }}
                 whileInView={{ 
                   scale: 1, 
@@ -374,7 +397,7 @@ const Index = () => {
                 {feature.number}
               </motion.div>
 
-              {/* Label with subtle lift */}
+              {/* Label */}
               <motion.div 
                 className="text-sm text-gray-600 font-body"
                 whileHover={{
@@ -384,11 +407,13 @@ const Index = () => {
               >
                 {feature.label}
               </motion.div>
+
             </CardContent>
 
-            {/* Bottom Border Animation */}
+            {/* Bottom Border Hover Animation */}
             <motion.div
-              className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-out"
+              className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 
+              origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-out"
             />
           </Card>
         </motion.div>
