@@ -223,7 +223,7 @@ const Navbar = () => {
       `}</style>
 
       {/* Premium Top Bar */}
-      <motion.div 
+      {/* <motion.div 
         className="bg-gradient-to-r from-red-600 to-red-700 text-white overflow-hidden hidden md:block"
         // variants={topBarVariants}
         initial="initial"
@@ -235,7 +235,7 @@ const Navbar = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 0.4 }}
         >
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4 relative">
             <div className="flex items-center justify-between text-xs font-body">
               <div className="flex items-center gap-6">
                 <motion.a
@@ -261,6 +261,15 @@ const Navbar = () => {
                   <span>info@saikrishnapoultry.com</span>
                 </motion.a>
               </div>
+
+              
+                <Button 
+ 
+    className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full  shadow-md transition-all"
+     onClick={() => setShowLogin(true)}
+  >
+    Login
+  </Button>
               <motion.div 
                 className="font-body font-medium tracking-wide"
                 initial={{ x: 50, opacity: 0 }}
@@ -269,10 +278,85 @@ const Navbar = () => {
               >
                 Certified by University of Illinois BESS LAB
               </motion.div>
+
             </div>
           </div>
         </motion.div>
-      </motion.div>
+      </motion.div> */}
+
+
+      <motion.div 
+  className="bg-gradient-to-r from-red-600 to-red-700 text-white overflow-hidden hidden md:block"
+  initial="initial"
+  animate="animate"
+>
+  <motion.div 
+    className="py-2"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.8, duration: 0.4 }}
+  >
+    <div className="container mx-auto px-4 relative">
+      
+      <div className="flex items-center justify-between text-xs font-body">
+
+        {/* LEFT SIDE — CALL + EMAIL */}
+        <div className="flex items-center gap-6">
+          <motion.a
+            href="tel:+919440406200"
+            className="flex items-center gap-1.5 hover:text-white/80 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 1, duration: 0.4 }}
+          >
+            <Phone className="w-3 h-3" />
+            <span>+91 94404 06200</span>
+          </motion.a>
+
+          <motion.a
+            href="mailto:info@saikrishnapoultry.com"
+            className="flex items-center gap-1.5 hover:text-white/80 transition-colors"
+            whileHover={{ scale: 1.05 }}
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 1.1, duration: 0.4 }}
+          >
+            <Mail className="w-3 h-3" />
+            <span>info@saikrishnapoultry.com</span>
+          </motion.a>
+        </div>
+
+        {/* RIGHT SIDE — LOGIN + CERTIFICATION */}
+        <div className="flex items-center gap-4">
+
+          <Button 
+            className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full shadow-md transition-all"
+            onClick={() => setShowLogin(true)}
+          >
+            Login
+          </Button>
+
+          <motion.div 
+            className="font-body font-medium tracking-wide whitespace-nowrap"
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: [0, 1, 1] }}
+            transition={{
+              x: { delay: 1, duration: 0.4 },
+              opacity: { delay: 1, duration: 0.4 },
+            }}
+          >
+            Certified by University of Illinois BESS LAB
+          </motion.div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </motion.div>
+</motion.div>
+
 
       {/* Main Navigation */}
       <motion.nav
@@ -285,7 +369,7 @@ const Navbar = () => {
         initial="initial"
         animate="animate"
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 relative">
           <div className="flex items-center justify-between h-20">
             
             {/* Premium Logo */}
@@ -382,26 +466,35 @@ const Navbar = () => {
                   {/* Dropdown with Left Margin */}
                   <AnimatePresence>
                     {link.hasDropdown && productsDropdownOpen && (
-                      <motion.div
-                        // variants={dropdownVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
-                        className="fixed left-14 bg-white shadow-xl border-t border-gray-200"
-                        style={{ top: isScrolled ? '120px' : '122px' }}
-                        onMouseEnter={() => setProductsDropdownOpen(true)}
-                        onMouseLeave={() => setProductsDropdownOpen(false)}
-                      >
+                   <motion.div
+  initial="hidden"
+  animate="visible"
+  exit="exit"
+className="absolute left-0 bg-white shadow-xl border-t border-gray-200"
+    style={{
+    top: "100%",      // attach exactly below the nav item
+    left: "0px",      // no shifting, stays aligned to nav item
+  }}
+  onMouseEnter={() => setProductsDropdownOpen(true)}
+  onMouseLeave={() => setProductsDropdownOpen(false)}
+>
                         <div className="container mx-auto px-2">
                           <div className="flex rounded-lg overflow-hidden  ml-0 w-[900px] max-w-full">
                             {/* Left Sidebar Section */}
                             <div className="w-80 bg-gray-50 p-8 border-r border-gray-200">
-                              <h2 className="text-2xl font-heading text-gray-900 font-bold mb-3">
-                                Our All Products
-                              </h2>
-                              <p className="text-sm font-body text-gray-600 mb-6 leading-relaxed">
-                                Check out our all products and hire your personal professional.
-                              </p>
+ <div className="flex flex-col items-start mb-4">
+  <img
+    src="/favicon.png"
+    alt="favicon"
+  className="w-14 h-auto ml-10 object-contain"
+  />
+
+  <h2 className="text-2xl font-heading text-gray-900 font-bold mt-12">
+    Our All Products
+  </h2>
+</div>
+
+
                               <Button 
                                 className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-body font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
                              onClick={() => {
@@ -440,61 +533,10 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* CTA Buttons */}
-            {/* <div className="hidden lg:flex items-center gap-3">
-
-
-              <motion.div
-                custom={0}
-                // variants={buttonVariants}
-                initial="initial"
-                animate="animate"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button 
-                  variant="outline"
-                  className="text-sm font-body font-semibold border-2 border-gray-300 hover:border-red-600 hover:text-red-600 text-gray-700 rounded-full px-5 py-2 transition-all duration-300 hover:shadow-lg"
-                >
-                  Get Quote
-                </Button>
-              </motion.div>
-
-              <motion.div
-                custom={1}
-                // variants={buttonVariants}
-                initial="initial"
-                animate="animate"
-                whileHover={{ scale: 1.05, x: 3 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Button 
-                  className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                    initial={{ x: "-100%" }}
-                    animate={{ x: hasAnimated ? "-100%" : "200%" }}
-                    transition={{ delay: 1.8, duration: 0.6 }}
-                    whileHover={{ x: "200%" }}
-                  />
-                  <Download className="w-3.5 h-3.5 mr-1.5 relative z-10" />
-                  <span className="relative z-10">Catalogue</span>
-                </Button>
-              </motion.div>
-            </div> */}
-
-            {/* CTA Buttons */}
+           
 <div className="hidden lg:flex items-center gap-3">
   
-  {/* LOGIN BUTTON */}
-  <Button 
- 
-    className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 shadow-md transition-all"
-     onClick={() => setShowLogin(true)}
-  >
-    Login
-  </Button>
+
 
   <Button 
     variant="outline"
@@ -503,10 +545,12 @@ const Navbar = () => {
     Get Quote
   </Button>
 
-  <Button className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+<Button asChild className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+  <a href="/SKPERed.pdf" download>
     <Download className="w-3.5 h-3.5 mr-1.5 relative z-10" />
     <span className="relative z-10">Catalogue</span>
-  </Button>
+  </a>
+</Button>
 </div>
 
 
@@ -620,6 +664,10 @@ const Navbar = () => {
                 </motion.div>
               </div>
             </motion.div>
+
+
+
+            
           </>
         )}
       </AnimatePresence>

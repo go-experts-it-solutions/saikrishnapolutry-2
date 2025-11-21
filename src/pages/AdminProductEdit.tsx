@@ -20,7 +20,7 @@ const fieldAnim = {
   visible: i => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.11, type: "spring", stiffness: 60, damping: 18 },
+    transition: { delay: i * 0.11, type: "spring", stiffness: 60, damping: 18 }
   }),
 };
 
@@ -28,11 +28,10 @@ const AdminEditProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // State handling
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
+  const [specifications, setSpecifications] = useState("");
   const [files, setFiles] = useState([]); // [{file, preview, name, type}]
   const [isLoading, setIsLoading] = useState(true);
 
@@ -45,15 +44,14 @@ const AdminEditProduct = () => {
         setName(p.name || "");
         setDescription(p.description || "");
         setCategory(p.category || "");
-        setPrice(p.price || "");
-        // Preload existing images as previews (simulate uploads)
+        setSpecifications(p.specifications || "");
         setFiles(
           Array.isArray(p.files)
             ? p.files.map(f => ({
                 preview: f.url,
                 name: f.name || f.url.split("/").pop(),
                 type: (f.name || f.url).split(".").pop(),
-                isRemote: true, // tag as already-uploaded
+                isRemote: true,
                 remoteId: f._id,
               }))
             : []
@@ -80,7 +78,9 @@ const AdminEditProduct = () => {
   const handleFileChange = e => {
     const selectedFiles = Array.from(e.target.files).map(file => ({
       file,
-      preview: file.type.startsWith("image/") ? URL.createObjectURL(file) : null,
+      preview: file.type.startsWith("image/")
+        ? URL.createObjectURL(file)
+        : null,
       type: file.type,
       name: file.name,
     }));
@@ -89,7 +89,6 @@ const AdminEditProduct = () => {
 
   const removeFile = idx => {
     const nf = [...files];
-    // Clean up object URL if needed
     if (nf[idx].preview && !nf[idx].isRemote) URL.revokeObjectURL(nf[idx].preview);
     nf.splice(idx, 1);
     setFiles(nf);
@@ -98,7 +97,7 @@ const AdminEditProduct = () => {
   // Submission
   const handleSubmit = async e => {
     e.preventDefault();
-    if (!name || !description || !price || !category) {
+    if (!name || !description || !category) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -107,7 +106,7 @@ const AdminEditProduct = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
-    formData.append("price", price);
+    formData.append("specifications", specifications);
     formData.append("category", category);
 
     // Only append new uploads, not existing remote files
@@ -186,31 +185,28 @@ const AdminEditProduct = () => {
               />
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Price */}
-              <motion.div initial="hidden" animate="visible" exit="hidden" custom={2} variants={fieldAnim}>
-                <label className="block font-semibold mb-1">Price*</label>
-                <input
-                  type="number"
-                  step="0.01"
-                  value={price}
-                  onChange={e => setPrice(e.target.value)}
-                  className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </motion.div>
-              {/* Category */}
-              <motion.div initial="hidden" animate="visible" exit="hidden" custom={3} variants={fieldAnim}>
-                <label className="block font-semibold mb-1">Category*</label>
-                <input
-                  type="text"
-                  value={category}
-                  onChange={e => setCategory(e.target.value)}
-                  className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </motion.div>
-            </div>
+            {/* Specifications */}
+            <motion.div initial="hidden" animate="visible" exit="hidden" custom={2} variants={fieldAnim}>
+              <label className="block font-semibold mb-1">Specifications</label>
+              <textarea
+                value={specifications}
+                onChange={e => setSpecifications(e.target.value)}
+                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                rows="2"
+              />
+            </motion.div>
+
+            {/* Category */}
+            <motion.div initial="hidden" animate="visible" exit="hidden" custom={3} variants={fieldAnim}>
+              <label className="block font-semibold mb-1">Category*</label>
+              <input
+                type="text"
+                value={category}
+                onChange={e => setCategory(e.target.value)}
+                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </motion.div>
 
             {/* File Input */}
             <motion.div initial="hidden" animate="visible" exit="hidden" custom={4} variants={fieldAnim}>

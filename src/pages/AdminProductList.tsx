@@ -3,8 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import config from "../config"; 
- 
+import config from "../config";
 
 const AdminProductList = () => {
   const navigate = useNavigate();
@@ -87,13 +86,13 @@ const AdminProductList = () => {
                 )}
                 <div className="p-4">
                   <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-                  <p className="text-gray-600 text-sm mb-2 line-clamp-2">
-                    {product.description}
-                  </p>
+                  <p className="text-gray-600 text-sm mb-2 line-clamp-2">{product.description}</p>
+                  {product.specifications && (
+                    <p className="text-gray-500 text-xs mb-2 line-clamp-2">
+                      <span className="font-medium">Specifications:</span> {product.specifications}
+                    </p>
+                  )}
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg font-bold text-blue-600">
-                      ₹{product.price}
-                    </span>
                     <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">
                       {product.category}
                     </span>

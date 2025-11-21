@@ -3,13 +3,13 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-import config from "../config"; 
+import config from "../config";
 
 const AdminAddProduct = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const [specifications, setSpecifications] = useState("");
   const [category, setCategory] = useState("");
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +40,7 @@ const AdminAddProduct = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!name || !description || !price || !category) {
+    if (!name || !description || !category) {
       toast.error("Please fill in all required fields");
       setIsLoading(false);
       return;
@@ -49,14 +49,13 @@ const AdminAddProduct = () => {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
-    formData.append("price", price);
+    formData.append("specifications", specifications);
     formData.append("category", category);
 
     files.forEach((f) => formData.append("files", f.file));
 
     try {
       const token = localStorage.getItem("token");
-      console.log("afsdv",token)
       await axios.post(`${config.API_URL}/api/products/add`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -109,28 +108,25 @@ const AdminAddProduct = () => {
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block font-semibold mb-1">Price*</label>
-              <input
-                type="number"
-                step="0.01"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block font-semibold mb-1">Category*</label>
-              <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
+          <div>
+            <label className="block font-semibold mb-1">Specifications</label>
+            <textarea
+              value={specifications}
+              onChange={(e) => setSpecifications(e.target.value)}
+              className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              rows="2"
+            />
+          </div>
+
+          <div>
+            <label className="block font-semibold mb-1">Category*</label>
+            <input
+              type="text"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
           </div>
 
           <div>

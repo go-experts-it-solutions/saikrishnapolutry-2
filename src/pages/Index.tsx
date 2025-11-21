@@ -108,19 +108,12 @@ const Index = () => {
       repeatType: "reverse"
     }}
   >
-<motion.img   
+
+
+<motion.img
   src={heroImage}
   alt="Poultry Farm"
-  style={{
-    width: '123%',
-    height: '100%',
-    minWidth: '100%',
-    minHeight: '100%',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    objectPosition: 'center center' // Adjust: 'top', 'bottom', '20% 50%', etc.
-  }}
+  className="w-full h-full object-cover absolute top-0 left-0"
   initial={{ scale: 1 }}
   animate={{ scale: 1.1 }}
   transition={{
@@ -130,6 +123,7 @@ const Index = () => {
     repeatType: "reverse"
   }}
 />
+
 
     <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
   </motion.div>

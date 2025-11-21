@@ -1,84 +1,95 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  Download, 
-  Check, 
-  Star,
-  Share2,
-  Heart,
-  Phone,
-  Mail,
+import {
+  Download,
+  Check,
   Package,
   Truck,
-  Shield,
   Award,
   ChevronRight,
   CheckCircle2,
-  Send,
-  MapPin
+  Phone,
 } from "lucide-react";
 import babyChickDrinker from "@/assets/Baby Chick Drinker.png";
 import chickDrinker from "@/assets/Chick Drinker.png";
-import vaccinator from "@/assets/Vaccinator.png";
 
-// Background image for hero section - replace with your farm image
-const heroBackgroundImage = "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1920&h=600&fit=crop";
+const heroBackgroundImage =
+  "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1920&h=600&fit=crop";
+
+// Parse "specifications" string (tab/newline separated) to {label,value}[]
+const parseSpecs = (specString) => {
+  if (!specString) return [];
+  return specString.split(/\r?\n/).map(line => {
+    const [label, value] = line.split(/\t(.+)?/);
+    if (!label || !value) return null;
+    return { label: label.trim(), value: value.trim() };
+  }).filter(Boolean);
+};
+
+// Static/fallback content you want to keep per original code
+const staticBenefits = [
+  {
+    icon: Package,
+    title: "Products Range",
+    description: "We offer a wide variety of fresh poultry and eggs, raised with care for every customer.",
+  },
+  {
+    icon: Award,
+    title: "Quality Matters",
+    description: "Every product reflects our promise of freshness, family tradition, and animal respect.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Satisfaction",
+    description: "We build trust through honest service and fresh poultry that exceeds expectations.",
+  },
+  {
+    icon: Truck,
+    title: "Free Shipping",
+    description: "Enjoy farm-fresh deliveries right to your door, fast, reliable, and completely free.",
+  },
+];
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Product data
-  const product = {
-    id: "1",
-    name: "Baby Chick Drinker",
-    tagline: "Big, fat, tasty franks",
-    category: "Drinking Systems",
-    rating: 4.8,
-    reviews: 156,
-    inStock: true,
-    sku: "SKPE-BCD-001",
-    shortDescription: "We're ready to welcome new flocks before the chicks even hatch",
-    detailedDescription: "We nurture every flock with heart and care for the best results. The Baby Chick Drinker is engineered with precision to provide consistent water supply for 8-10 chicks. Made from food-grade materials, it ensures hygiene and durability.",
-    image: babyChickDrinker,
-    features: [
-      "We have over 50 partner restaurants and attend many local markets.",
-      "Enjoy premium poultry at home from our specially cared-for farm."
-    ],
-    specifications: [
-      { label: "Capacity", value: "250ml" },
-      { label: "Suitable For", value: "8-10 chicks" },
-      { label: "Material", value: "Food-grade Plastic (BPA-free)" },
-      { label: "Bowl Diameter", value: "132mm" },
-      { label: "Lip Space", value: "20mm" },
-      { label: "Trough Height", value: "135mm" },
-      { label: "Weight", value: "200g" },
-      { label: "Warranty", value: "1 Year" },
-      { label: "Certification", value: "BESS LAB Approved" },
-      { label: "Made In", value: "India" }
-    ],
-    benefits: [
-      { icon: Package, title: "Products Range", description: "We offer a wide variety of fresh poultry and eggs, raised with care for every customer." },
-      { icon: Award, title: "Quality Matters", description: "Every product reflects our promise of freshness, family tradition, and animal respect." },
-      { icon: CheckCircle2, title: "Satisfaction", description: "We build trust through honest service and fresh poultry that exceeds expectations." },
-      { icon: Truck, title: "Free Shipping", description: "Enjoy farm-fresh deliveries right to your door, fast, reliable, and completely free." }
-    ],
-    healthySection: {
-      title: "Healthy & happy",
-      heading: "All our birds roam freely with access to nests, perches, and fresh feed",
-      description: "We raise our flocks with care and balance for healthier, happier poultry.",
-      quote: "We're a family-run farm providing quality poultry since 1983."
-    },
-    bestSeller: true,
-    certified: true
-  };
+  // Fetch product from backend on mount
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(
+          `https://saikrishnapolutary-backend.onrender.com/api/products/${id}`
+        );
+        const data = await res.json();
+        setProduct(data.product || data);
+      } catch (err) {
+        setProduct(null);
+      }
+      setLoading(false);
+    };
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <Navbar />
+        <div className="container mx-auto px-4 py-20 text-center">
+          <span className="animate-spin inline-block w-12 h-12 border-t-4 border-green-400 rounded-full" />
+          <p className="mt-4 text-gray-500">Loading product...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -95,62 +106,43 @@ const ProductDetail = () => {
     );
   }
 
+  // Fallback image if files missing, fallback static content for any data not present
+  const image =
+    product.files && product.files[0]
+      ? product.files[0].url
+      : babyChickDrinker;
+
+  // Parse technical specifications
+  const techSpecs = parseSpecs(product.specifications);
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Professional 2025 Typography - Poppins + Inter */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-        
-        * {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
-        
-        .font-heading { 
-          font-family: 'Poppins', sans-serif;
-          font-weight: 700;
-          line-height: 1.2;
-        }
-        
-        .font-body { 
-          font-family: 'Inter', sans-serif;
-          font-weight: 400;
-          line-height: 1.6;
-        }
-        
-        .font-handwriting {
-          font-family: 'Poppins', sans-serif;
-          font-weight: 500;
-          font-style: italic;
-        }
-        
-        .font-medium { font-weight: 500; }
-        .font-semibold { font-weight: 600; }
-        .font-bold { font-weight: 700; }
+        * {-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+        .font-heading {font-family:'Poppins',sans-serif;font-weight:700;line-height:1.2;}
+        .font-body {font-family:'Inter',sans-serif;font-weight:400;line-height:1.6;}
+        .font-handwriting {font-family:'Poppins',sans-serif;font-weight:500;font-style:italic;}
+        .font-medium{font-weight:500;}.font-semibold{font-weight:600;}.font-bold{font-weight:700;}
       `}</style>
-
       <Navbar />
 
-      {/* Hero Section with Background Image */}
+      {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 py-32 overflow-hidden">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0">
-          <img 
+          <img
             src={heroBackgroundImage}
             alt="Poultry Farm Background"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-green-900/90 via-green-800/85 to-green-900/90" />
         </div>
-
-        {/* Dot Pattern Overlay */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="2" fill="white" opacity="0.3"/></svg>')`,
           }}
         />
-        
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -159,22 +151,19 @@ const ProductDetail = () => {
             className="text-center"
           >
             <h1 className="text-5xl md:text-6xl font-heading text-white mb-4">
-              {product.name}
+              {product.name || "Product Name"}
             </h1>
-            
             <div className="flex items-center justify-center gap-3 text-sm font-body text-white/80">
               <Link to="/" className="hover:text-white transition-colors">HOME</Link>
               <ChevronRight className="w-4 h-4" />
               <Link to="/products" className="hover:text-white transition-colors">PRODUCTS</Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-white font-semibold uppercase tracking-wide">
-                {product.name}
+                {product.name || "Product Name"}
               </span>
             </div>
           </motion.div>
         </div>
-
-        {/* Wave Bottom */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
             <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" fill="white"/>
@@ -182,11 +171,10 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* Main Content Section - Farm Style with 500x500 Image */}
+      {/* Product Main Info */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
             {/* Left - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -194,30 +182,23 @@ const ProductDetail = () => {
               transition={{ duration: 0.8 }}
               className="space-y-8"
             >
-              {/* Tagline */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
                 <p className="text-green-600 font-handwriting text-2xl md:text-3xl mb-4">
-                  {product.tagline}
+                  {product.category || "Category"}
                 </p>
               </motion.div>
-
-              {/* Main Heading */}
               <h2 className="text-3xl md:text-4xl font-heading text-gray-900 leading-tight">
-                {product.shortDescription}
+                {product.name || "Product Name"}
               </h2>
-
-              {/* Description */}
               <p className="text-base text-gray-600 leading-relaxed font-body">
-                {product.detailedDescription}
+                {product.description || "No description yet."}
               </p>
-
-              {/* Features List */}
               <div className="space-y-4">
-                {product.features.map((feature, index) => (
+                {[`Category: ${product.category || "N/A"}`].map((feature, index) => (
                   <motion.div
                     key={index}
                     className="flex items-start gap-3"
@@ -234,8 +215,6 @@ const ProductDetail = () => {
                   </motion.div>
                 ))}
               </div>
-
-              {/* CTA Button */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -248,8 +227,7 @@ const ProductDetail = () => {
                 </Button>
               </motion.div>
             </motion.div>
-
-            {/* Right - 500x500 Circular Image */}
+            {/* Right - Image */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -259,13 +237,12 @@ const ProductDetail = () => {
               <div className="relative z-10">
                 <div className="relative w-[500px] h-[500px] rounded-full overflow-hidden border-8 border-white shadow-2xl">
                   <img
-                    src={product.image}
-                    alt={product.name}
+                    src={image}
+                    alt={product.name || "Product"}
                     className="w-full h-full object-cover"
                   />
                 </div>
-
-                {/* Decorative Yellow Accent Lines */}
+                {/* Decorative lines */}
                 <motion.div
                   className="absolute -bottom-10 -left-10 z-0"
                   initial={{ opacity: 0, scale: 0 }}
@@ -284,11 +261,11 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* Benefits Section - Icon Cards */}
+      {/* Benefits Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {product.benefits.map((benefit, index) => {
+            {staticBenefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
                 <motion.div
@@ -319,100 +296,6 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* Healthy & Happy Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
-            {/* Left - 500x500 Circular Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative order-2 lg:order-1 flex justify-center"
-            >
-              {/* Decorative Leaves */}
-              <motion.div
-                className="absolute -top-16 -left-16 z-0"
-                initial={{ opacity: 0, rotate: -45 }}
-                whileInView={{ opacity: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.8 }}
-              >
-                <svg width="150" height="150" viewBox="0 0 150 150" fill="none">
-                  <ellipse cx="75" cy="30" rx="25" ry="40" fill="#10B981" opacity="0.3" transform="rotate(-30 75 30)"/>
-                  <ellipse cx="40" cy="70" rx="20" ry="35" fill="#10B981" opacity="0.4" transform="rotate(-60 40 70)"/>
-                  <ellipse cx="85" cy="85" rx="22" ry="38" fill="#10B981" opacity="0.3" transform="rotate(15 85 85)"/>
-                </svg>
-              </motion.div>
-
-              <div className="relative z-10">
-                <div className="relative w-[500px] h-[500px] rounded-full overflow-hidden border-8 border-white shadow-2xl">
-                  <img
-                    src={chickDrinker}
-                    alt="Healthy chickens"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                <motion.div
-                  className="absolute -bottom-8 -right-8 z-0"
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                >
-                  <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-                    <path d="M90 10 L50 50" stroke="#FCD34D" strokeWidth="6" strokeLinecap="round"/>
-                    <path d="M90 30 L70 50" stroke="#FCD34D" strokeWidth="6" strokeLinecap="round"/>
-                    <path d="M90 50 L90 50" stroke="#FCD34D" strokeWidth="6" strokeLinecap="round"/>
-                  </svg>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* Right - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6 order-1 lg:order-2"
-            >
-              <p className="text-green-600 font-handwriting text-2xl md:text-3xl">
-                {product.healthySection.title}
-              </p>
-
-              <h2 className="text-3xl md:text-4xl font-heading text-gray-900 leading-tight">
-                {product.healthySection.heading}
-              </h2>
-
-              <p className="text-base text-gray-600 leading-relaxed font-body">
-                {product.healthySection.description}
-              </p>
-
-              <div className="border-l-4 border-green-600 bg-green-50 pl-6 py-4 rounded-r-lg">
-                <p className="text-base font-semibold text-gray-900 font-body">
-                  {product.healthySection.quote}
-                </p>
-              </div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-body font-bold px-8 py-6 rounded-full text-base uppercase tracking-wide shadow-lg"
-                >
-                  Contact Us
-                </Button>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Technical Specifications */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -430,26 +313,29 @@ const ProductDetail = () => {
               Detailed product information
             </p>
           </motion.div>
-
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {product.specifications.map((spec, index) => (
-                <motion.div
-                  key={index}
-                  className="flex justify-between items-center p-5 bg-white rounded-lg hover:shadow-md transition-all"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <span className="text-sm font-body font-bold text-gray-700">
-                    {spec.label}
-                  </span>
-                  <span className="text-sm font-body text-gray-900">
-                    {spec.value}
-                  </span>
-                </motion.div>
-              ))}
+              {techSpecs.length === 0 ? (
+                <div className="text-gray-400 col-span-2 text-center">No technical specifications available.</div>
+              ) : (
+                techSpecs.map((spec, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex justify-between items-center p-5 bg-white rounded-lg hover:shadow-md transition-all"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <span className="text-sm font-body font-bold text-gray-700">
+                      {spec.label}
+                    </span>
+                    <span className="text-sm font-body text-gray-900">
+                      {spec.value}
+                    </span>
+                  </motion.div>
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -462,7 +348,6 @@ const ProductDetail = () => {
             backgroundImage: `url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="2" fill="white"/></svg>')`
           }} />
         </div>
-
         <div className="container mx-auto px-4 text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -476,7 +361,6 @@ const ProductDetail = () => {
             <p className="text-lg mb-8 text-white/90 max-w-2xl mx-auto font-body">
               Contact our team to learn more about this product and how it can benefit your farm
             </p>
-            
             <div className="flex flex-wrap gap-4 justify-center">
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -490,7 +374,6 @@ const ProductDetail = () => {
                   Call: +91 94404 06200
                 </Button>
               </motion.div>
-
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -508,7 +391,6 @@ const ProductDetail = () => {
           </motion.div>
         </div>
       </section>
-
       <Footer />
     </div>
   );
