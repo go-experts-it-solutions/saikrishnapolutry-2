@@ -10,9 +10,52 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
+
+
+
+    const [showLogin, setShowLogin] = useState(false); // 👈 LOGIN POPUP
+  const [loginData, setLoginData] = useState({ username: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
+
   const location = useLocation();
+  const navigate = useNavigate();
   
-const navigate = useNavigate();
+  
+
+    const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setLoginError("");
+
+    try {
+      const response = await fetch("https://saikrishnapolutary-backend.onrender.com/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        setLoginError(result.message || "Invalid credentials");
+        setLoading(false);
+        return;
+      }
+
+      // Save token
+      localStorage.setItem("token", result.token);
+
+      setShowLogin(false);      // close popup
+      navigate("/admin");       // redirect 👈
+
+    } catch (error) {
+      setLoginError("Server error. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -398,7 +441,9 @@ const navigate = useNavigate();
             </div>
 
             {/* CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-3">
+            {/* <div className="hidden lg:flex items-center gap-3">
+
+
               <motion.div
                 custom={0}
                 // variants={buttonVariants}
@@ -437,7 +482,33 @@ const navigate = useNavigate();
                   <span className="relative z-10">Catalogue</span>
                 </Button>
               </motion.div>
-            </div>
+            </div> */}
+
+            {/* CTA Buttons */}
+<div className="hidden lg:flex items-center gap-3">
+  
+  {/* LOGIN BUTTON */}
+  <Button 
+ 
+    className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 shadow-md transition-all"
+     onClick={() => setShowLogin(true)}
+  >
+    Login
+  </Button>
+
+  <Button 
+    variant="outline"
+    className="text-sm font-body font-semibold border-2 border-gray-300 hover:border-red-600 hover:text-red-600 text-gray-700 rounded-full px-5 py-2 transition-all duration-300 hover:shadow-lg"
+  >
+    Get Quote
+  </Button>
+
+  <Button className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+    <Download className="w-3.5 h-3.5 mr-1.5 relative z-10" />
+    <span className="relative z-10">Catalogue</span>
+  </Button>
+</div>
+
 
             {/* Mobile Menu Button */}
             <motion.button
@@ -552,6 +623,63 @@ const navigate = useNavigate();
           </>
         )}
       </AnimatePresence>
+
+      {/* ---------------- LOGIN MODAL ADDED ---------------- */}
+<AnimatePresence>
+{showLogin && (
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[999]" 
+       onClick={() => setShowLogin(false)}>
+
+    <div 
+      className="bg-white rounded-xl shadow-2xl w-96 p-6 relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button 
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-900"
+        onClick={() => setShowLogin(false)}
+      >
+        ✕
+      </button>
+
+      <h2 className="text-xl font-semibold text-center mb-5 font-['Poppins']">
+        Admin Login
+      </h2>
+
+      <div className="space-y-4">
+        <input 
+          type="text"
+          placeholder="Username"
+          className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-red-500 outline-none"
+          value={loginData.username}
+          onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
+        />
+
+        <input 
+          type="password"
+          placeholder="Password"
+          className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-red-500 outline-none"
+          value={loginData.password}
+          onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+        />
+
+        {loginError && (
+          <p className="text-red-600 text-sm text-center">{loginError}</p>
+        )}
+
+        <Button 
+          className="w-full bg-red-600 hover:bg-red-700 text-white rounded-lg p-3 font-semibold"
+          onClick={handleLogin}
+        >
+          Login
+        </Button>
+      </div>
+    </div>
+
+  </div>
+)}
+
+</AnimatePresence>
+
     </>
   );
 };

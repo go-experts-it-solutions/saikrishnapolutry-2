@@ -112,7 +112,7 @@ const Index = () => {
   src={heroImage}
   alt="Poultry Farm"
   style={{
-    width: '100%',
+    width: '123%',
     height: '100%',
     minWidth: '100%',
     minHeight: '100%',

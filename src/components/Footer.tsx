@@ -8,9 +8,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-primary font-['Poppins']">
-              Sai Krishna Plastic Industries
-            </h3>
+        <div className="flex items-center gap-2">
+  <img 
+    src="/SKPELOGO.png" 
+    alt="Logo"
+    className="w-45 h-13 object-contain"
+  />
+
+
+</div>
             <p className="text-sm text-muted-foreground">
               Leading manufacturer of poultry equipment and systems in India, serving the industry since 2002.
             </p>

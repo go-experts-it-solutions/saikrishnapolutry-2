@@ -11,6 +11,16 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import OurSpeciality from "./pages/OurSpeciality"
 import OurProjects from "./pages/Ourprojects";
+import Admin from "./pages/Admin"
+import AdminAddProduct from "./pages/AdminAddProduct";
+import AdminAddProject from "./pages/AdminAddProject";
+import AdminAddContact from "./pages/AdminAddContact";
+import AdminProductList from "./pages/AdminProductList";
+import AdminProjectList from "./pages/AdminProjectList";
+import AdminContactList from "./pages/AdminContactList";
+import AdminEditProduct from "./pages/AdminProductEdit";
+import AdminEditProject from "./pages/AdminEditProject";
+import AdminEditContact from "./pages/AdminEditContact";
 
 const queryClient = new QueryClient();
 
@@ -28,9 +38,20 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/ourspeciality" element={<OurSpeciality />} />
           <Route path="/ourprojects" element={<OurProjects />} />
+          <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/add-product" element={<AdminAddProduct />} />
+        <Route path="/admin/add-project" element={<AdminAddProject />} />
+        <Route path="/admin/add-contact" element={<AdminAddContact />} />
+         <Route path="/admin/products" element={<AdminProductList />} />
+             <Route path="/admin/projects" element={<AdminProjectList />} />
+              <Route path="/admin/contacts" element={<AdminContactList />} />
+              <Route path="/admin/edit/:id" element={<AdminEditProduct />} />
+                    <Route path="/admin/:id" element={<AdminEditProject />} />
+                       <Route path="/admin/editcontact/:id" element={<AdminEditContact />} />
+
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
