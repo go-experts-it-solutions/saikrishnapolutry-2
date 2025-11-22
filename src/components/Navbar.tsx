@@ -475,25 +475,30 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
                             {/* Right Content Section - 2 Column Grid */}
 
 
-<div className="flex-1 p-8 flex flex-col gap-3">
+<div className="flex-1 p-8 grid grid-cols-1 md:grid-cols-2 gap-3">
   {productCategories && productCategories.length > 0 ? (
-    productCategories.map((category, idx) => (
-      <Link
-        key={idx}
-        to={"/products"}
-        onClick={() => setProductsDropdownOpen(false)}
-        className="flex items-center gap-2 py-3 px-4 rounded-lg transition-colors duration-200 group"
-      >
-        <span className="text-base font-body text-black group-hover:text-red-600 transition-colors">
-          {category.name}
-        </span>
-        <ChevronRight className="w-5 h-5 text-black group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
-      </Link>
+    Array(Math.ceil(productCategories.length / 5)).fill().map((_, colIdx) => (
+      <div key={colIdx} className="flex flex-col gap-2">
+        {productCategories.slice(colIdx * 5, colIdx * 5 + 5).map((category, idx) => (
+          <Link
+            key={category.name}
+            to={"/products"}
+            onClick={() => setProductsDropdownOpen(false)}
+            className="flex items-center gap-2 py-3 px-4 rounded-lg transition-colors duration-200 group"
+          >
+            <span className="text-base font-body text-black group-hover:text-red-600 transition-colors">
+              {category.name}
+            </span>
+            <ChevronRight className="w-5 h-5 text-black group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
+          </Link>
+        ))}
+      </div>
     ))
   ) : (
     <div className="py-3 px-4 text-gray-400">No categories found</div>
   )}
 </div>
+
 
 
 
@@ -511,12 +516,12 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
 <div className="hidden lg:flex items-center gap-3">
   
 
-<Button 
-  className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 transition-all duration-300 shadow-md hover:shadow-lg border-2 border-red-600"
->
-  Get Quote
-</Button>
-
+    <Button
+      onClick={() => navigate("/contact")}
+      className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 transition-all duration-300 shadow-md hover:shadow-lg border-2 border-red-600"
+    >
+      Get Quote
+    </Button>
 
 <Button asChild className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
   <a href="/SKPERed.pdf" download>
@@ -603,13 +608,27 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
                 </div>
 
                 <motion.div className="space-y-3 mb-8" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-                  <Button variant="outline" className="w-full text-sm font-body font-semibold border-2 border-gray-300 hover:border-red-600 hover:text-red-600 text-gray-700 rounded-full py-6 transition-all">
-                    Get Quote
-                  </Button>
-                  <Button className="w-full text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full py-6 shadow-lg">
-                    <Download className="w-4 h-4 mr-2" />
-                    Download Catalogue
-                  </Button>
+                   <Button
+      variant="outline"
+      className="w-full text-sm font-body font-semibold border-2 border-gray-300 hover:border-red-600 hover:text-red-600 text-gray-700 rounded-full py-6 transition-all"
+      onClick={() => navigate("/contact")}
+    >
+      Get Quote
+    </Button>
+               <Button
+  className="w-full text-sm font-body font-semibold 
+             bg-gradient-to-r from-red-600 to-red-700 
+             hover:from-red-700 hover:to-red-800 
+             text-white rounded-full py-6 shadow-lg 
+             inline-flex items-center justify-center gap-2"
+  asChild
+>
+  <a href="/SKPERed.pdf" download>
+    <Download className="w-4 h-4" />
+    <span>Catalogue</span>
+  </a>
+</Button>
+
 
 
 

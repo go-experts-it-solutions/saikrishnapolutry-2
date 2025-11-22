@@ -12,25 +12,53 @@ import { useToast } from "@/hooks/use-toast";
 const Contact = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     phone: "",
     message: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-    setFormData({ name: "", email: "", phone: "", message: "" });
+
+    try {
+      const res = await fetch(
+        "https://saikrishnapolutary-backend.onrender.com/api/contact/enquiry",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: "We'll get back to you as soon as possible.",
+      });
+
+      setFormData({ fullName: "", email: "", phone: "", message: "" });
+
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to send message.",
+        variant: "destructive",
+      });
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -60,15 +88,19 @@ const Contact = () => {
                 <h2 className="text-2xl font-bold mb-6 font-['Poppins']">
                   Send Us a Message
                 </h2>
+
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2 font-['Poppins']">
+                    <label
+                      htmlFor="fullName"
+                      className="block text-sm font-medium mb-2 font-['Poppins']"
+                    >
                       Full Name
                     </label>
                     <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
+                      id="fullName"
+                      name="fullName"
+                      value={formData.fullName}
                       onChange={handleChange}
                       placeholder="John Doe"
                       required
@@ -76,7 +108,10 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2 font-['Poppins']">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium mb-2 font-['Poppins']"
+                    >
                       Email Address
                     </label>
                     <Input
@@ -91,7 +126,10 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2 font-['Poppins']">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium mb-2 font-['Poppins']"
+                    >
                       Phone Number
                     </label>
                     <Input
@@ -105,7 +143,10 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2 font-['Poppins']">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium mb-2 font-['Poppins']"
+                    >
                       Message
                     </label>
                     <Textarea
@@ -119,7 +160,11 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-red-600 hover:bg-red-700">
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full bg-red-600 hover:bg-red-700"
+                  >
                     Send Message
                   </Button>
                 </form>
@@ -145,7 +190,9 @@ const Contact = () => {
                     <MapPin className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1 font-['Poppins']">Visit Us</h3>
+                    <h3 className="font-semibold mb-1 font-['Poppins']">
+                      Visit Us
+                    </h3>
                     <p className="text-sm text-muted-foreground font-['Poppins']">
                       Factory: Industrial Park Kondapur,<br />
                       Kondapur Village, Medak District<br />
@@ -191,9 +238,11 @@ const Contact = () => {
                     <Globe className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1 font-['Poppins']">Website</h3>
+                    <h3 className="font-semibold mb-1 font-['Poppins']">
+                      Website
+                    </h3>
                     <p className="text-sm text-muted-foreground font-['Poppins']">
-                     www.saikrishnapoultry.co.in
+                      www.saikrishnapoultry.co.in
                     </p>
                   </div>
                 </CardContent>
@@ -205,7 +254,9 @@ const Contact = () => {
                     <MessageSquare className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1 font-['Poppins']">Business Hours</h3>
+                    <h3 className="font-semibold mb-1 font-['Poppins']">
+                      Business Hours
+                    </h3>
                     <p className="text-sm text-muted-foreground font-['Poppins']">
                       Monday - Saturday: 9:00 AM - 6:00 PM<br />
                       Sunday: Closed
@@ -219,26 +270,23 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-  {/* Map Section */}
-<section className="py-16 bg-muted/50">
-  <div className="container mx-auto px-4">
-    <Card className="overflow-hidden max-w-6xl mx-auto border-2 border-red-100">
-      <div className="aspect-[21/9] bg-muted flex items-center justify-center">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d62012520.540350445!2d79.097002!3d18.440857!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccdfd080c233b3%3A0xdffdfa7ea808c2b6!2sSai%20krishna%20poultry%20equipments!5e0!3m2!1sen!2sin!4v1763564213785!5m2!1sen!2sin"
-          width="100%"
-          height="400"
-          style={{ border: 0 }}
-          
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Sai Krishna Poultry Equipments Location"
-        />
-      </div>
-    </Card>
-  </div>
-</section>
-
+      <section className="py-16 bg-muted/50">
+        <div className="container mx-auto px-4">
+          <Card className="overflow-hidden max-w-6xl mx-auto border-2 border-red-100">
+            <div className="aspect-[21/9] bg-muted flex items-center justify-center">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d62012520.540350445!2d79.097002!3d18.440857!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccdfd080c233b3%3A0xdffdfa7ea808c2b6!2sSai%20krishna%20poultry%20equipments!5e0!3m2!1sen!2sin!4v1763564213785!5m2!1sen!2sin"
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Sai Krishna Poultry Equipments Location"
+              />
+            </div>
+          </Card>
+        </div>
+      </section>
 
       <Footer />
     </div>

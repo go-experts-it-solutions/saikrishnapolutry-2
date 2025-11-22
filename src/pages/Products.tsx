@@ -382,7 +382,7 @@ const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
             />
           </div>
 
-          <CardContent className="p-6 flex-1">
+          <CardContent className="p-6 flex-1  ">
             <div className="mb-3">
               <span className="text-xs font-body font-semibold text-red-600 uppercase tracking-wide">
                 {product.category}

@@ -92,10 +92,11 @@ const Footer = () => {
           </div>
         </div>
 
-<div className="border-t border-border mt-8 pt-8 text-sm text-muted-foreground flex items-center justify-between">
-  
-  {/* LEFT EMPTY SPACE (balances layout) */}
-  <div className="flex-1"></div>
+<div className="border-t border-border mt-8 pt-8 text-sm text-muted-foreground 
+  flex flex-col md:flex-row items-center justify-between gap-4">
+
+  {/* LEFT EMPTY SPACE */}
+  <div className="flex-1 hidden md:block"></div>
 
   {/* CENTER TEXT */}
   <div className="flex-1 flex justify-center">
@@ -104,12 +105,17 @@ const Footer = () => {
     </p>
   </div>
 
-  {/* RIGHT SIDE */}
-  <div className="flex-1 flex items-center justify-end min-w-max">
-    <p className="mr-2 font-semibold text-black ">Designed by</p>
-    <img src="./GELOGO.png" alt="Designed By Logo" className="h-8 w-auto" />
-  </div>
+  {/* RIGHT SIDE (Designed by + Logo) */}
+  <div className="flex-1 flex flex-col md:flex-row items-center justify-end min-w-max">
 
+    <p className="font-semibold text-black md:mr-2">Designed by</p>
+
+    <img 
+      src="./GELOGO.png" 
+      alt="Designed By Logo" 
+      className="h-8 w-auto mt-1 md:mt-0"
+    />
+  </div>
 </div>
 
 

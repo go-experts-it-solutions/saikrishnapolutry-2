@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Card, CardContent } from "@/components/ui/card";
-import { Target, Eye, Award, Users, Building2, Globe, Zap } from "lucide-react";
+import { Target, Eye, Award, Users, Building2, Globe, Zap , UserCheck, Lightbulb} from "lucide-react";
 
 import henproductspage from "../assets/henproductspage.jpg"
 
@@ -293,19 +293,23 @@ const About = () => {
             {[
               {
                 name: "High-Quality Products",
-                description: "Premium quality products that exceed industry standards"
+                description: "Premium quality products that exceed industry standards",
+                 icon: Award
               },
               {
                 name: "Quick Service",
-                description: "Fast and efficient service delivery"
+                description: "Fast and efficient service delivery",
+                 icon: Zap
               },
               {
                 name: "Customer-Centric",
-                description: "Customer-focused approach in everything we do"
+                description: "Customer-focused approach in everything we do",
+                  icon: UserCheck
               },
               {
                 name: "Innovative Development",
-                description: "Continuous innovative product development"
+                description: "Continuous innovative product development",
+                  icon: Lightbulb
               }
             ].map((cert, index) => (
               <AnimatedSection key={index} animation="fade-up" delay={index * 0.1}>
