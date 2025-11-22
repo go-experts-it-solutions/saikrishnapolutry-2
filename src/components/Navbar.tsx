@@ -611,6 +611,18 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
                     <Download className="w-4 h-4 mr-2" />
                     Download Catalogue
                   </Button>
+
+
+
+                    <Button
+    className="w-full bg-red-600 hover:bg-red-700 text-white rounded-full py-6 font-body font-semibold mt-4"
+    onClick={() => {
+      setShowLogin(true);
+      setIsOpen(false); // close mobile menu
+    }}
+  >
+    Login
+  </Button>
                 </motion.div>
 
                 <motion.div className="p-5 bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl border border-gray-200" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
@@ -688,12 +700,16 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
           <p className="text-red-600 text-sm text-center">{loginError}</p>
         )}
 
-        <Button 
-          className="w-full bg-red-600 hover:bg-red-700 text-white rounded-lg p-3 font-semibold"
-          onClick={handleLogin}
-        >
-          Login
-        </Button>
+     <Button
+  className="w-full bg-red-600 hover:bg-red-700 text-white rounded-full py-6 font-body font-semibold mb-4"
+  onClick={() => {
+    setShowLogin(true);
+    setIsOpen(false); // close mobile menu
+  }}
+>
+  Login
+</Button>
+
       </div>
     </div>
 
