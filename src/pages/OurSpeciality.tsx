@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import heroBackgroundImage from "../assets/henproductspage.jpg"
 
 // Tailwind color palette for six backgrounds
 const sectionColors = [
@@ -11,6 +12,7 @@ const sectionColors = [
   "bg-[#FFB801]",
   "bg-[#27374D]"
 ];
+
 
 // Example FAQ data
 const sections = [
@@ -98,12 +100,13 @@ function ColorAccordionFAQ() {
 <section className="relative bg-gradient-to-br from-[#edf3fa] via-[#3f5e7f] to-[#0a4a92] py-28 text-white overflow-hidden">
 
   {/* Decorative background dots (same style as Products page) */}
-  <div 
-    className="absolute inset-0 opacity-10"
-    style={{
-      backgroundImage: `url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="2" fill="white" opacity="0.3"/></svg>')`,
-    }}
-  />
+  <div
+  className="absolute inset-0 opacity-20 bg-cover bg-center"
+  style={{
+    backgroundImage: `url(${heroBackgroundImage})`,
+  }}
+/>
+
 
   {/* Content */}
   <div className="relative z-10 container mx-auto px-6 text-center">
