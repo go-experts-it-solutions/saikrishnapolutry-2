@@ -438,7 +438,7 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
 
     style={{
     top: "100%",      // attach exactly below the nav item
-    left: "0px",      // no shifting, stays aligned to nav item
+    left: "0px",      // no shifting, stays aligned to nav itemas
   }}
   onMouseEnter={() => setProductsDropdownOpen(true)}
   onMouseLeave={() => setProductsDropdownOpen(false)}

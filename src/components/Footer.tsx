@@ -92,9 +92,19 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Sai Krishna Plastic Industries. All rights reserved.</p>
-        </div>
+<div className="border-t border-border mt-8 pt-8 text-sm text-muted-foreground flex items-center justify-between">
+  <div className="flex-1 flex justify-center">
+    <p className="m-0">
+      &copy; {new Date().getFullYear()} Sai Krishna Plastic Industries. All rights reserved.
+    </p>
+  </div>
+  <div className="flex items-center justify-end min-w-max">
+    <p className="m-0 mr-2">Designed by</p>
+    <img src="./GELOGO.png" alt="Designed By Logo" className="h-8 w-auto" />
+  </div>
+</div>
+
+
       </div>
     </footer>
   );
