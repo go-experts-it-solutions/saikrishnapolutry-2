@@ -313,7 +313,7 @@ const CategorySidebarButton = ({ category, isActive, onClick }) => {
     >
       <Icon className={`w-5 h-5 ${isActive ? "text-red-500" : "text-gray-400"}`} />
 
-      <span>{category.name}</span>
+   <span className="text-xs">{category.name}</span>
 
       <span
         className={`ml-auto text-xs px-2 py-0.5 rounded ${
