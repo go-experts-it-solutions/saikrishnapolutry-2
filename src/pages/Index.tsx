@@ -511,11 +511,15 @@ const Index = () => {
               </div>
 
               <div className="flex items-center gap-6 pt-4">
-                <Button 
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 rounded-md font-accent font-semibold"
-                >
-                  Discover More
-                </Button>
+              <div className="flex items-center gap-6 pt-4">
+  <Link to="/products">
+    <Button 
+      className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 rounded-md font-accent font-semibold"
+    >
+      Discover More
+    </Button>
+  </Link>
+</div>
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
                     <Phone className="w-6 h-6 text-red-600" />
@@ -594,34 +598,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Team/Experts Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-red-600 font-accent font-semibold text-sm uppercase tracking-wider">
-              → Our Locations
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 text-gray-900 font-heading">
-              Visit Our Facilities
-            </h2>
-          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { title: "Factory 1", location: "Kondapur", address: "Industrial Park Kondapur, Medak Dist, Telangana" },
-              { title: "Factory 2", location: "Karimnagar", address: "Behind Petrol Bunk, Padmanagar, Karimnagar - 505002" },
-              { title: "Sales Depot", location: "Hyderabad", address: "Plot No: 16, Road No: 2, Mamatanagar Colony, Nagole" }
-            ].map((location, index) => (
-              <LocationCard key={index} location={location} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
 
 
  <section className="py-20 bg-background">
@@ -712,6 +689,35 @@ const Index = () => {
                 </Button>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team/Experts Section */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="text-red-600 font-accent font-semibold text-sm uppercase tracking-wider">
+              → Our Locations
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-4 text-gray-900 font-heading">
+              Visit Our Facilities
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: "Factory 1", location: "Kondapur", address: "Industrial Park Kondapur, Medak Dist, Telangana" },
+              { title: "Factory 2", location: "Karimnagar", address: "Behind Petrol Bunk, Padmanagar, Karimnagar - 505002" },
+              { title: "Sales Depot", location: "Hyderabad", address: "Plot No: 16, Road No: 2, Mamatanagar Colony, Nagole" }
+            ].map((location, index) => (
+              <LocationCard key={index} location={location} index={index} />
+            ))}
           </div>
         </div>
       </section>

@@ -4,6 +4,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Eye, Award, Users, Building2, Globe, Zap } from "lucide-react";
 
+import henproductspage from "../assets/henproductspage.jpg"
+
 const About = () => {
   return (
     <div className="min-h-screen">
@@ -11,14 +13,14 @@ const About = () => {
 
       {/* Hero Section */}
    {/* Hero Section with Wave */}
+
 <section
-  className="relative bg-gradient-to-r from-red-600/10 to-red-700/10 py-20 overflow-hidden bg-cover bg-center"
+  className=" relative bg-gradient-to-r from-red-600/10 to-red-700/10 py-20 overflow-hidden bg-cover bg-center "
   style={{
-    backgroundImage: `
-      url("https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1920&h=600&fit=crop")
-    `,
+    backgroundImage: `url(${henproductspage})`,
   }}
 >
+
   {/* Dark overlay to improve text visibility */}
   <div className="absolute inset-0 bg-black/40"></div>
 
@@ -41,24 +43,26 @@ const About = () => {
   />
 
   {/* Bottom Wave Shape */}
-  <div className="absolute bottom-0 left-0 right-0 z-20">
-    <svg
-      viewBox="0 0 1440 120"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full"
-    >
-      <path
-        d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"
-        fill="white"
-      />
-    </svg>
-  </div>
+<div className="absolute bottom-0 left-0 right-0 z-20">
+  <svg
+    viewBox="0 0 1440 120"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-full"
+  >
+    <path
+      d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"
+      fill="white"
+    />
+  </svg>
+</div>
+
 </section>
 
 
       {/* Company Overview */}
-      <section className="py-20 container mx-auto px-4">
+   <section className="py-20 container mx-auto px-4 bg-[#f8eeee] -mt-12 pt-32">
+
         <div className="max-w-4xl mx-auto">
           <AnimatedSection animation="fade-up">
             <h2 className="text-4xl font-bold mb-6 text-center font-['Poppins']">

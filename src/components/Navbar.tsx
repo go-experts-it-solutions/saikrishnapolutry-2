@@ -446,59 +446,55 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
                         <div className="container mx-auto px-2">
                           <div className="flex rounded-lg overflow-hidden  ml-0 w-[900px] max-w-full">
                             {/* Left Sidebar Section */}
-                            <div className="w-80 bg-gray-50 p-8 border-r border-gray-200">
- <div className="flex flex-col items-start mb-4">
-  <img
-    src="/favicon.png"
-    alt="favicon"
-  className="w-20 h-auto ml-12 object-contain"
-  />
+                       <div className="w-80 bg-white/30 p-8 border-r border-gray-200 backdrop-blur-sm">
+  <div className="flex flex-col items-start mb-4">
+    <img
+      src="/favicon.png"
+      alt="favicon"
+      className="w-20 h-auto ml-12 object-contain"
+    />
 
-  <h2 className="text-2xl font-heading text-gray-900 font-bold mt-12">
-    Our All Products
-  </h2>
-  <p>Pioneering Innovations in the Global Agriculture</p>
+    <h2 className="text-2xl font-heading text-gray-900 font-bold mt-12">
+      Our All Products
+    </h2>
+    <p className="text-gray-700">Pioneering Innovations in the Global Agriculture</p>
+  </div>
+
+  <Button 
+    className="w-full bg-red-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-body font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+    onClick={() => {
+      setProductsDropdownOpen(false);
+      navigate("/products");
+    }}
+  >
+    Explore All Products
+    <ChevronRight className="w-4 h-4" />
+  </Button>
 </div>
-
-
-                              <Button 
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-3 text-sm font-body font-semibold shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
-                             onClick={() => {
-  setProductsDropdownOpen(false);
-  navigate("/products");
-}}
-                                
-                              >
-                                Explore All Products
-                                <ChevronRight className="w-4 h-4" />
-                              </Button>
-                            </div>
 
                             {/* Right Content Section - 2 Column Grid */}
 
 
-<div className="flex-1 p-8 grid grid-cols-2 gap-x-8 gap-y-4">
+<div className="flex-1 p-8 flex flex-col gap-3">
   {productCategories && productCategories.length > 0 ? (
     productCategories.map((category, idx) => (
       <Link
         key={idx}
-        to={
-          // Generate slug route /products/drinking-equipments from name
-          "/products"
-        }
+        to={"/products"}
         onClick={() => setProductsDropdownOpen(false)}
-        className="flex items-center justify-between py-3 px-4 hover:bg-gray-50 rounded-lg transition-colors duration-200 group"
+        className="flex items-center gap-2 py-3 px-4 rounded-lg transition-colors duration-200 group"
       >
-        <span className="text-base font-body text-gray-900 group-hover:text-red-600 transition-colors">
+        <span className="text-base font-body text-black group-hover:text-red-600 transition-colors">
           {category.name}
         </span>
-        <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
+        <ChevronRight className="w-5 h-5 text-black group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
       </Link>
     ))
   ) : (
-    <div className="py-3 px-4 text-gray-400 col-span-2">No categories found</div>
+    <div className="py-3 px-4 text-gray-400">No categories found</div>
   )}
 </div>
+
 
 
                           
@@ -515,13 +511,12 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
 <div className="hidden lg:flex items-center gap-3">
   
 
+<Button 
+  className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 transition-all duration-300 shadow-md hover:shadow-lg border-2 border-red-600"
+>
+  Get Quote
+</Button>
 
-  <Button 
-    variant="outline"
-    className="text-sm font-body font-semibold border-2 border-gray-300 hover:border-red-600 hover:text-red-600 text-gray-700 rounded-full px-5 py-2 transition-all duration-300 hover:shadow-lg"
-  >
-    Get Quote
-  </Button>
 
 <Button asChild className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
   <a href="/SKPERed.pdf" download>
