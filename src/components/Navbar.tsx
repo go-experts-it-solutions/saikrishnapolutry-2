@@ -706,7 +706,7 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
 
    <Button
   className="w-full bg-red-600 hover:bg-red-700 text-white rounded-full py-6 font-body font-semibold mb-4"
-  onClick={(e) => handleLogin(e)}  // <-- call login function
+  onClick={(e) => handleLogin(e)}  // <-- call login functionhjbnj
 >
   Login
 </Button>
