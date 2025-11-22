@@ -38,7 +38,6 @@ const Products = () => {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
-        // Some backends wrap in { products: [...] }
         setProducts(data.products || data);
       } catch (err) {
         // Optionally display error to user
@@ -58,7 +57,7 @@ const Products = () => {
     }
   }, [isLoading]);
 
-  // Example categories; update counts if you want live stats
+  // Categories with counts
   const categories = [
     { name: "All", icon: Factory, count: products.length },
     { name: "Industrial Fans", icon: Wind, count: products.filter(p => p.category === "Industrial Fans").length },
@@ -66,7 +65,7 @@ const Products = () => {
     { name: "Feeding Systems", icon: Zap, count: products.filter(p => p.category === "Feeding Systems").length }
   ];
 
-  // Filtering/search
+  // Filter products based on category and search
   const filteredProducts = products.filter(product => {
     const matchesCategory =
       selectedCategory === "All" || product.category === selectedCategory;
@@ -155,15 +154,15 @@ const Products = () => {
       </section>
 
       {/* Main filter & products grid layout */}
-      <section className="py-16 container mx-auto px-4 flex gap-8">
-        {/* Sidebar */}
-        <aside className="w-72 min-w-[200px] bg-white border-r border-gray-200 mr-8 rounded-xl shadow-md">
+      <section className="py-16 container mx-auto px-4 flex flex-col md:flex-row md:gap-8">
+        {/* Desktop Sidebar */}
+        <div className="hidden md:block w-72 min-w-[200px] bg-white border-r border-gray-200 mr-8 rounded-xl shadow-md">
           <div className="py-8 px-6">
             <h2 className="text-lg font-heading font-semibold mb-6 text-gray-900">
               Product Categories
             </h2>
             <div className="flex flex-col gap-3">
-              {categories.map((category, index) => (
+              {categories.map((category) => (
                 <CategorySidebarButton
                   key={category.name}
                   category={category}
@@ -173,7 +172,22 @@ const Products = () => {
               ))}
             </div>
           </div>
-        </aside>
+        </div>
+
+        {/* Mobile tabs */}
+        <div className="md:hidden mb-6 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-4 px-4">
+            {categories.map((category) => (
+              <button
+                key={category.name}
+                onClick={() => setSelectedCategory(category.name)}
+                className={`px-4 py-2 rounded-full whitespace-nowrap font-body text-sm font-semibold transition-all ${selectedCategory === category.name ? "bg-red-600 text-white shadow-lg" : "bg-gray-200 text-gray-800 hover:bg-red-100"}`}
+              >
+                {category.name} <span className="ml-2 bg-white rounded-full px-2 text-xs font-semibold text-red-600">{category.count}</span>
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Right side: Search & product grid */}
         <div className="flex-1">
@@ -257,7 +271,6 @@ const Products = () => {
     </div>
   );
 };
-
 
 // Sidebar Category Button (unchanged)
 const CategorySidebarButton = ({ category, isActive, onClick }) => {
