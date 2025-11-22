@@ -281,10 +281,13 @@ const Products = () => {
             </p>
 
             <motion.div whileHover={{ scale: 1.05 }}>
-              <Button className="text-sm px-8 py-5 rounded-full bg-white text-red-600 hover:bg-gray-100 shadow-xl font-body font-semibold">
-                Contact Our Team
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+              <Button
+      className="text-sm px-8 py-5 rounded-full bg-white text-red-600 hover:bg-gray-100 shadow-xl font-body font-semibold"
+      onClick={() => navigate("/contact")}
+    >
+      Contact Our Team
+      <ArrowRight className="w-4 h-4 ml-2" />
+    </Button>
             </motion.div>
           </motion.div>
         </div>
@@ -375,7 +378,7 @@ const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
               className="absolute inset-0 bg-black/10"
               initial={{ opacity: 0 }}
               animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.3 }}
+                transition={{ duration: 0.3 }}
             />
           </div>
 

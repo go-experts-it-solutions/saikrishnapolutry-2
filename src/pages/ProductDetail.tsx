@@ -18,8 +18,8 @@ import {
 import babyChickDrinker from "@/assets/Baby Chick Drinker.png";
 import chickDrinker from "@/assets/Chick Drinker.png";
 
-const heroBackgroundImage =
-  "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1920&h=600&fit=crop";
+// Fallback PDF location
+const defaultBrochureUrl = "/SKPERed.pdf";
 
 // Parse "specifications" string (tab/newline separated) to {label,value}[]
 const parseSpecs = (specString) => {
@@ -31,7 +31,7 @@ const parseSpecs = (specString) => {
   }).filter(Boolean);
 };
 
-// Static/fallback content you want to keep per original code
+// Static benefits
 const staticBenefits = [
   {
     icon: Package,
@@ -55,6 +55,9 @@ const staticBenefits = [
   },
 ];
 
+const heroBackgroundImage =
+  "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=1920&h=600&fit=crop";
+
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -77,6 +80,29 @@ const ProductDetail = () => {
     };
     fetchProduct();
   }, [id]);
+
+  // Fallback image if files missing
+  const image =
+    product && product.files && product.files[0]
+      ? product.files[0].url
+      : babyChickDrinker;
+
+  // Parse technical specifications
+  const techSpecs = parseSpecs(product && product.specifications);
+
+  // Dynamic brochure download logic
+  let pdfUrl = defaultBrochureUrl;
+  if (product && product.pdfs && product.pdfs.length > 0) {
+    // If your API returns pdfs array
+    pdfUrl = product.pdfs[0].url;
+  } else if (product && product.files && Array.isArray(product.files)) {
+    // If your API returns pdf under files array
+    const pdfFile = product.files.find(f =>
+      (f.type && f.type.toLowerCase().includes('pdf')) ||
+      (f.url && f.url.toLowerCase().endsWith('.pdf'))
+    );
+    if (pdfFile) pdfUrl = pdfFile.url;
+  }
 
   if (loading) {
     return (
@@ -105,15 +131,6 @@ const ProductDetail = () => {
       </div>
     );
   }
-
-  // Fallback image if files missing, fallback static content for any data not present
-  const image =
-    product.files && product.files[0]
-      ? product.files[0].url
-      : babyChickDrinker;
-
-  // Parse technical specifications
-  const techSpecs = parseSpecs(product.specifications);
 
   return (
     <div className="min-h-screen bg-white">
@@ -194,7 +211,7 @@ const ProductDetail = () => {
               <h2 className="text-3xl md:text-4xl font-heading text-gray-900 leading-tight">
                 {product.name || "Product Name"}
               </h2>
-              <p className="text-base text-gray-600 leading-relaxed font-body">
+          <p className="text-base text-gray-600 font-body leading-relaxed max-w-2xl mx-auto">
                 {product.description || "No description yet."}
               </p>
               <div className="space-y-4">
@@ -378,13 +395,16 @@ const ProductDetail = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button 
+                <Button
                   size="lg"
                   variant="outline"
                   className="bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 font-body font-bold px-8 py-6 rounded-full text-base"
+                  asChild
                 >
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Brochure
+                  <a href={pdfUrl} download target="_blank" rel="noopener noreferrer">
+                    <Download className="w-5 h-5 mr-2" />
+                    Download Brochure
+                  </a>
                 </Button>
               </motion.div>
             </div>

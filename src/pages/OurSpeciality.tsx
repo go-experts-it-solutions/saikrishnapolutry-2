@@ -15,54 +15,77 @@ const sectionColors = [
 // Example FAQ data
 const sections = [
   {
-    title: "General",
+    title: "Company Overview",
     questions: [
       {
-        q: "How can I use Octopus.do without registration?",
-        a: "Limited features are available without registration. For full access, sign up for free."
+        q: "What is Sai Krishna Plastic Industries?",
+        a: "Sai Krishna Plastic Industries, situated in Hyderabad, Telangana, has been a trailblazer in the poultry equipment industry since 2002, offering high-quality products and innovative solutions."
       },
       {
-        q: "Do you have a referral program?",
-        a: "Yes! Invite your friends and earn rewards with our referral program."
+        q: "Who are the leaders of the company?",
+        a: "The company is led by Managing Partners Mr. Srikanth M and Naveen Kumar, who collectively bring over 25 years of industry expertise."
       }
     ]
   },
   {
-    title: "Pricing",
+    title: "Infrastructure & Capabilities",
     questions: [
-      { q: "Is there a free plan?", a: "Yes, we offer a free plan with basic features." },
-      { q: "How can I upgrade my plan?", a: "You can upgrade any time from your account dashboard." }
+      {
+        q: "What infrastructure does the company have?",
+        a: "Sai Krishna Plastic Industries boasts state-of-the-art infrastructure, including advanced plastic injection molding machines, ample storage facilities, and a strategic location in Hyderabad."
+      },
+      {
+        q: "What technological capabilities does the company offer?",
+        a: "With cutting-edge technology, the company ensures high-quality poultry equipment production and the ability to adapt to market demands."
+      }
     ]
   },
   {
-    title: "Features",
+    title: "Market Presence",
     questions: [
-      { q: "Can I build a visual sitemap using my mobile device?", a: "Absolutely! Our app works on mobile." },
-      { q: "Can I import my sitemap to Octopus.do?", a: "Yes, imports from supported formats are available." }
+      {
+        q: "Where does Sai Krishna Plastic Industries operate?",
+        a: "The company has an extensive dealer network across India and a strong international presence, exporting globally."
+      },
+      {
+        q: "What are the key strengths of the company?",
+        a: "Key strengths include over 25 years of industry experience, timely delivery, customer satisfaction, high-quality products, and adaptability to market demands."
+      }
     ]
   },
   {
-    title: "Integrations",
+    title: "Products & Services",
     questions: [
-      { q: "Does Octopus.do integrate with Slack?", a: "Slack integration is currently in beta—contact us to try it." },
-      { q: "Can I export my maps to PDF?", a: "Export to PDF is available in premium plans." }
+      {
+        q: "What products does the company offer?",
+        a: "The company offers a comprehensive range of poultry equipment, including feeders, drinkers, brooders, and other essential tools for poultry farming."
+      },
+      {
+        q: "How is the company's product quality and service?",
+        a: "Sai Krishna Plastic Industries is renowned for high-quality products, quick service, a customer-centric approach, and continuous innovative product development."
+      }
     ]
   },
   {
-    title: "Account",
+    title: "Innovation & Adaptability",
     questions: [
-      { q: "I forgot my password. What do I do?", a: "Click 'Forgot Password' to reset your credentials." },
-      { q: "How do I change my email address?", a: "Go to account settings to update your email." }
+      {
+        q: "How does the company stay ahead in the industry?",
+        a: "The company stays ahead by monitoring market trends, developing new products, enhancing existing products, and continuously meeting customer needs."
+      }
     ]
   },
   {
-    title: "Support",
+    title: "Customer Support",
     questions: [
-      { q: "How can I contact support?", a: "Email support@octopus.do or use our in-app chat." },
-      { q: "Where can I find documentation?", a: "Docs are at help.octopus.do." }
+      {
+        q: "How can I contact Sai Krishna Plastic Industries?",
+        a: "You can contact the team via the website's contact page or through official email and phone channels."
+      }
     ]
   }
 ];
+
 
 function ColorAccordionFAQ() {
   const [openSection, setOpenSection] = useState(null);
