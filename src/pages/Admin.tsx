@@ -47,7 +47,18 @@ const AdminDashboard = () => {
           <p className="text-gray-600">
             Manage your products, projects, and contacts
           </p>
+
+
         </div>
+<button
+  onClick={() => {
+    localStorage.clear();
+    window.location.href = "https://saikrishnapolutry-2.vercel.app/";
+  }}
+  className="inline-block mt-1 mb-2 px-6 py-3 bg-red-600 text-white font-semibold rounded-lg shadow hover:bg-red-700 transition-colors"
+>
+  Logout
+</button>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {menuItems.map((item) => (
