@@ -54,7 +54,7 @@ useEffect(() => {
 }, []);
   
 
-    const handleLogin = async (e) => {
+const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setLoginError("");
@@ -290,12 +290,16 @@ useEffect(() => {
         {/* RIGHT SIDE — LOGIN + CERTIFICATION */}
         <div className="flex items-center gap-4">
 
-          <Button 
-            className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full shadow-md transition-all"
-            onClick={() => setShowLogin(true)}
-          >
-            Login
-          </Button>
+      <Button 
+  className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full shadow-md transition-all"
+  onClick={() => {
+    setShowLogin(true);
+    handleLogin();
+  }}
+>
+  Login
+</Button>
+
 
           <motion.div 
             className="font-body font-medium tracking-wide whitespace-nowrap"
@@ -700,15 +704,13 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
           <p className="text-red-600 text-sm text-center">{loginError}</p>
         )}
 
-     <Button
+   <Button
   className="w-full bg-red-600 hover:bg-red-700 text-white rounded-full py-6 font-body font-semibold mb-4"
-  onClick={() => {
-    setShowLogin(true);
-    setIsOpen(false); // close mobile menu
-  }}
+  onClick={(e) => handleLogin(e)}  // <-- call login function
 >
   Login
 </Button>
+
 
       </div>
     </div>
