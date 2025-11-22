@@ -193,7 +193,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold mb-1 font-['Poppins']">Website</h3>
                     <p className="text-sm text-muted-foreground font-['Poppins']">
-                      www.saikrishnapoultry.com
+                     www.saikrishnapoultry.co.in
                     </p>
                   </div>
                 </CardContent>
