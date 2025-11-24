@@ -24,6 +24,7 @@ import {
 import babyChickDrinker from "@/assets/Baby Chick Drinker.png";
 import henproductspage from "../assets/henproductspage.jpg";
 
+
 const API_URL = "https://saikrishnapolutary-backend.onrender.com/api/products/getallproducts";
 
 const heroBackgroundImage = henproductspage;
@@ -374,6 +375,44 @@ const CategorySidebarButton = ({ category, isActive, onClick }) => {
 const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+
+
+
+
+    const handleShareClick = async (e) => {
+    e.stopPropagation();
+
+    const shareUrl = `${window.location.origin}/products/${product._id}`;
+    const shareText = `Check out this product: ${product.name}`;
+
+    // Preferred: native share sheet (mobile / supported browsers)
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.name,
+          text: shareText,
+          url: shareUrl,
+        }); // [web:1][web:2]
+      } catch (err) {
+        console.error("Share cancelled or failed", err);
+      }
+      return;
+    }
+
+    // Fallback: copy link to clipboard
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(shareUrl); // [web:6][web:9][web:15]
+        alert("Product link copied to clipboard!");
+      } catch (err) {
+        console.error("Failed to copy link", err);
+        alert("Unable to copy link. Please copy it manually.");
+      }
+    } else {
+      alert("Sharing is not supported on this browser.");
+    }
+  };
+
   return (
     <motion.div
       className="relative"
@@ -467,11 +506,11 @@ const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
       </motion.div>
 
       <motion.button
-        className="px-4 py-2 border-2 border-gray-200 rounded-md hover:border-red-600 hover:bg-red-50 transition-all"
-        whileHover={{ scale: 1.05 }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <Share2 className="w-4 h-4 text-gray-600" />
+      className="px-4 py-2 border-2 border-gray-200 rounded-md hover:border-red-600 hover:bg-red-50 transition-all"
+            whileHover={{ scale: 1.05 }}
+            onClick={handleShareClick}
+          >
+            <Share2 className="w-4 h-4 text-gray-600" />
       </motion.button>
     </div>
   </div>
