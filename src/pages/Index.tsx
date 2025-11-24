@@ -33,13 +33,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import heroImages from "../assets/hero-farm.jpg";
+import aboutimage from "../assets/aboutImage.jpg";
+import service1 from "../assets/serviceImage1.webp";
+import service2 from "../assets/serviceImage2.jpg";
 
-// Placeholder for poultry farm images - replace with actual images
+// Correctly assign imported images to variables
 const heroImage = heroImages;
-const aboutImage = "https://afi.com.ph/wp-content/uploads/2022/09/Day2_AFI-06368-1024x683.jpg";
-const serviceImage1 = "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQXjth1ym32MSgeWxwnT_fpI28tL5oiXtxHPtWAiVhba0GaI95uedQMGLtSsM7jqEMZRfHSkksh7kayYZy8-UYas6cCVCBmmjshBTI_asdxg65aVfh-mj2Dcg";
-const serviceImage2 = "https://images.unsplash.com/photo-1612170153139-6f881ff067e0?w=400&h=300&fit=crop";
-const serviceImage3 = "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=400&h=300&fit=crop";
+const aboutImage = aboutimage;
+const serviceImage1 = service1;
+const serviceImage2 = service2;
+
 
 
 
@@ -67,7 +70,7 @@ const Index = () => {
       icon: Zap,
       title: "Drinking Solutions",
       description: "Automatic nipple drinking systems with pressure regulators for 50-100 birds per unit",
-      image: serviceImage3,
+      image: serviceImage2,
       link: "/products"
     }
   ];
@@ -236,39 +239,40 @@ const Index = () => {
   whileTap={{ scale: 0.95 }}
   transition={{ duration: 0.2 }}
 >
-  <Button
-    size="lg"
-    variant="outline"
-    className="
-      bg-white 
-      text-red-600 
-      border-2 border-red-600
-      px-6 py-4 
-      rounded-md 
-      text-sm 
-      font-accent font-semibold 
-      transition-all duration-300 
-      group relative overflow-hidden
-      hover:bg-white 
-      hover:text-red-600 
-      hover:border-red-600
-    "
-  >
-    <span className="relative z-10 flex items-center">
-      Contact Us
-      <motion.div
-        animate={{ x: [0, 3, 0] }}
-        transition={{
-          repeat: Infinity,
-          duration: 1.5,
-          ease: "easeInOut",
-          delay: 0.3
-        }}
-      >
-        <ChevronRight className="w-4 h-4 ml-2 text-red-600" />
-      </motion.div>
-    </span>
-  </Button>
+   <Button  
+      size="lg"
+      variant="outline"
+      className="
+        bg-white 
+        text-red-600 
+        border-2 border-red-600
+        px-6 py-4 
+        rounded-md 
+        text-sm 
+        font-accent font-semibold 
+        transition-all duration-300 
+        group relative overflow-hidden
+        hover:bg-white 
+        hover:text-red-600 
+        hover:border-red-600
+      "
+      onClick={() => navigate("/contact")}
+    >
+      <span className="relative z-10 flex items-center">
+        Contact Us
+        <motion.div
+          animate={{ x: [0, 3, 0] }}
+          transition={{
+            repeat: Infinity,
+            duration: 1.5,
+            ease: "easeInOut",
+            delay: 0.3
+          }}
+        >
+          <ChevronRight className="w-4 h-4 ml-2 text-red-600" />
+        </motion.div>
+      </span>
+    </Button>
 </motion.div>
 
       </motion.div>

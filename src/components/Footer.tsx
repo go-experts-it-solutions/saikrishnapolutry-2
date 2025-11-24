@@ -8,14 +8,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-        <div className="flex items-center gap-2">
-  <img 
-    src="/SKPELOGO.png" 
-    alt="Logo"
-    className="w-45 h-13 object-contain"
-  />
-
-
+<div className="flex items-center gap-2">
+  <Link to="/">
+    <img
+      src="/SKPELOGO.png"
+      alt="Logo"
+      className="w-45 h-13 object-contain cursor-pointer"
+    />
+  </Link>
 </div>
             <p className="text-sm text-muted-foreground">
               Leading manufacturer of poultry equipment and systems in India, serving the industry since 2002.
@@ -73,7 +73,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Contact Us</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start space-x-2">
-                <MapPin size={16} className="text-primary mt-0.5 flex-shrink-0" />
+                <MapPin size={16} className="text-primary mt-0.5 flex-shrink-0 " />
                 <span className="text-muted-foreground">Industrial Park Kondapur,<br />Kondapur Village, Medak District,<br />Hyderabad, Telangana, India</span>
               </li>
               <li className="flex items-center space-x-2">
@@ -106,16 +106,18 @@ const Footer = () => {
   </div>
 
   {/* RIGHT SIDE (Designed by + Logo) */}
-  <div className="flex-1 flex flex-col md:flex-row items-center justify-end min-w-max">
+<div className="flex-1 flex flex-col md:flex-row items-center justify-end min-w-max">
+  <p className="font-semibold text-black md:mr-2">Designed by</p>
 
-    <p className="font-semibold text-black md:mr-2">Designed by</p>
-
+  <a href="https://www.goexperts.in/" target="_blank" rel="noopener noreferrer">
     <img 
       src="./GELOGO.png" 
       alt="Designed By Logo" 
-      className="h-8 w-auto mt-1 md:mt-0"
+      className="h-8 w-auto mt-1 md:mt-0 cursor-pointer"
     />
-  </div>
+  </a>
+</div>
+
 </div>
 
 
