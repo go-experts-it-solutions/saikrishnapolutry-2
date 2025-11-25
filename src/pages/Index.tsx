@@ -52,27 +52,29 @@ const Index = () => {
 
   // Services/Features data
   const services = [
-    {
-      icon: Wind,
-      title: "Industrial Ventilation",
-      description: "BESS LAB certified exhaust fans with 44,000-51,020 m³/h capacity for optimal air circulation",
-      image: serviceImage1,
-      link: "/products"
-    },
-    {
-      icon: Droplets,
-      title: "Automated Feeding",
-      description: "Innopan feeding systems with grill-less design serving 35-50 birds per pan efficiently",
-      image: serviceImage2,
-      link: "/products"
-    },
+ 
+  
     {
       icon: Zap,
       title: "Drinking Solutions",
       description: "Automatic nipple drinking systems with pressure regulators for 50-100 birds per unit",
       image: serviceImage2,
       link: "/products"
-    }
+    },
+      {
+      icon: Droplets,
+      title: "Automated Feeding",
+      description: "Innopan feeding systems with grill-less design serving 35-50 birds per pan efficiently",
+      image: serviceImage2,
+      link: "/products"
+    },
+       {
+      icon: Wind,
+      title: "Polutry Ventilation",
+      description: "BESS LAB certified exhaust fans with 44,000-51,020 m³/h capacity for optimal air circulation",
+      image: serviceImage1,
+      link: "/products"
+    },
   ];
 
   // Stats/Features with icons
@@ -188,7 +190,7 @@ const Index = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
-        World-class poultry equipment certified by University of Illinois BESS LAB. 
+        World-class poultry equipment 
         Premium ventilation, automated feeding, and complete farm solutions.
       </motion.p>
 
@@ -444,29 +446,9 @@ const Index = () => {
                 <img 
                   src={aboutImage}
                   alt="About SKPE"
-                  className="w-full h-[600px] object-cover"
+                  className="w-full h-[400px] object-cover"
                 />
-                {/* Overlay Badge */}
-              <div className="absolute bottom-6 left-6 bg-background backdrop-blur-sm px-6 py-4 rounded-lg shadow-xl">
-  <div className="flex items-center gap-3">
-    
-    {/* Logo Circle (Same size as before) */}
-    <div className="w-12 h-12  overflow-hidden flex items-center justify-center ">
-      <img 
-        src="/favicon.png" 
-        alt="Logo" 
-        className="w-full h-full object-cover" 
-      />
-    </div>
 
-    {/* Text Section (unchanged) */}
-    <div>
-      <p className="text-sm font-bold text-gray-900 font-accent">SKPE</p>
-      <p className="text-xs text-gray-600 font-body">Saikrishna Polutry Equipments</p>
-    </div>
-
-  </div>
-</div>
 
               </div>
             </motion.div>
@@ -484,7 +466,7 @@ const Index = () => {
                   → Welcome to SKPE
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-gray-900 font-heading leading-tight">
-                  Pioneering Innovations in the Global Agriculture
+                  Pioneering Innovations 
                 </h2>
               </div>
 
@@ -493,15 +475,6 @@ const Index = () => {
               </p>
 
               <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <CheckCircle2 className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900 font-heading mb-1">BESS LAB Certified Products</h4>
-                    <p className="text-sm text-gray-600 font-body">All equipment tested and certified by University of Illinois</p>
-                  </div>
-                </div>
 
                 <div className="flex items-start gap-3">
                   <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
@@ -529,8 +502,13 @@ const Index = () => {
                     <Phone className="w-6 h-6 text-red-600" />
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500 font-body">Call Us Anytime</p>
-                    <p className="text-sm font-bold text-gray-900 font-accent">+91 94404 06200</p>
+<a href="tel:+919440406200" className="flex items-center gap-2 cursor-pointer">
+  <div>
+    <p className="text-xs text-gray-500 font-body">Call Us Anytime</p>
+    <p className="text-sm font-bold text-gray-900 font-accent">+91 94404 06200</p>
+  </div>
+</a>
+
                   </div>
                 </div>
               </div>
@@ -540,7 +518,7 @@ const Index = () => {
       </section>
 
       {/* Services Section - Grid with Images */}
-      <section className="py-24 bg-background-50">
+      <section className=" bg-background-50">
         <div className="container mx-auto px-4">
           {/* Section Header */}
           <motion.div
@@ -567,7 +545,7 @@ const Index = () => {
       </section>
 
       {/* Full Width Dark CTA Section */}
-      <section className="relative py-32 overflow-hidden bg-gradient-to-r from-gray-900 via-black to-gray-900">
+      {/* <section className="relative py-32 overflow-hidden bg-gradient-to-r from-gray-900 via-black to-gray-900">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`,
@@ -600,7 +578,7 @@ const Index = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
 
 
@@ -666,39 +644,9 @@ const Index = () => {
 </section>
 
 
-      {/* Newsletter/CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-red-600 via-red-700 to-red-900 text-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 font-heading">
-                Get Our Comprehensive Agriculture Updates Newsletter
-              </h2>
-              <p className="text-lg mb-8 text-white/90 font-body">
-                Stay updated with the latest in poultry farm technology and equipment innovations
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto">
-                <input 
-                  type="email"
-                  placeholder="Your Email Address"
-                  className="flex-1 px-6 py-4 rounded-md text-gray-900 font-body focus:outline-none focus:ring-2 focus:ring-white"
-                />
-                <Button className="bg-background text-red-600 hover:bg-gray-100 px-8 py-4 rounded-md font-accent font-bold">
-                  Subscribe
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* Team/Experts Section */}
-      <section className="py-24 bg-background">
+      <section className=" bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

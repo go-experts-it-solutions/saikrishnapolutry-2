@@ -7,35 +7,45 @@ import.meta.env.VITE_SOMETHING
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
-  const menuItems = [
-    {
-      id: 1,
-      title: "Products",
-      description: "Manage products with images and details",
-      icon: <FaBoxOpen className="text-5xl text-blue-500" />,
-      addRoute: "/admin/add-product",
-      listRoute: "/admin/products",
-      bgColor: "bg-blue-50 hover:bg-blue-100",
-    },
-    {
-      id: 2,
-      title: "Projects",
-      description: "Manage projects with multiple images",
-      icon: <FaProjectDiagram className="text-5xl text-green-500" />,
-      addRoute: "/admin/add-project",
-      listRoute: "/admin/projects",
-      bgColor: "bg-green-50 hover:bg-green-100",
-    },
-    {
-      id: 3,
-      title: "Contacts",
-      description: "Manage store locations with map",
-      icon: <FaAddressBook className="text-5xl text-purple-500" />,
-      addRoute: "/admin/add-contact",
-      listRoute: "/admin/contacts",
-      bgColor: "bg-purple-50 hover:bg-purple-100",
-    },
-  ];
+const menuItems = [
+  {
+    id: 1,
+    title: "Products",
+    description: "Manage products with images and details",
+    icon: <FaBoxOpen className="text-5xl text-blue-500" />,
+    addRoute: "/admin/add-product",
+    listRoute: "/admin/products",
+    bgColor: "bg-blue-50 hover:bg-blue-100",
+  },
+  {
+    id: 2,
+    title: "Projects",
+    description: "Manage projects with multiple images",
+    icon: <FaProjectDiagram className="text-5xl text-green-500" />,
+    addRoute: "/admin/add-project",
+    listRoute: "/admin/projects",
+    bgColor: "bg-green-50 hover:bg-green-100",
+  },
+  {
+    id: 3,
+    title: "Contacts",
+    description: "Manage store locations with map",
+    icon: <FaAddressBook className="text-5xl text-purple-500" />,
+    addRoute: "/admin/add-contact",
+    listRoute: "/admin/contacts",
+    bgColor: "bg-purple-50 hover:bg-purple-100",
+  },
+  {
+    id: 4,
+    title: "Categories",
+    description: "Create and manage product categories",
+    icon: <FaList className="text-5xl text-orange-500" />,
+    addRoute: "/admin/Addcategory",
+    listRoute: "/admin/getallcategories",
+    bgColor: "bg-orange-50 hover:bg-orange-100",
+  },
+];
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-6">

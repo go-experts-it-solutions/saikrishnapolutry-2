@@ -23,6 +23,8 @@ import AdminEditProduct from "./pages/AdminProductEdit";
 import AdminEditProject from "./pages/AdminEditProject";
 import AdminEditContact from "./pages/AdminEditContact";
 import CategoryProduct from "./pages/CategoryProducts"
+import AdminAddCategory from "./pages/Addcategory";
+import AdminCategoriesList from "./pages/AdminCategoriesList";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +49,8 @@ const App = () => (
         <Route path="/admin/add-project" element={<AdminAddProject />} />
         <Route path="/admin/add-contact" element={<AdminAddContact />} />
          <Route path="/admin/products" element={<AdminProductList />} />
+            <Route path="/admin/Addcategory" element={<AdminAddCategory />} />
+                <Route path="/admin/getallcategories" element={<AdminCategoriesList />} />
              <Route path="/admin/projects" element={<AdminProjectList />} />
               <Route path="/admin/contacts" element={<AdminContactList />} />
               <Route path="/admin/edit/:id" element={<AdminEditProduct />} />

@@ -290,16 +290,6 @@ const handleLogin = async (e) => {
         {/* RIGHT SIDE — LOGIN + CERTIFICATION */}
         <div className="flex items-center gap-4">
 
-      <Button 
-  className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full shadow-md transition-all"
-  onClick={() => {
-    setShowLogin(true);
-    handleLogin();
-  }}
->
-  Login
-</Button>
-
 
           <motion.div 
             className="font-body font-medium tracking-wide whitespace-nowrap"
@@ -310,7 +300,7 @@ const handleLogin = async (e) => {
               opacity: { delay: 1, duration: 0.4 },
             }}
           >
-            Certified by University of Illinois BESS LAB
+            {/* Certified by University of Illinois BESS LAB */}
           </motion.div>
 
         </div>
@@ -514,21 +504,34 @@ className="absolute left-0 bg-white/25 shadow-xl border-t border-gray-200"
 
            
 <div className="hidden lg:flex items-center gap-3">
-  
 
-    <Button
-      onClick={() => navigate("/contact")}
-      className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 transition-all duration-300 shadow-md hover:shadow-lg border-2 border-red-600"
-    >
-      Get Quote
-    </Button>
+  <Button
+    className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 shadow-md hover:shadow-lg transition-all duration-300"
+    onClick={() => {
+      setShowLogin(true);
+      handleLogin();
+    }}
+  >
+    Login
+  </Button>
 
-<Button asChild className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-  <a href="/SKPERed.pdf" download>
-    <Download className="w-3.5 h-3.5 mr-1.5 relative z-10" />
-    <span className="relative z-10">Catalogue</span>
-  </a>
-</Button>
+  <Button
+    onClick={() => navigate("/contact")}
+    className="text-sm font-body font-semibold bg-red-600 hover:bg-red-700 text-white rounded-full px-5 py-2 transition-all duration-300 shadow-md hover:shadow-lg border-2 border-red-600"
+  >
+    Get Quote
+  </Button>
+
+  <Button
+    asChild
+    className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+  >
+    <a href="/SKPERed.pdf" download>
+      <Download className="w-3.5 h-3.5 mr-1.5 relative z-10" />
+      <span className="relative z-10">Catalogue</span>
+    </a>
+  </Button>
+
 </div>
 
 

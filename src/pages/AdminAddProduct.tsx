@@ -10,9 +10,17 @@ const AdminAddProduct = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [specifications, setSpecifications] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState([]); // will store ObjectId
   const [files, setFiles] = useState([]);
+  const [categories, setCategories] = useState([]); // list for dropdown
   const [isLoading, setIsLoading] = useState(false);
+
+  // Fetch categories on mount
+  useEffect(() => {
+    axios.get(`${config.API_URL}/api/categories/getallcategories`)
+      .then(res => setCategories(res.data))
+      .catch(() => toast.error("Failed to load categories"));
+  }, []);
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files).map((file) => ({
@@ -50,7 +58,7 @@ const AdminAddProduct = () => {
     formData.append("name", name);
     formData.append("description", description);
     formData.append("specifications", specifications);
-    formData.append("category", category);
+    formData.append("category", category); // ObjectId
 
     files.forEach((f) => formData.append("files", f.file));
 
@@ -76,7 +84,6 @@ const AdminAddProduct = () => {
     <div className="min-h-screen bg-gray-50 p-6">
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
-        {/* Back Button */}
         <button
           onClick={() => navigate("/admin")}
           className="mb-4 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold transition-colors"
@@ -91,7 +98,7 @@ const AdminAddProduct = () => {
             <input
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={e => setName(e.target.value)}
               className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -101,7 +108,7 @@ const AdminAddProduct = () => {
             <label className="block font-semibold mb-1">Description*</label>
             <textarea
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={e => setDescription(e.target.value)}
               className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               rows="4"
               required
@@ -112,7 +119,7 @@ const AdminAddProduct = () => {
             <label className="block font-semibold mb-1">Specifications</label>
             <textarea
               value={specifications}
-              onChange={(e) => setSpecifications(e.target.value)}
+              onChange={e => setSpecifications(e.target.value)}
               className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               rows="2"
             />
@@ -120,13 +127,17 @@ const AdminAddProduct = () => {
 
           <div>
             <label className="block font-semibold mb-1">Category*</label>
-            <input
-              type="text"
+            <select
               value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={e => setCategory(e.target.value)}
               className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
-            />
+            >
+              <option value="">Select category</option>
+              {categories.map(cat => (
+                <option key={cat._id} value={cat._id}>{cat.name}</option>
+              ))}
+            </select>
           </div>
 
           <div>
