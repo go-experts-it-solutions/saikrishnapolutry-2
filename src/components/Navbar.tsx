@@ -361,138 +361,143 @@ const Navbar = () => {
                   </Link>
 
                   {/* Enhanced Dropdown with Categories and Products */}
-                  <AnimatePresence>
-                    {link.hasDropdown && productsDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute left-0 top-full bg-white shadow-2xl border-t-4 border-red-600 rounded-b-2xl"
-                        style={{ width: "1200px", maxWidth: "95vw" }}
-                        onMouseEnter={() => setProductsDropdownOpen(true)}
-                        onMouseLeave={() => setProductsDropdownOpen(false)}
-                      >
-                        <div className="flex h-[600px]">
-                          {/* Left Sidebar - Categories */}
-                          <div className="w-80 bg-gradient-to-br from-gray-50 to-gray-100 border-r border-gray-200 rounded-bl-2xl relative overflow-hidden">
-                            {/* Animated scrolling line */}
-                            <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent animate-scroll-line"></div>
-                            
-                            <div className="p-6 relative z-10">
-                              <div className="flex flex-col items-center mb-6">
-                                <motion.img
-                                  src="/SKPELOGO.png"
-                                  alt="SKPE Logo"
-                                  className="w-20 h-auto object-contain mb-3"
-                                  initial={{ scale: 0, rotate: -180 }}
-                                  animate={{ scale: 1, rotate: 0 }}
-                                  transition={{ duration: 0.6, delay: 0.2 }}
-                                />
-                                
-                                <h2 className="text-xl font-heading text-gray-900 font-bold text-center mb-1">
-                                  Our Products
-                                </h2>
-                                <p className="text-xs text-gray-600 text-center leading-relaxed mb-4">
-                                  Select a category to view products
-                                </p>
-                              </div>
+             {/* Enhanced Dropdown with Categories and Products */}
+<AnimatePresence>
+  {link.hasDropdown && productsDropdownOpen && (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 10 }}
+      transition={{ duration: 0.3 }}
+      className="fixed left-0 right-0 top-[88px] bg-white shadow-2xl border-t-4 border-red-600 rounded-b-2xl z-50 mx-auto"
+      style={{ 
+        width: "1200px", 
+        maxWidth: "95vw"
+      }}
+      onMouseEnter={() => setProductsDropdownOpen(true)}
+      onMouseLeave={() => setProductsDropdownOpen(false)}
+    >
+      <div className="flex h-[600px]">
+        {/* Left Sidebar - Categories */}
+        <div className="w-80 bg-gradient-to-br from-gray-50 to-gray-100 border-r border-gray-200 rounded-bl-2xl relative overflow-hidden">
+          {/* Animated scrolling line */}
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent animate-scroll-line"></div>
+          
+          <div className="p-6 relative z-10">
+            <div className="flex flex-col items-center mb-6">
+              <motion.img
+                src="/SKPELOGO.png"
+                alt="SKPE Logo"
+                className="w-20 h-auto object-contain mb-3"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              />
+              
+              <h2 className="text-xl font-heading text-gray-900 font-bold text-center mb-1">
+                Our Products
+              </h2>
+              <p className="text-xs text-gray-600 text-center leading-relaxed mb-4">
+                Select a category to view products
+              </p>
+            </div>
 
-                              {/* Categories List */}
-                              <div className="space-y-2 mb-6 max-h-[380px] overflow-y-auto custom-scrollbar pr-2">
-                                {categories.map((category) => (
-                                  <div
-                                    key={category._id}
-                                    onClick={() => setSelectedCategory(category)}
-                                    className={`category-item p-3 rounded-lg ${
-                                      selectedCategory?._id === category._id ? 'active' : 'bg-white'
-                                    }`}
-                                  >
-                                    <div className="flex items-center justify-between">
-                                      <span className="text-sm font-body font-semibold">
-                                        {category.name}
-                                      </span>
-                                      <ChevronRight className={`w-4 h-4 transition-transform ${
-                                        selectedCategory?._id === category._id ? 'translate-x-1' : ''
-                                      }`} />
-                                    </div>
-                                  </div>
-                                ))}
-                              </div>
+            {/* Categories List */}
+            <div className="space-y-2 mb-6 max-h-[380px] overflow-y-auto custom-scrollbar pr-2">
+              {categories.map((category) => (
+                <div
+                  key={category._id}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`category-item p-3 rounded-lg ${
+                    selectedCategory?._id === category._id ? 'active' : 'bg-white'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-body font-semibold">
+                      {category.name}
+                    </span>
+                    <ChevronRight className={`w-4 h-4 transition-transform ${
+                      selectedCategory?._id === category._id ? 'translate-x-1' : ''
+                    }`} />
+                  </div>
+                </div>
+              ))}
+            </div>
 
-                              <Button 
-                                className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-6 py-4 text-sm font-body font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 group"
-                                onClick={() => {
-                                  setProductsDropdownOpen(false);
-                                  navigate("/products");
-                                }}
-                              >
-                                View All Products
-                                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                              </Button>
-                            </div>
-                          </div>
+            <Button 
+              className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl px-6 py-4 text-sm font-body font-semibold shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 group"
+              onClick={() => {
+                setProductsDropdownOpen(false);
+                navigate("/products");
+              }}
+            >
+              View All Products
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        </div>
 
-                          {/* Right Product Grid Section */}
-                          <div className="flex-1 p-8 bg-white rounded-br-2xl overflow-hidden">
-                            {loadingProducts ? (
-                              <div className="flex items-center justify-center h-full">
-                                <div className="text-center">
-                                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
-                                  <p className="text-gray-500 font-body">Loading products...</p>
-                                </div>
-                              </div>
-                            ) : categoryProducts.length === 0 ? (
-                              <div className="flex items-center justify-center h-full">
-                                <div className="text-center">
-                                  <p className="text-gray-500 font-body text-lg mb-2">No products found</p>
-                                  <p className="text-gray-400 font-body text-sm">
-                                    {selectedCategory?.name || 'Select a category to view products'}
-                                  </p>
-                                </div>
-                              </div>
-                            ) : (
-                              <>
-                                <div className="mb-6">
-                                  <h3 className="text-2xl font-heading text-gray-900 font-bold mb-1">
-                                    {selectedCategory?.name}
-                                  </h3>
-                                  <p className="text-sm text-gray-600">
-                                    {categoryProducts.length} {categoryProducts.length === 1 ? 'product' : 'products'} available
-                                  </p>
-                                </div>
+        {/* Right Product Grid Section */}
+        <div className="flex-1 p-8 bg-white rounded-br-2xl overflow-hidden">
+          {loadingProducts ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto mb-4"></div>
+                <p className="text-gray-500 font-body">Loading products...</p>
+              </div>
+            </div>
+          ) : categoryProducts.length === 0 ? (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
+                <p className="text-gray-500 font-body text-lg mb-2">No products found</p>
+                <p className="text-gray-400 font-body text-sm">
+                  {selectedCategory?.name || 'Select a category to view products'}
+                </p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="mb-6">
+                <h3 className="text-2xl font-heading text-gray-900 font-bold mb-1">
+                  {selectedCategory?.name}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {categoryProducts.length} {categoryProducts.length === 1 ? 'product' : 'products'} available
+                </p>
+              </div>
 
-                                <div className="grid grid-cols-5 gap-6 max-h-[450px] overflow-y-auto custom-scrollbar pr-2">
-                                  {categoryProducts.map((product, idx) => (
-                                    <Link
-                                      key={product._id}
-                                      to={`/products`}
-                                      onClick={() => setProductsDropdownOpen(false)}
-                                      className="product-item flex flex-col items-center group cursor-pointer"
-                                    >
-                                      <div className="product-image-container w-28 h-28 rounded-full bg-gray-50 border-2 border-gray-200 flex items-center justify-center mb-3 overflow-hidden shadow-md">
-                                        <img
-                                          src={product.files?.[0]?.url || "/favicon.png"}
-                                          alt={product.name}
-                                          className="w-20 h-20 object-contain"
-                                          onError={(e) => {
-                                            e.target.src = "/favicon.png";
-                                          }}
-                                        />
-                                      </div>
-                                      <h3 className="product-name text-xs font-body font-semibold text-gray-700 text-center leading-tight transition-colors px-2">
-                                        {product.name}
-                                      </h3>
-                                    </Link>
-                                  ))}
-                                </div>
-                              </>
-                            )}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+              <div className="grid grid-cols-5 gap-6 max-h-[450px] overflow-y-auto custom-scrollbar pr-2">
+                {categoryProducts.map((product, idx) => (
+                  <Link
+                    key={product._id}
+                    to={`/products/${product._id}`}
+                    onClick={() => setProductsDropdownOpen(false)}
+                    className="product-item flex flex-col items-center group cursor-pointer"
+                  >
+                    <div className="product-image-container w-28 h-28 rounded-full bg-gray-50 border-2 border-gray-200 flex items-center justify-center mb-3 overflow-hidden shadow-md">
+                      <img
+                        src={product.files?.[0]?.url || "/favicon.png"}
+                        alt={product.name}
+                        className="w-20 h-20 object-contain"
+                        onError={(e) => {
+                          e.target.src = "/favicon.png";
+                        }}
+                      />
+                    </div>
+                    <h3 className="product-name text-xs font-body font-semibold text-gray-700 text-center leading-tight transition-colors px-2">
+                      {product.name}
+                    </h3>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
                 </motion.div>
               ))}
             </div>

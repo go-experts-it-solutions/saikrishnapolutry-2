@@ -11,7 +11,6 @@ import {
   Droplets,
   Zap,
   Factory,
-  ChevronDown,
   Share2,
   Search,
   ArrowRight,
@@ -24,71 +23,68 @@ import {
 import babyChickDrinker from "@/assets/Baby Chick Drinker.png";
 import henproductspage from "../assets/henproductspage.jpg";
 
-const API_URL = "https://saikrishnapolutary-backend.onrender.com/api/products/getallproducts";
+const PRODUCTS_API = "https://saikrishnapolutary-backend.onrender.com/api/products/getallproducts";
+const CATEGORIES_API = "https://saikrishnapolutary-backend.onrender.com/api/categories/getallcategories";
 
 const heroBackgroundImage = henproductspage;
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [cardsRevealed, setCardsRevealed] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [categoryIdToName, setCategoryIdToName] = useState({});
   
   const navigate = useNavigate();
 
-  // Fetch products
+  // Fetch categories from API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await fetch(CATEGORIES_API);
+        const data = await res.json();
+        
+        if (Array.isArray(data)) {
+          setCategories(data);
+          // Set first category as default selected
+          if (data.length > 0) {
+            setSelectedCategory(data[0]);
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Fetch products based on selected category
   useEffect(() => {
     const fetchProducts = async () => {
+      if (!selectedCategory) return;
+      
+      setIsLoading(true);
       try {
-        const res = await fetch(API_URL);
+        const url = selectedCategory._id 
+          ? `https://saikrishnapolutary-backend.onrender.com/api/products/category/${selectedCategory._id}`
+          : PRODUCTS_API;
+        
+        const res = await fetch(url);
         const data = await res.json();
-        const productList = data.products || data;
+        
+        // Handle different response formats
+        const productList = Array.isArray(data) ? data : (data.products || []);
         setProducts(productList);
-
-        // Extract unique categories
-        const categoryMap = new Map();
-        
-        productList.forEach(p => {
-          if (p.category) {
-            // Handle if category is an object
-            const categoryId = typeof p.category === 'object' ? p.category._id : p.category;
-            const categoryName = typeof p.category === 'object' ? p.category.name : p.category;
-            
-            if (!categoryMap.has(categoryId)) {
-              categoryMap.set(categoryId, {
-                id: categoryId,
-                name: categoryName,
-                count: 0
-              });
-            }
-            categoryMap.get(categoryId).count++;
-          }
-        });
-
-        // Build category ID to name mapping
-        const idToName = {};
-        categoryMap.forEach((value, key) => {
-          idToName[key] = value.name;
-        });
-        setCategoryIdToName(idToName);
-
-        // Create categories array with "All" option
-        const uniqueCategories = [
-          { id: 'all', name: "All", count: productList.length },
-          ...Array.from(categoryMap.values())
-        ];
-        
-        setCategories(uniqueCategories);
       } catch (err) {
         console.error("Error fetching products:", err);
+        setProducts([]);
       }
       setIsLoading(false);
     };
+    
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
   // Animate cards
   useEffect(() => {
@@ -98,20 +94,10 @@ const Products = () => {
     }
   }, [isLoading]);
 
-  // Filter logic
+  // Filter by search query
   const filteredProducts = products.filter((product) => {
-    // Get category name from product
-    const productCategoryName = typeof product.category === 'object' 
-      ? product.category.name 
-      : product.category;
-
-    const matchesCategory =
-      selectedCategory === "All" || productCategoryName === selectedCategory;
-    
-    const matchesSearch =
-      product.name?.toLowerCase().includes(searchQuery.toLowerCase());
-    
-    return matchesCategory && matchesSearch;
+    const matchesSearch = product.name?.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSearch;
   });
 
   return (
@@ -128,7 +114,6 @@ const Products = () => {
         .font-semibold { font-weight: 600; }
         .font-bold { font-weight: 700; }
 
-        /* Hide all scrollbars */
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
@@ -140,13 +125,13 @@ const Products = () => {
 
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 py-30 overflow-hidden">
+      {/* HERO SECTION */}
+      <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroBackgroundImage}
             alt="Poultry Products"
-            className="w-full h-50 object-cover"
+            className="w-full  object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-green-900/90 via-green-800/80 to-green-900/90" />
         </div>
@@ -164,25 +149,15 @@ const Products = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-6"
-            >
-              <Factory className="w-3.5 h-3.5 text-red-500" />
-              <span className="text-xs text-white font-body uppercase tracking-wider">
-                Premium Poultry Equipment
-              </span>
-            </motion.div>
+      
+       
+
 
             <h1 className="text-5xl md:text-6xl font-heading text-white mb-6">
               Our <span className="text-red-500">Products</span>
             </h1>
 
-            <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto font-body">
-              Explore our complete range of premium poultry equipment certified by University of Illinois BESS LAB
-            </p>
+   
           </motion.div>
         </div>
 
@@ -196,87 +171,81 @@ const Products = () => {
         </div>
       </section>
 
-      {/* MAIN SECTION */}
-      <section className="py-16 container mx-auto px-4">
-        {/* MOBILE CATEGORY TABS - No horizontal scroll */}
-        <div className="md:hidden mb-6">
-          <div className="flex flex-wrap gap-3 px-4">
-            {categories.map((category) => (
-              <button
-                key={category.id || category.name}
-                onClick={() => setSelectedCategory(category.name)}
-                className={`px-4 py-2 rounded-full whitespace-nowrap font-body text-sm font-semibold transition-all ${
-                  selectedCategory === category.name
-                    ? "bg-red-600 text-white shadow-lg"
-                    : "bg-gray-200 text-gray-800 hover:bg-red-100"
-                }`}
-              >
-                {category.name}
-                <span className="ml-2 bg-white rounded-full px-2 text-xs font-semibold text-red-600">
-                  {category.count}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* MAIN CONTENT SECTION */}
+      <section className="py-6 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row gap-8">
+            
+            {/* LEFT SIDEBAR - Categories */}
+            <div className="lg:w-80 flex-shrink-0">
+              <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+                <h2 className="text-xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-2">
+                  <Factory className="w-5 h-5 text-red-600" />
+                  Product Categories
+                </h2>
 
-        <div className="flex flex-col md:flex-row md:gap-8">
-          {/* SIDEBAR - Desktop only */}
-          <div className="hidden md:block w-72 min-w-[200px] bg-white border-r border-gray-200 mr-8 rounded-xl shadow-md">
-            <div className="py-8 px-6">
-              <h2 className="text-lg font-heading font-semibold mb-6 text-gray-900">
-                Product Categories
-              </h2>
+                <div className="space-y-2">
+                  {categories.map((category) => (
+                    <CategoryButton
+                      key={category._id}
+                      category={category}
+                      isActive={selectedCategory?._id === category._id}
+                      onClick={() => setSelectedCategory(category)}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
 
-              <div className="flex flex-col gap-3">
-                {categories.map((category) => (
-                  <CategorySidebarButton
-                    key={category.id || category.name}
-                    category={category}
-                    isActive={selectedCategory === category.name}
-                    onClick={() => setSelectedCategory(category.name)}
+            {/* RIGHT SIDE - Products Grid */}
+            <div className="flex-1">
+              {/* Search Bar */}
+              <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white rounded-2xl shadow-md p-4">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-11 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-red-500 focus:outline-none text-sm font-body transition-all"
                   />
-                ))}
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* PRODUCTS GRID WRAPPER */}
-          <div className="flex-1 flex flex-col">
-            {/* Top bar */}
-            <div className="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="w-full sm:max-w-lg relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 rounded-full border-2 border-gray-200 focus:border-red-500 focus:outline-none text-sm font-body transition-all"
-                />
+                <div className="flex items-center gap-3">
+                  <span className="text-gray-600 font-body text-sm whitespace-nowrap">
+                    <span className="font-semibold text-red-600">{filteredProducts.length}</span> Products
+                  </span>
+                </div>
               </div>
 
-              <span className="text-gray-600 font-body text-sm whitespace-nowrap">
-                Showing{" "}
-                <span className="font-semibold text-red-600">
-                  {filteredProducts.length}
-                </span>{" "}
-                products
-              </span>
-            </div>
+              {/* Category Title */}
+              {selectedCategory && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6"
+                >
+                  <h2 className="text-3xl font-heading font-bold text-gray-900">
+                    {selectedCategory.name}
+                  </h2>
+                  <p className="text-gray-600 font-body mt-1">
+                    Browse our selection of {selectedCategory.name.toLowerCase()}
+                  </p>
+                </motion.div>
+              )}
 
-            {/* PRODUCTS GRID - No scrollbar */}
-            <div className="pt-4">
+              {/* Products Grid */}
               {isLoading ? (
-                <div className="text-center py-16">
-                  <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-red-400" />
-                  <p className="mt-6 text-gray-500">Loading products...</p>
+                <div className="text-center py-20">
+                  <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-red-600 border-r-4 border-r-transparent" />
+                  <p className="mt-6 text-gray-500 font-body">Loading products...</p>
                 </div>
               ) : (
                 <>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProducts.map((product, index) => (
-                      <ProductCardStacked
+                      <ProductCard
                         key={product._id}
                         product={product}
                         index={index}
@@ -287,12 +256,13 @@ const Products = () => {
                   </div>
 
                   {filteredProducts.length === 0 && (
-                    <div className="text-center py-16">
+                    <div className="text-center py-20 bg-white rounded-2xl shadow-md">
+                      <Factory className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                       <h3 className="text-xl font-heading text-gray-900 mb-2">
                         No products found
                       </h3>
                       <p className="text-sm text-gray-600 font-body">
-                        Try adjusting your search or filter criteria
+                        Try adjusting your search criteria
                       </p>
                     </div>
                   )}
@@ -303,8 +273,8 @@ const Products = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-gradient-to-br from-red-600 via-red-700 to-black text-white">
+      {/* CTA SECTION */}
+      <section className="py-16 bg-gradient-to-br from-red-600 via-red-700 to-red-900 text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -322,7 +292,7 @@ const Products = () => {
 
             <motion.div whileHover={{ scale: 1.05 }}>
               <Button
-                className="text-sm px-8 py-5 rounded-full bg-white text-red-600 hover:bg-gray-100 shadow-xl font-body font-semibold"
+                className="text-sm px-8 py-6 rounded-full bg-white text-red-600 hover:bg-gray-100 shadow-xl font-body font-semibold"
                 onClick={() => navigate("/contact")}
               >
                 Contact Our Team
@@ -338,59 +308,50 @@ const Products = () => {
   );
 };
 
-const getCategoryIcon = (categoryName) => {
-  const name = typeof categoryName === "string" ? categoryName.toLowerCase() : "";
-  if (!name) return Factory;
-  if (name.includes("fan")) return Wind;
-  if (name.includes("drink")) return Droplets;
-  if (name.includes("feed")) return Zap;
-  if (name.includes("incub")) return Egg;
-  if (name.includes("brood")) return Flame;
-  if (name.includes("nest")) return Feather;
-  if (name.includes("green")) return Leaf;
-  if (name.includes("premium")) return Star;
-  return Factory;
-};
-
-// CATEGORY BUTTON
-const CategorySidebarButton = ({ category, isActive, onClick }) => {
+// Category Button Component
+const CategoryButton = ({ category, isActive, onClick }) => {
   const Icon = getCategoryIcon(category.name);
+  
   return (
-    <button
+    <motion.button
       onClick={onClick}
-      className={`flex items-center gap-3 px-2 py-3 rounded-lg text-base font-body transition-all ${
+      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-body transition-all ${
         isActive
-          ? "bg-red-100 text-red-700 font-bold shadow border border-red-200"
-          : "bg-white hover:bg-gray-100 text-gray-800 border border-gray-100"
+          ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg transform scale-105"
+          : "bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200"
       }`}
+      whileHover={{ x: 5 }}
+      whileTap={{ scale: 0.98 }}
     >
-      <Icon className={`w-5 h-5 ${isActive ? "text-red-500" : "text-gray-400"}`} />
-      <span className="text-xs">{category.name}</span>
-      <span
-        className={`ml-auto text-xs px-2 py-0.5 rounded ${
-          isActive ? "bg-red-200" : "bg-gray-200"
-        }`}
-      >
-        {category.count}
+      <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? "text-white" : "text-red-600"}`} />
+      <span className={`text-sm font-semibold ${isActive ? "text-white" : "text-gray-800"}`}>
+        {category.name}
       </span>
-    </button>
+    </motion.button>
   );
 };
 
-// PRODUCT CARD
-const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
-  const [isHovered, setIsHovered] = useState(false);
+// Get category icon helper
+const getCategoryIcon = (categoryName) => {
+  const name = typeof categoryName === "string" ? categoryName.toLowerCase() : "";
+  if (!name) return Factory;
+  if (name.includes("drink")) return Droplets;
+  if (name.includes("feed")) return Zap;
+  if (name.includes("cool") || name.includes("fan")) return Wind;
+  if (name.includes("incub") || name.includes("hatch")) return Egg;
+  if (name.includes("brood")) return Flame;
+  if (name.includes("nest")) return Feather;
+  if (name.includes("disinfect")) return Leaf;
+  if (name.includes("meat") || name.includes("process")) return Star;
+  return Factory;
+};
 
-  // Extract category name safely
-  const getCategoryName = (category) => {
-    if (!category) return "Uncategorized";
-    if (typeof category === 'object') return category.name || "Uncategorized";
-    return category;
-  };
+// Product Card Component
+const ProductCard = ({ product, index, navigate, cardsRevealed }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleShareClick = async (e) => {
     e.stopPropagation();
-
     const shareUrl = `${window.location.origin}/products/${product._id}`;
     const shareText = `Check out this product: ${product.name}`;
 
@@ -413,27 +374,22 @@ const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
         alert("Product link copied to clipboard!");
       } catch (err) {
         console.error("Failed to copy link", err);
-        alert("Unable to copy link. Please copy it manually.");
       }
-    } else {
-      alert("Sharing is not supported on this browser.");
     }
   };
 
   return (
     <motion.div
-      className="relative"
-      initial={{ scale: 0.8, opacity: 0, z: -index * 10, y: index * -20 }}
+      initial={{ scale: 0.9, opacity: 0, y: 20 }}
       animate={
         cardsRevealed
           ? {
               scale: 1,
               opacity: 1,
-              z: 0,
               y: 0,
               transition: {
-                delay: index * 0.15,
-                duration: 0.6,
+                delay: index * 0.1,
+                duration: 0.5,
                 type: "spring",
                 stiffness: 100,
                 damping: 15
@@ -442,67 +398,44 @@ const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
           : {}
       }
     >
-      <Card className="overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-        {/* Image & hover */}
-        <motion.div
-          className="cursor-pointer"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={() => navigate(`/products/${product._id}`)}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.3 }}
-        >
-          <div className="relative h-56 bg-gray-50 overflow-hidden">
-            <motion.img
-              src={
-                product.files && product.files[0]
-                  ? product.files[0].url
-                  : babyChickDrinker
-              }
-              alt={product.name}
-              className="w-full h-full object-contain p-6"
-              animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
-              transition={{ duration: 0.4 }}
-            />
+      <Card
+        className="overflow-hidden border border-gray-200 hover:shadow-2xl transition-all duration-300 h-full flex flex-col bg-white rounded-2xl cursor-pointer group"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => navigate(`/products/${product._id}`)}
+      >
+        {/* Image */}
+        <div className="relative h-56 bg-gray-50 overflow-hidden">
+          <motion.img
+            src={product.files?.[0]?.url || babyChickDrinker}
+            alt={product.name}
+            className="w-full h-full object-contain p-6"
+            animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
+            transition={{ duration: 0.4 }}
+          />
+          
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+            initial={{ opacity: 0 }}
+            animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
+          />
+        </div>
 
-            <motion.div
-              className="absolute inset-0 bg-black/10"
-              initial={{ opacity: 0 }}
-              animate={isHovered ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-        </motion.div>
-
-        {/* Content area */}
-        <CardContent className="p-6 flex-1 flex flex-col overflow-hidden">
-          <div className="mb-3 flex-shrink-0">
-            <span className="text-xs font-body font-semibold text-red-600 uppercase tracking-wide">
-              {getCategoryName(product.category)}
-            </span>
-          </div>
-
-          <h3 className="text-xl font-heading text-gray-900 mb-3 line-clamp-2 flex-shrink-0">
+        {/* Content */}
+        <CardContent className="p-5 flex-1 flex flex-col">
+          <h3 className="text-lg font-heading font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors">
             {product.name}
           </h3>
 
-          <p className="text-sm text-gray-600 font-body mb-4 line-clamp-3 flex-grow overflow-hidden">
-            {product.description}
-          </p>
 
-          <div className="flex items-center gap-2 text-xs text-gray-500 font-body mb-2 flex-shrink-0">
-            <CheckCircle2 className="w-3.5 h-3.5 text-green-600" />
-            <span>{product.specifications}</span>
-          </div>
-        </CardContent>
+      
 
-        {/* Footer buttons */}
-        <div className="p-4 pt-0 border-t border-gray-100 flex-shrink-0">
-          <div className="flex gap-2">
-            <motion.div className="flex-1" whileHover={{ scale: 1.02 }}>
+          {/* Action Buttons */}
+          <div className="flex gap-2 pt-2">
+            <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button
                 size="sm"
-                className="w-full bg-red-600 hover:bg-red-700 text-white rounded-md text-sm font-body font-semibold"
+                className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl text-sm font-body font-semibold shadow-md"
                 onClick={(e) => {
                   e.stopPropagation();
                   navigate(`/products/${product._id}`);
@@ -513,14 +446,15 @@ const ProductCardStacked = ({ product, index, navigate, cardsRevealed }) => {
             </motion.div>
 
             <motion.button
-              className="px-4 py-2 border-2 border-gray-200 rounded-md hover:border-red-600 hover:bg-red-50 transition-all"
+              className="px-3 py-2 border-2 border-gray-200 rounded-xl hover:border-red-600 hover:bg-red-50 transition-all"
               whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleShareClick}
             >
               <Share2 className="w-4 h-4 text-gray-600" />
             </motion.button>
           </div>
-        </div>
+        </CardContent>
       </Card>
     </motion.div>
   );

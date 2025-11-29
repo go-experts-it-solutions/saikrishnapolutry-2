@@ -145,7 +145,7 @@ const ProductDetail = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 py-28 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroBackgroundImage}
@@ -189,7 +189,7 @@ const ProductDetail = () => {
       </section>
 
       {/* Product Main Info */}
-      <section className="py-16 bg-white">
+      <section className="py-5 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Left - Text Content */}
@@ -214,24 +214,25 @@ const ProductDetail = () => {
           <p className="text-base text-gray-600 font-body leading-relaxed max-w-2xl mx-auto">
                 {product.description || "No description yet."}
               </p>
-              <div className="space-y-4">
-                {[`Category: ${product.category || "N/A"}`].map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-start gap-3"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 + index * 0.1 }}
-                  >
-                    <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <Check className="w-4 h-4 text-white" />
-                    </div>
-                    <p className="text-sm text-gray-600 font-body leading-relaxed">
-                      {feature}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
+        <div className="space-y-4">
+  {[`Category: ${product.category || "N/A"}`].map((feature, index) => (
+    <motion.div
+      key={index}
+      className="flex items-start gap-3"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ delay: 0.4 + index * 0.1 }}
+    >
+      <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+        <Check className="w-4 h-4 text-white" />
+      </div>
+      <p className="text-sm text-gray-600 font-body leading-relaxed">
+        {feature}
+      </p>
+    </motion.div>
+  ))}
+</div>
+
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -277,43 +278,6 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
-
-      {/* Benefits Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {staticBenefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
-                  className="text-center"
-                >
-                  <Card className="border-none shadow-md hover:shadow-xl transition-all">
-                    <CardContent className="p-8">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <Icon className="w-8 h-8 text-gray-700" />
-                      </div>
-                      <h3 className="text-lg font-heading text-gray-900 mb-3">
-                        {benefit.title}
-                      </h3>
-                      <p className="text-sm text-gray-600 font-body leading-relaxed">
-                        {benefit.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Technical Specifications */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
@@ -358,59 +322,45 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-green-700 to-green-800 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="2" fill="white"/></svg>')`
-          }} />
-        </div>
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-heading mb-4">
-              Ready to Get Started?
-            </h2>
-            <p className="text-lg mb-8 text-white/90 max-w-2xl mx-auto font-body">
-              Contact our team to learn more about this product and how it can benefit your farm
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  size="lg"
-                  className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-body font-bold px-8 py-6 rounded-full text-base shadow-xl"
+      {/* Benefits Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {staticBenefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  className="text-center"
                 >
-                  <Phone className="w-5 h-5 mr-2" />
-                  Call: +91 94404 06200
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 font-body font-bold px-8 py-6 rounded-full text-base"
-                  asChild
-                >
-                  <a href={pdfUrl} download target="_blank" rel="noopener noreferrer">
-                    <Download className="w-5 h-5 mr-2" />
-                    Download Brochure
-                  </a>
-                </Button>
-              </motion.div>
-            </div>
-          </motion.div>
+                  <Card className="border-none shadow-md hover:shadow-xl transition-all">
+                    <CardContent className="p-8">
+                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <Icon className="w-8 h-8 text-gray-700" />
+                      </div>
+                      <h3 className="text-lg font-heading text-gray-900 mb-3">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-sm text-gray-600 font-body leading-relaxed">
+                        {benefit.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
+
+      {/* Technical Specifications */}
+
+      {/* CTA Section */}
+    
       <Footer />
     </div>
   );
