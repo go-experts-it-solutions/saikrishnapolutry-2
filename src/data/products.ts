@@ -31,7 +31,7 @@ export const products: Product[] = [
       { label: "Color", value: "Brown" },
       { label: "Packaging", value: "12/24/30 eggs per tray" },
       { label: "Shelf Life", value: "28 days refrigerated" },
-      { label: "Certification", value: "USDA Organic" },
+  
     ],
     brochureUrl: "#"
   },
@@ -55,7 +55,7 @@ export const products: Product[] = [
       { label: "Age", value: "42-45 days" },
       { label: "Processing", value: "Fresh/Frozen" },
       { label: "Packaging", value: "Vacuum sealed" },
-      { label: "Certification", value: "USDA, Halal" },
+ 
     ],
     brochureUrl: "#"
   },

@@ -655,11 +655,7 @@ const Navbar = () => {
                   </div>
                 </motion.div>
 
-                <motion.div className="mt-6 p-4 bg-gradient-to-r from-red-600 to-red-700 rounded-xl text-center" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.6 }}>
-                  <p className="text-xs font-body font-semibold text-white/90 leading-relaxed">
-                    Certified by University of Illinois BESS LAB
-                  </p>
-                </motion.div>
+             
               </div>
             </motion.div>
           </>

@@ -131,7 +131,7 @@ const CategoryProducts = () => {
               Our <span className="text-red-500">Products</span>
             </h1>
             <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto font-body leading-relaxed">
-              Explore our complete range of premium poultry equipment certified by University of Illinois BESS LAB
+              Explore our complete range of premium poultry equipment 
             </p>
             <div className="flex items-center justify-center gap-2 mt-6 text-sm text-white/70 font-body">
               <Link to="/" className="hover:text-white transition-colors">HOME</Link>
