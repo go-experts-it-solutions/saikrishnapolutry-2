@@ -582,13 +582,17 @@ const Navbar = () => {
                 </div>
 
                 <motion.div className="space-y-3 mb-8" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-                  <Button
-                    variant="outline"
-                    className="w-full text-sm font-body font-semibold border-2 border-gray-300 hover:border-red-600 hover:text-red-600 text-gray-700 rounded-full py-6 transition-all"
-                    onClick={() => navigate("/contact")}
-                  >
-                    Get Quote
-                  </Button>
+               <Button
+  variant="outline"
+  className="w-full text-sm font-body font-semibold border-2 border-gray-300 hover:border-red-600 hover:text-red-600 text-gray-700 rounded-full py-6 transition-all"
+  onClick={() => {
+    setIsOpen(false);  // close menu first
+    navigate("/contact"); // then navigate
+  }}
+>
+  Get Quote
+</Button>
+
                   <Button
                     className="w-full text-sm font-body font-semibold 
                              bg-gradient-to-r from-red-600 to-red-700 

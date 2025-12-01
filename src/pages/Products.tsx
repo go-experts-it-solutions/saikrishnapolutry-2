@@ -38,19 +38,15 @@ const Products = () => {
   
   const navigate = useNavigate();
 
-  // Fetch categories from API
+  // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const res = await fetch(CATEGORIES_API);
         const data = await res.json();
-        
         if (Array.isArray(data)) {
           setCategories(data);
-          // Set first category as default selected
-          if (data.length > 0) {
-            setSelectedCategory(data[0]);
-          }
+          if (data.length > 0) setSelectedCategory(data[0]);
         }
       } catch (err) {
         console.error("Error fetching categories:", err);
@@ -59,21 +55,17 @@ const Products = () => {
     fetchCategories();
   }, []);
 
-  // Fetch products based on selected category
+  // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       if (!selectedCategory) return;
-      
       setIsLoading(true);
       try {
         const url = selectedCategory._id 
           ? `https://saikrishnapolutary-backend.onrender.com/api/products/category/${selectedCategory._id}`
           : PRODUCTS_API;
-        
         const res = await fetch(url);
         const data = await res.json();
-        
-        // Handle different response formats
         const productList = Array.isArray(data) ? data : (data.products || []);
         setProducts(productList);
       } catch (err) {
@@ -82,7 +74,6 @@ const Products = () => {
       }
       setIsLoading(false);
     };
-    
     fetchProducts();
   }, [selectedCategory]);
 
@@ -95,96 +86,56 @@ const Products = () => {
   }, [isLoading]);
 
   // Filter by search query
-  const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name?.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch;
-  });
+  const filteredProducts = products.filter((product) => 
+    product.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
-        * {
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-        }
+        * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         .font-heading { font-family: 'Poppins', sans-serif; font-weight: 700; line-height: 1.2; }
         .font-body { font-family: 'Inter', sans-serif; font-weight: 400; line-height: 1.6; }
         .font-medium { font-weight: 500; }
         .font-semibold { font-weight: 600; }
         .font-bold { font-weight: 700; }
 
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
       <Navbar />
-
-      {/* HERO SECTION */}
-      {/* <section className="relative bg-gradient-to-b py-24 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={heroBackgroundImage}
-            alt="Poultry Products"
-            className="w-full  object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r" />
-        </div>
-
-        <motion.div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="2" fill="white" opacity="0.3"/></svg>')`
-          }}
-        />
-
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-      
-       
-
-
-            <h1 className="text-5xl md:text-6xl font-heading text-white mb-6">
-              Our <span className="text-red-500">Products</span>
-            </h1>
-
-   
-          </motion.div>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" className="w-full">
-            <path
-              d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"
-              fill="white"
-            />
-          </svg>
-        </div>
-      </section> */}
 
       {/* MAIN CONTENT SECTION */}
       <section className="py-6 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8">
             
-            {/* LEFT SIDEBAR - Categories */}
+            {/* LEFT SIDEBAR / MOBILE TABS */}
             <div className="lg:w-80 flex-shrink-0">
-              <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+              {/* Desktop Sidebar */}
+              <div className="hidden lg:block bg-white rounded-2xl shadow-lg p-6 sticky top-24">
                 <h2 className="text-xl font-heading font-bold mb-6 text-gray-900 flex items-center gap-2">
                   <Factory className="w-5 h-5 text-red-600" />
                   Product Categories
                 </h2>
 
                 <div className="space-y-2">
+                  {categories.map((category) => (
+                    <CategoryButton
+                      key={category._id}
+                      category={category}
+                      isActive={selectedCategory?._id === category._id}
+                      onClick={() => setSelectedCategory(category)}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile Horizontal Tabs */}
+              <div className="lg:hidden bg-white rounded-2xl shadow-md p-3 mb-6 overflow-x-auto no-scrollbar">
+                <div className="flex gap-3">
                   {categories.map((category) => (
                     <CategoryButton
                       key={category._id}
@@ -311,12 +262,12 @@ const Products = () => {
 // Category Button Component
 const CategoryButton = ({ category, isActive, onClick }) => {
   const Icon = getCategoryIcon(category.name);
-  
+
   return (
     <motion.button
       onClick={onClick}
-      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left font-body transition-all ${
-        isActive
+      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-body transition-all whitespace-nowrap
+        ${isActive
           ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg transform scale-105"
           : "bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200"
       }`}
@@ -324,7 +275,7 @@ const CategoryButton = ({ category, isActive, onClick }) => {
       whileTap={{ scale: 0.98 }}
     >
       <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? "text-white" : "text-red-600"}`} />
-      <span className={`text-sm font-semibold ${isActive ? "text-white" : "text-gray-800"}`}>
+      <span className={`${isActive ? "text-white" : "text-gray-800"} font-semibold`}>
         {category.name}
       </span>
     </motion.button>
@@ -357,11 +308,7 @@ const ProductCard = ({ product, index, navigate, cardsRevealed }) => {
 
     if (navigator.share) {
       try {
-        await navigator.share({
-          title: product.name,
-          text: shareText,
-          url: shareUrl,
-        });
+        await navigator.share({ title: product.name, text: shareText, url: shareUrl });
       } catch (err) {
         console.error("Share cancelled or failed", err);
       }
@@ -387,13 +334,7 @@ const ProductCard = ({ product, index, navigate, cardsRevealed }) => {
               scale: 1,
               opacity: 1,
               y: 0,
-              transition: {
-                delay: index * 0.1,
-                duration: 0.5,
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }
+              transition: { delay: index * 0.1, duration: 0.5, type: "spring", stiffness: 100, damping: 15 }
             }
           : {}
       }
@@ -413,7 +354,6 @@ const ProductCard = ({ product, index, navigate, cardsRevealed }) => {
             animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
             transition={{ duration: 0.4 }}
           />
-          
           <motion.div
             className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
             initial={{ opacity: 0 }}
@@ -427,19 +367,13 @@ const ProductCard = ({ product, index, navigate, cardsRevealed }) => {
             {product.name}
           </h3>
 
-
-      
-
           {/* Action Buttons */}
           <div className="flex gap-2 pt-2">
             <motion.div className="flex-1" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button
                 size="sm"
                 className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-xl text-sm font-body font-semibold shadow-md"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigate(`/products/${product._id}`);
-                }}
+                onClick={(e) => { e.stopPropagation(); navigate(`/products/${product._id}`); }}
               >
                 View Details
               </Button>
