@@ -96,52 +96,6 @@ function ColorAccordionFAQ() {
   return (
     <>
       <Navbar />
-{/* Wave Hero Section */}
-<section className="relative bg-gradient-to-br from-[#edf3fa] via-[#3f5e7f] to-[#0a4a92] py-28 text-white overflow-hidden">
-
-  {/* Decorative background dots (same style as Products page) */}
-  <div
-  className="absolute inset-0 opacity-20 bg-cover bg-center"
-  style={{
-    backgroundImage: `url(${heroBackgroundImage})`,
-  }}
-/>
-
-
-  {/* Content */}
-  <div className="relative z-10 container mx-auto px-6 text-center">
-    
-    <h1 className="text-4xl md:text-5xl font-['Poppins'] font-bold mb-4">
-      Frequently Asked <span className="text-yellow-300">Questions</span>
-    </h1>
-
-    <p className="text-white/90 max-w-2xl mx-auto text-base font-['Poppins']">
-      Find quick answers to the most common questions about our services & products.
-    </p>
-
-    {/* Breadcrumb */}
-    <div className="flex justify-center items-center gap-2 mt-6 text-sm text-white/70 font-['Poppins']">
-      <a href="/" className="hover:text-white">HOME</a>
-      <span className="opacity-50">/</span>
-      <span className="text-white font-semibold">FAQ</span>
-    </div>
-  </div>
-
-  {/* Bottom Wave Shape — SAME as Products Page */}
-  <div className="absolute bottom-0 left-0 right-0">
-    <svg 
-      viewBox="0 0 1440 120" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-full"
-    >
-      <path 
-        d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" 
-        fill="white"
-      />
-    </svg>
-  </div>
-</section>
 
       <div className="flex flex-col gap-6 max-w-3xl w-full mx-auto my-8 px-2">
         {sections.map((section, sectionIdx) => (

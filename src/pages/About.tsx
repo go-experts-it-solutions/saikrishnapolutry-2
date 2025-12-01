@@ -4,58 +4,26 @@ import Footer from "@/components/Footer";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Eye, Award } from "lucide-react";
-
+import slider from "../assets/slider.png"
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* ========== WHAT WE DO SECTION ========== */}
-      <section className="relative bg-gradient-to-r from-green-600/10 to-green-700/10 py-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.pexels.com/photos/735968/pexels-photo-735968.jpeg"
-            alt="Poultry equipment background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40" />
-        </div>
-    
-        <div className="container mx-auto px-4 text-center relative z-10">
-            <h1 className=" text-7xl font-semibold  pb-3 text-white  text-bold font-['Poppins']">About Us</h1>
-          <div className="flex items-center justify-center gap-2 text-sm text-gray-200 font-['Poppins']">
-            <span>Home</span>
-            <span>›</span>
-            <span>What We Do?</span>
-          </div>
-        </div>
 
-        {/* Bottom Wave */}
-        <div className="absolute bottom-0 left-0 right-0 z-20">
-          <svg
-            viewBox="0 0 1440 120"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full"
-          >
-            <path
-              d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"
-              className="fill-background"
-            />
-          </svg>
-        </div>
-      </section>
 
       {/* What We Do Content */}
       <section className=" mt-1 pt-2 bg-background">
         <div className="container mx-auto px-4 ">
-               <h1 className="text-5xl font-bold mb-4 ml-6 font-['Poppins'] text-black">
+               <h1 className="text-5xl font-bold mt-12 mb-4 ml-6 font-['Poppins'] text-black">
             What We Do?
           </h1>
           {/* Text and Image Grid */}
           <div className="grid md:grid-cols-2 gap-16 items-start mb-20 max-w-6xl ml-5">
             <AnimatedSection animation="fade-up">
               <div className="space-y-6">
-                <p className="text-lg text-muted-foreground leading-relaxed font-['Poppins']">
+                <p className="text-lg mt-5 text-muted-foreground leading-relaxed font-['Poppins']">
                   Sai Krishna Plastic Industries designs, develops, manufactures and markets products & solutions 
                   for the Poultry Industry by providing innovative products of world-class quality. The company 
                   offers a comprehensive range of poultry equipment, including poultry feeders, drinkers, brooders, 
@@ -71,7 +39,7 @@ const About = () => {
                   "https://images.pexels.com/photos/5779099/pexels-photo-5779099.jpeg",
                   "https://images.pexels.com/photos/4911703/pexels-photo-4911703.jpeg",
                   "https://images.pexels.com/photos/735968/pexels-photo-735968.jpeg",
-                  "https://images.pexels.com/photos/4992830/pexels-photo-4992830.jpeg",
+                  // "https://images.pexels.com/photos/4992830/pexels-photo-4992830.jpeg",
                 ].map((src, idx) => (
                   <div
                     key={idx}

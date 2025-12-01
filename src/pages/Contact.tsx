@@ -270,23 +270,76 @@ const Contact = () => {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <Card className="overflow-hidden max-w-6xl mx-auto border-2 border-red-100">
-            <div className="aspect-[21/9] bg-muted flex items-center justify-center">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d62012520.540350445!2d79.097002!3d18.440857!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccdfd080c233b3%3A0xdffdfa7ea808c2b6!2sSai%20krishna%20poultry%20equipments!5e0!3m2!1sen!2sin!4v1763564213785!5m2!1sen!2sin"
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Sai Krishna Poultry Equipments Location"
-              />
-            </div>
-          </Card>
+{/* Map Section */}
+<section className="py-16 bg-muted/50 font-[Poppins]">
+  <div className="container mx-auto px-4">
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+      {/* Factory Address */}
+      <Card className="overflow-hidden rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3544988222253!2d78.54009187575546!3d17.441547683437794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99c3177907f7%3A0xcedd81a503d62422!2sSai%20Krishna%20Poultry%20Farm!5e0!3m2!1sen!2sin!4v1733049600000!5m2!1sen!2sin"
+          style={{ border: 0 }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-52"
+          allowFullScreen
+        ></iframe>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold font-[Poppins] mb-3">🏭 Factory Address</h3>
+          <p className="text-sm text-muted-foreground font-[Poppins] leading-relaxed">
+            Sai Krishna Poultry Equipments,  
+            Dharmaram, Karimnagar,  
+            Telangana, India – 505416.
+          </p>
         </div>
-      </section>
+      </Card>
+
+      {/* Head Office */}
+      <Card className="overflow-hidden rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.520972766073!2d78.42888657575544!3d17.43377608344149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9789dc32b0c1%3A0xabcd12345789abcd!2sAttapur%2C%20Hyderabad!5e0!3m2!1sen!2sin!4v1733049800000!5m2!1sen!2sin"
+          style={{ border: 0 }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-52"
+          allowFullScreen
+        ></iframe>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold font-[Poppins] mb-3">🏢 Head Office</h3>
+          <p className="text-sm text-muted-foreground font-[Poppins] leading-relaxed">
+            2nd Floor, Business Center Plaza,  
+            KPHP Road, Kukatpally,  
+            Hyderabad, Telangana – 500072.
+          </p>
+        </div>
+      </Card>
+
+      {/* Warehouse */}
+      <Card className="overflow-hidden rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.270539670953!2d78.4279552757549!3d17.39761298345778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb965e3f8a2dd1%3A0x4d6596883536c3a9!2sShadnagar!5e0!3m2!1sen!2sin!4v1733049700000!5m2!1sen!2sin"
+          style={{ border: 0 }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-52"
+          allowFullScreen
+        ></iframe>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold font-[Poppins] mb-3">📦 Warehouse</h3>
+          <p className="text-sm text-muted-foreground font-[Poppins] leading-relaxed">
+            Industrial Estate, Shed No. 14,  
+            Bypass Road, Warangal,  
+            Telangana – 506002.
+          </p>
+        </div>
+      </Card>
+
+    </div>
+  </div>
+</section>
+
 
       <Footer />
     </div>

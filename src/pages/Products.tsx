@@ -21,7 +21,7 @@ import {
   Flame
 } from "lucide-react";
 import babyChickDrinker from "@/assets/Baby Chick Drinker.png";
-import henproductspage from "../assets/henproductspage.jpg";
+import henproductspage from "../assets/slider.png";
 
 const PRODUCTS_API = "https://saikrishnapolutary-backend.onrender.com/api/products/getallproducts";
 const CATEGORIES_API = "https://saikrishnapolutary-backend.onrender.com/api/categories/getallcategories";
@@ -126,14 +126,14 @@ const Products = () => {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative bg-gradient-to-br from-green-800 via-green-700 to-green-900 py-24 overflow-hidden">
+      {/* <section className="relative bg-gradient-to-b py-24 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroBackgroundImage}
             alt="Poultry Products"
             className="w-full  object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-green-900/90 via-green-800/80 to-green-900/90" />
+          <div className="absolute inset-0 bg-gradient-to-r" />
         </div>
 
         <motion.div
@@ -169,7 +169,7 @@ const Products = () => {
             />
           </svg>
         </div>
-      </section>
+      </section> */}
 
       {/* MAIN CONTENT SECTION */}
       <section className="py-6 bg-gray-50">
