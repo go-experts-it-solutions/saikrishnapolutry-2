@@ -33,7 +33,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import heroImages from "../assets/hero-farm.jpg";
-import aboutimage from "../assets/aboutImage.jpg";
+import aboutimage from "../assets/Feeder.png";
 import service1 from "../assets/serviceImage1.webp";
 import service2 from "../assets/serviceImage2.jpg";
 import slider from "../assets/slider.png"
