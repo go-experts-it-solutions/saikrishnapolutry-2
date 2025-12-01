@@ -64,7 +64,7 @@ const Index = () => {
     {
       icon: Wind,
       title: "Polutry Ventilation",
-      description: "BESS LAB certified exhaust fans with 44,000-51,020 m³/h capacity for optimal air circulation",
+      description: "Exhaust fans with 44,000-51,020 m³/h capacity for optimal air circulation",
       image: serviceImage1,
       link: "/products"
     },

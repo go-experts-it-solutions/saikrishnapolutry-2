@@ -32,7 +32,7 @@ const staticProjects = [
     image: chickDrinkerImg,
     title: "Centrifugal Exhaust Fan Systems",
     description:
-      "Centrifugal exhaust fans maximize air quality in greenhouses and animal sheds—430 stainless blades, galvanized frames, BESS Lab certified for high performance.",
+      "Centrifugal exhaust fans maximize air quality in greenhouses and animal sheds—430 stainless blades, galvanized frames",
   },
   {
     meta: "Feeding · Precision Systems",
