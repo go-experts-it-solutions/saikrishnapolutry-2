@@ -194,7 +194,7 @@ const Products = () => {
                 </div>
               ) : (
                 <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {filteredProducts.map((product, index) => (
                       <ProductCard
                         key={product._id}
@@ -203,7 +203,7 @@ const Products = () => {
                         navigate={navigate}
                         cardsRevealed={cardsRevealed}
                       />
-                    ))}
+                    ))} 
                   </div>
 
                   {filteredProducts.length === 0 && (
@@ -266,7 +266,7 @@ const CategoryButton = ({ category, isActive, onClick }) => {
   return (
     <motion.button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-body transition-all whitespace-nowrap
+      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-body transition-all whitespace-nowrap w-64
         ${isActive
           ? "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-lg transform scale-105"
           : "bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200"
