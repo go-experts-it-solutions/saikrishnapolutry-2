@@ -272,46 +272,23 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-20">
             
             {/* Premium Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <motion.div
-                className="relative"
-                initial="initial"
-                animate="animate"
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              >
-                <div className="relative h-14 w-auto flex items-center">
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-transparent rounded-lg blur-md"
-                    animate={{ opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                  
-                  <motion.img
-                    src="/SKPELOGO.png"
-                    alt="SKPE - Sai Krishna Poultry Equipments"
-                    className="h-14 w-auto object-contain relative z-10 drop-shadow-lg"
-                    style={{ filter: "drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))" }}
-                  />
+    <Link to="/" className="flex items-center gap-3 group">
+  <div className="relative h-14 w-auto flex items-center transition-transform duration-300 group-hover:scale-105">
+    
+    {/* Logo Image */}
+    <img
+      src="/SKPELOGO.png"
+      alt="SKPE - Sai Krishna Poultry Equipments"
+      className="h-14 w-auto object-contain drop-shadow-lg relative z-10"
+    />
 
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                    initial={{ x: "-100%" }}
-                    animate={{ x: hasAnimated ? "-100%" : "200%" }}
-                    transition={{ delay: 1.5, duration: 0.8 }}
-                    whileHover={{ x: "200%" }}
-                  />
-                </div>
+    {/* Remove all shimmer/gradient effects */}
 
-                <motion.div
-                  className="absolute -bottom-1 -right-1 w-3 h-3 bg-red-600 rounded-full border-2 border-white shadow-md"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ scale: { delay: 1.4, duration: 0.4 }, opacity: { delay: 1.4, duration: 0.4 } }}
-                />
-              </motion.div>
-            </Link>
+    {/* Red dot */}
+    {/* <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-red-600 rounded-full border-2 border-white shadow-md" /> */}
+  </div>
+</Link>
+
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-2">
