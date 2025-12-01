@@ -5,6 +5,15 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Card, CardContent } from "@/components/ui/card";
 import { Target, Eye, Award } from "lucide-react";
 import slider from "../assets/slider.png"
+
+
+import img1 from "../assets/img-1.png";
+import img2 from "../assets/img-4.png";
+import img3 from "../assets/saikrishna-building.png";
+
+import facilityMain from "@/assets/saikrishna-building.png"; 
+
+
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -33,29 +42,27 @@ const About = () => {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection animation="fade-up" delay={0.2}>
-              <div className="grid grid-cols-2 gap-5">
-                {[
-                  "https://images.pexels.com/photos/5779099/pexels-photo-5779099.jpeg",
-                  "https://images.pexels.com/photos/4911703/pexels-photo-4911703.jpeg",
-                  "https://images.pexels.com/photos/735968/pexels-photo-735968.jpeg",
-                  // "https://images.pexels.com/photos/4992830/pexels-photo-4992830.jpeg",
-                ].map((src, idx) => (
-                  <div
-                    key={idx}
-                    className={`relative overflow-hidden rounded-lg shadow-lg group
-                      ${idx === 0 ? "row-span-2 h-80" : "h-36"}`}
-                  >
-                    <img
-                      src={src}
-                      alt={`Facility ${idx + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-                ))}
-              </div>
-            </AnimatedSection>
+       <AnimatedSection animation="fade-up" delay={0.2}>
+  <div className="grid grid-cols-2 gap-5">
+
+    {[img1, img2, img3].map((src, idx) => (
+      <div
+        key={idx}
+        className={`relative overflow-hidden rounded-lg shadow-lg group
+          ${idx === 0 ? "row-span-2 h-80" : "h-36"}`}
+      >
+        <img
+          src={src}
+          alt={`Facility ${idx + 1}`}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
+    ))}
+
+  </div>
+</AnimatedSection>
+
           </div>
         </div>
       </section>
@@ -110,22 +117,20 @@ const About = () => {
               </div>
             </AnimatedSection>
 
-            <AnimatedSection animation="fade-up" delay={0.2}>
-              <div className="relative rounded-lg overflow-hidden shadow-2xl group">
-                <img
-                  src="https://images.pexels.com/photos/5779099/pexels-photo-5779099.jpeg"
-                  alt="Sai Krishna facility"
-                  className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                {/* Optional: Play button overlay */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-500 cursor-pointer">
-                    <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1" />
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
+          <AnimatedSection animation="fade-up" delay={0.2}>
+  <div className="relative rounded-lg overflow-hidden shadow-2xl group">
+    <img
+      src={facilityMain}
+      alt="Sai Krishna facility"
+      className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+    />
+
+    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+
+
+  </div>
+</AnimatedSection>
+
           </div>
 
           {/* Originality Counts & Endeavors */}
