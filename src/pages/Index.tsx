@@ -35,13 +35,20 @@ import Footer from "@/components/Footer";
 import heroImages from "../assets/hero-farm.jpg";
 import aboutimage from "../assets/Feeder.png";
 import service1 from "../assets/box-Fan.png";
-import service2 from "../assets/serviceImage2.jpg";
+import service2 from "../assets/jumbo-drinker.png";
+import service3 from "../assets/automateddrinking.jpg"
 import slider from "../assets/slider.png"
+
+
 
 const heroImage = slider;
 const aboutImage = aboutimage;
 const serviceImage1 = service1;
 const serviceImage2 = service2;
+const serviceImage3=service3;
+
+
+
 
 const Index = () => {
   const navigate = useNavigate();
@@ -58,7 +65,7 @@ const Index = () => {
       icon: Droplets,
       title: "Automated Feeding",
       description: "Innopan feeding systems with grill-less design serving 35-50 birds per pan efficiently",
-      image: serviceImage2,
+      image: serviceImage3,
       link: "/products"
     },
     {
@@ -450,137 +457,150 @@ const Index = () => {
       </section>
 
       {/* Services Section */}
-      <section className="bg-background-50 py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-red-600 font-accent font-semibold text-sm uppercase tracking-wider">
-              → Our Services
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 text-gray-900 font-heading">
-              Top Services in Sustainable Agriculture
-            </h2>
-          </motion.div>
+<section className="bg-background-50 py-12">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <ServiceCard key={index} service={service} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-16"
+    >
+      <span className="text-red-600 font-accent font-semibold text-sm uppercase tracking-wider">
+        → Our Services
+      </span>
+
+      <h2 className="text-4xl md:text-5xl font-heading font-bold mt-4 text-gray-900">
+        Top Services in Sustainable Agriculture
+      </h2>
+    </motion.div>
+
+    {/* GRID */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 mt-5">
+      {services.map((service, index) => (
+        <ServiceCard key={index} service={service} index={index} />
+      ))}
+    </div>
+
+  </div>
+</section>
+
 
       {/* Core Values Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12 font-Poppins">
-            Our Core Values
-          </h2>
+<section className="py-20 bg-background">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Section Heading */}
+    <h2 className="text-4xl font-semibold text-center mb-12 font-Poppins">
+      Our Core Values
+    </h2>
 
-          <Swiper
-            modules={[Pagination, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={1}
-            autoplay={{ delay: 2500 }}
-            pagination={{ clickable: true }}
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-              1280: { slidesPerView: 4 },
-            }}
-          >
-            {[
-              {
-                title: "Leadership",
-                description:
-                  "Under the guidance of our Managing Partners with 25+ years of expertise, the company has grown consistently.",
-              },
-              {
-                title: "Infrastructure & Capabilities",
-                description:
-                  "We operate with modern machinery, large-scale storage, and a strategic location in Hyderabad.",
-              },
-              {
-                title: "Key Strengths",
-                description:
-                  "25+ years experience, advanced tech, pan-India supply, global exports, on-time delivery, and customer-first service.",
-              },
-              {
-                title: "Product Portfolio",
-                description:
-                  "We offer a complete lineup of poultry equipment including feeders, drinkers, brooders, and more.",
-              },
-            ].map((value, index) => (
-              <SwiperSlide key={index}>
-                <div className="h-full">
-                  <Card className="hover-lift h-full">
-                    <CardContent className="p-6 text-center">
-                      <h3 className="text-lg md:text-xl font-semibold mb-2 font-Poppins">
-                        {value.title}
-                      </h3>
-                      <p className="text-xs md:text-sm text-muted-foreground font-Poppins">
-                        {value.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
+    {/* Swiper Carousel */}
+    <Swiper
+      modules={[Pagination, Autoplay]}
+      spaceBetween={20}
+      slidesPerView={1}
+      autoplay={{ delay: 2500 }}
+      pagination={{ clickable: true }}
+      breakpoints={{
+        640: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+        1280: { slidesPerView: 4 },
+      }}
+    >
+      {[
+        {
+          title: "Leadership",
+          description:
+            "Under the guidance of our Managing Partners with 25+ years of expertise, the company has grown consistently.",
+        },
+        {
+          title: "Infrastructure & Capabilities",
+          description:
+            "We operate with modern machinery, large-scale storage, and a strategic location in Hyderabad.",
+        },
+        {
+          title: "Key Strengths",
+          description:
+            "25+ years experience, advanced tech, pan-India supply, global exports, on-time delivery, and customer-first service.",
+        },
+        {
+          title: "Product Portfolio",
+          description:
+            "We offer a complete lineup of poultry equipment including feeders, drinkers, brooders, and more.",
+        },
+      ].map((value, index) => (
+        <SwiperSlide key={index}>
+          <div className="h-full">
+            <Card className="hover-lift h-full">
+              <CardContent className="p-6 text-center">
+                <h3 className="text-lg md:text-xl font-semibold mb-2 font-Poppins">
+                  {value.title}
+                </h3>
+                <p className="text-xs md:text-sm text-gray-600 font-Poppins">
+                  {value.description}
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
+</section>
+
 
       {/* Locations Section */}
-      <section className="bg-background py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-red-600 font-accent font-semibold text-sm uppercase tracking-wider">
-              → Our Locations
-            </span>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 text-gray-900 font-heading">
-              Visit Our Facilities
-            </h2>
-          </motion.div>
+<section className="bg-background py-16">
+  <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="text-center mb-16"
+    >
+      <span className="text-red-600 font-accent font-semibold text-sm uppercase tracking-wider">
+        → Our Locations
+      </span>
+      <h2 className="text-4xl md:text-5xl font-bold mt-4 text-gray-900 font-Poppins">
+        Visit Our Facilities
+      </h2>
+    </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Hyderabad Factory",
-                location: "Kondapur (Medak)",
-                address:
-                  "Industrial Park Kondapur, Kondapur Village, Medak District - 502336, Telangana",
-                phone: ["9440406200", "9849059508"]
-              },
-              {
-                title: "Karimnagar Factory",
-                location: "Karimnagar",
-                address:
-                  "Behind Petrol Bunk, Padmanagar, Karimnagar - 505002, Telangana",
-                phone: ["9440406200", "9849059508"]
-              },
-              {
-                title: "Hyderabad Sales Depot",
-                location: "Nagole",
-                address:
-                  "Plot No: 16, Road No: 2, Mamatanagar Colony, Nagole, Hyderabad - 500068,Telangana",
-                phone: ["9440406200"]
-              }
-            ].map((location, index) => (
-              <LocationCard key={index} location={location} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Hyderabad Factory",
+          location: "Kondapur (Medak)",
+          address:
+            "Industrial Park Kondapur, Kondapur Village, Medak District - 502336, Telangana",
+          phone: ["9440406200", "9849059508"],
+          image:"", // Replace with your local asset
+        },
+        {
+          title: "Karimnagar Factory",
+          location: "Karimnagar",
+          address:
+            "Behind Petrol Bunk, Padmanagar, Karimnagar - 505002, Telangana",
+          phone: ["9440406200", "9849059508"],
+          image: "/assets/karimnagar-factory.jpg",
+        },
+        {
+          title: "Hyderabad Sales Depot",
+          location: "Nagole",
+          address:
+            "Plot No: 16, Road No: 2, Mamatanagar Colony, Nagole, Hyderabad - 500068,Telangana",
+          phone: ["9440406200"],
+          image: "/assets/hyderabad-sales.jpg",
+        }
+      ].map((location, index) => (
+        <LocationCard key={index} location={location} index={index} />
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
       <Footer />
     </div>
