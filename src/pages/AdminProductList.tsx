@@ -92,11 +92,12 @@ const AdminProductList = () => {
                       <span className="font-medium">Specifications:</span> {product.specifications}
                     </p>
                   )}
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">
-                      {product.category}
-                    </span>
-                  </div>
+               <div className="flex justify-between items-center mb-4">
+  <span className="px-3 py-1 bg-gray-100 rounded-full text-sm">
+    {product.category?.name || "Uncategorized"}
+  </span>
+</div>
+
                   <div className="flex gap-2">
                     <button
                       onClick={() => navigate(`/admin/edit/${product._id}`)}

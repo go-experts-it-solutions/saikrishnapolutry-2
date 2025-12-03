@@ -8,22 +8,20 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 import { 
-  Fan, 
+
   Wind, 
   Droplets, 
   Award, 
   ArrowRight, 
-  Sparkles,
-  Shield,
+
   Zap,
   Factory,
   CheckCircle2,
   Phone,
-  Mail,
+
   MapPin,
   Users,
-  TrendingUp,
-  Leaf,
+
   ChevronRight,
   PhoneCall
 } from "lucide-react";
@@ -32,7 +30,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-import heroImages from "../assets/hero-farm.jpg";
+
 import aboutimage from "../assets/Feeder.png";
 import service1 from "../assets/box-Fan.png";
 import service2 from "../assets/jumbo-drinker.png";
@@ -70,7 +68,7 @@ const Index = () => {
     },
     {
       icon: Wind,
-      title: "Polutry Ventilation",
+   title: "Poultry Ventilation", 
       description: "Exhaust fans with 44,000-51,020 m³/h capacity for optimal air circulation",
       image: serviceImage1,
       link: "/products"
@@ -87,18 +85,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700;900&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Libre+Franklin:wght@300;400;500;600;700;800;900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
-        .font-display { font-family: 'Cormorant Garamond', serif; }
-        .font-heading { font-family: 'Merriweather', serif; }
-        .font-body { font-family: 'IBM Plex Sans', sans-serif; }
-        .font-accent { font-family: 'Libre Franklin', sans-serif; }
+     
+.font-poppins { font-family: 'Poppins', sans-serif; }
       `}</style>
 
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative h-[75vh] overflow-hidden">
+<section className="relative min-h-[600px] h-[75vh] overflow-hidden">
         <motion.div 
           className="absolute inset-0 w-full h-full"
           initial={{ scale: 1.2 }}
@@ -238,9 +234,7 @@ const Index = () => {
                     font-accent font-semibold 
                     transition-all duration-300 
                     group relative overflow-hidden
-                    hover:bg-white 
-                    hover:text-red-600 
-                    hover:border-red-600
+                
                   "
                   onClick={() => navigate("/contact")}
                 >
@@ -265,116 +259,127 @@ const Index = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          whileHover={{ scale: 1.2 }}
-        >
-          <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center p-2 backdrop-blur-sm">
-            <motion.div 
-              className="w-1.5 h-1.5 bg-red-500 rounded-full shadow-lg shadow-red-500/50"
-              animate={{ y: [0, 20, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            />
-          </div>
-        </motion.div>
+  {/* Scroll Indicator - Alternative (Visible on all screens, better positioned) */}
+<motion.div 
+  className="absolute left-1/2 -translate-x-1/2 z-20 cursor-pointer bottom-8 md:bottom-12"
+
+  animate={{ y: [0, 10, 0] }}
+  transition={{ repeat: Infinity, duration: 2 }}
+  whileHover={{ scale: 1.2 }}
+>
+  <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center p-2 backdrop-blur-sm">
+    <motion.div 
+      className="w-1.5 h-1.5 bg-red-500 rounded-full shadow-lg shadow-red-500/50"
+      animate={{ y: [0, 20, 0] }}
+      transition={{ repeat: Infinity, duration: 2 }}
+    />
+  </div>
+</motion.div>
+
       </section>
 
 
       {/* Features Section */}
-      <section className="relative -mt-20 z-10"> 
-        <div className="w-full flex justify-center">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 place-items-center">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="mx-auto"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                whileHover={{
-                  scale: 1.05,
-                  y: -8,
-                  transition: { duration: 0.4, ease: "backOut" }
-                }}
-              >
-                <Card className="bg-background hover:shadow-2xl transition-all duration-500 
-                  border-none relative overflow-hidden group 
-                  w-full max-w-xs h-36 flex items-center justify-center rounded-xl">
-                  
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 
-                    opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+{/* Features Section */}
 
-                  <CardContent className="p-4 text-center relative z-10 flex flex-col items-center justify-center">
-                    <motion.div
-                      className="relative inline-block mb-2"
-                      whileHover={{
-                        scale: 1.2,
-                        rotate: [0, -10, 10, -10, 0],
-                        transition: {
-                          scale: { duration: 0.3 },
-                          rotate: { duration: 0.6, ease: "easeInOut" }
-                        }
-                      }}
-                    >
-                      <motion.div
-                        className="absolute inset-0 bg-red-100 rounded-full -z-10"
-                        initial={{ scale: 0, opacity: 0 }}
-                        whileHover={{
-                          scale: [1, 1.5, 2],
-                          opacity: [0.6, 0.3, 0],
-                          transition: {
-                            duration: 1,
-                            repeat: Infinity,
-                            ease: "easeOut"
-                          }
-                        }}
-                      />
-                      <feature.icon className={`w-10 h-10 ${feature.color}`} />
-                    </motion.div>
 
-                    <motion.div 
-                      className="text-3xl font-bold text-gray-900 mb-1 font-display 
-                      group-hover:text-red-600 group-hover:scale-110 transition-all duration-300"
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      whileInView={{ 
-                        scale: 1, 
-                        opacity: 1,
-                        transition: {
-                          type: "spring",
-                          stiffness: 200,
-                          damping: 10,
-                          delay: index * 0.1 + 0.3
-                        }
-                      }}
-                      viewport={{ once: true }}
-                    >
-                      {feature.number}
-                    </motion.div>
+{/* Features Section */}
+<section className="relative py-12 bg-gradient-to-b from-gray-50 to-white"> 
+  <div className="container mx-auto px-4">
+    {/* Wrapper with controlled negative offset */}
+    <div className="relative -mt-24 mb-8 z-30">
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-screen-xl mx-auto">
+        {features.map((feature, index) => (
+          <motion.div
+            key={index}
+            className="mx-auto w-full max-w-[280px]"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1, duration: 0.6 }}
+            whileHover={{
+              scale: 1.05,
+              y: -8,
+              transition: { duration: 0.4, ease: "backOut" }
+            }}
+          >
+            <Card className="bg-background hover:shadow-2xl transition-all duration-500 
+              border-none relative overflow-hidden group 
+              w-full h-36 flex items-center justify-center rounded-xl">
+              
+              <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 
+                opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
 
-                    <motion.div 
-                      className="text-sm text-gray-600 font-body"
-                      whileHover={{
-                        y: -2,
-                        transition: { duration: 0.3 }
-                      }}
-                    >
-                      {feature.label}
-                    </motion.div>
-                  </CardContent>
-
+              <CardContent className="p-4 text-center relative z-10 flex flex-col items-center justify-center">
+                <motion.div
+                  className="relative inline-block mb-2"
+                  whileHover={{
+                    scale: 1.2,
+                    rotate: [0, -10, 10, -10, 0],
+                    transition: {
+                      scale: { duration: 0.3 },
+                      rotate: { duration: 0.6, ease: "easeInOut" }
+                    }
+                  }}
+                >
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 
-                    origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-out"
+                    className="absolute inset-0 bg-red-100 rounded-full -z-10"
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileHover={{
+                      scale: [1, 1.5, 2],
+                      opacity: [0.6, 0.3, 0],
+                      transition: {
+                        duration: 1,
+                        repeat: Infinity,
+                        ease: "easeOut"
+                      }
+                    }}
                   />
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                  <feature.icon className={`w-10 h-10 ${feature.color}`} />
+                </motion.div>
+
+                <motion.div 
+                  className="text-3xl font-bold text-gray-900 mb-1 font-display 
+                  group-hover:text-red-600 group-hover:scale-110 transition-all duration-300"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  whileInView={{ 
+                    scale: 1, 
+                    opacity: 1,
+                    transition: {
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 10,
+                      delay: index * 0.1 + 0.3
+                    }
+                  }}
+                  viewport={{ once: true }}
+                >
+                  {feature.number}
+                </motion.div>
+
+                <motion.div 
+                  className="text-sm text-gray-600 font-body"
+                  whileHover={{
+                    y: -2,
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  {feature.label}
+                </motion.div>
+              </CardContent>
+
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-red-600 
+                origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-out"
+              />
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
       {/* About Section */}
@@ -640,8 +645,7 @@ const ServiceCard = ({ service, index }) => {
               <Icon className="w-8 h-8 text-white" />
             </div>
           </div>
-
-          <CardContent className="p-6 bg-background">
+<CardContent className="p-6 bg-background flex-1 flex flex-col">
             <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900 font-heading">
               {service.title}
             </h3>
@@ -688,7 +692,7 @@ const LocationCard = ({ location, index }) => {
             {location.location}
           </p>
 
-          <p className="text-sm md:text-base text-gray-600 font-body mb-4">
+<p className="text-base text-gray-600 font-body mb-4 leading-relaxed">
             {location.address}
           </p>
 
