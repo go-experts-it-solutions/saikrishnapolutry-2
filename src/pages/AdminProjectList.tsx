@@ -31,8 +31,8 @@ const AdminProjectList = () => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
 
     try {
-      const token = localStorage.getItem("adminToken");
-      await axios.delete(`${config.API_URL}api/projects/delete/${id}`, {
+      const token = localStorage.getItem("token");
+      await axios.delete(`${config.API_URL}/api/projects/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Project deleted successfully");

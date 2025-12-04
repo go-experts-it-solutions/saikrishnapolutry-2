@@ -354,7 +354,7 @@ const Navbar = () => {
       onMouseEnter={() => setProductsDropdownOpen(true)}
       onMouseLeave={() => setProductsDropdownOpen(false)}
     >
-      <div className="flex h-[600px]">
+      <div className="flex h-[650px]">
         {/* Left Sidebar - Categories */}
         <div className="w-80 bg-gradient-to-br from-gray-50 to-gray-100 border-r border-gray-200 rounded-bl-2xl relative overflow-hidden">
           {/* Animated scrolling line */}
@@ -415,7 +415,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Product Grid Section */}
-        <div className="flex-1 p-8 bg-white rounded-br-2xl overflow-hidden">
+   <div className="flex-1 p-8 bg-white rounded-br-2xl overflow-hidden flex flex-col">
           {loadingProducts ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
@@ -434,7 +434,7 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <div className="mb-6">
+  <div className="mb-6 flex-shrink-0">
                 <h3 className="text-2xl font-heading text-gray-900 font-bold mb-1">
                   {selectedCategory?.name}
                 </h3>
@@ -442,8 +442,7 @@ const Navbar = () => {
                   {categoryProducts.length} {categoryProducts.length === 1 ? 'product' : 'products'} available
                 </p>
               </div>
-
-              <div className="grid grid-cols-5 gap-6 max-h-[450px] overflow-y-auto custom-scrollbar pr-2">
+<div className="grid grid-cols-5 gap-6 max-h-[420px] overflow-y-auto custom-scrollbar pr-2 pt-4">
                 {categoryProducts.map((product, idx) => (
                   <Link
                     key={product._id}

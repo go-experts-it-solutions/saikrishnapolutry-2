@@ -37,7 +37,7 @@ const AdminAddProject = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!title || !description) {
+    if (!title ) {
       toast.error("Please fill in all required fields");
       setIsLoading(false);
       return;
@@ -98,7 +98,7 @@ const AdminAddProject = () => {
               onChange={(e) => setDescription(e.target.value)}
               className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
               rows="4"
-              required
+         
             />
           </div>
 

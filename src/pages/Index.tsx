@@ -31,10 +31,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 
-import aboutimage from "../assets/Feeder.png";
-import service1 from "../assets/box-Fan.png";
-import service2 from "../assets/autofeeding.png";
-import service3 from "../assets/autofeeding (2).jpg"
+import aboutimage from "../assets/companyimage.png";
+import service1 from "../assets/ventilation (1).png";
+import service2 from "../assets/polutry-drinking (1).png";
+import service3 from "../assets/auto-feeding (1).png"
 import slider from "../assets/slider.jpg"
 
 
@@ -417,10 +417,11 @@ const Index = () => {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src={aboutImage}
-                  alt="About SKPE"
-                  className="w-full h-64 sm:h-[400px] object-cover"
-                />
+  src={aboutImage}
+  alt="About SKPE"
+  className="w-full md:w-2/4 lg:w-full h-60 sm:h-[400px] object-cover mx-auto"
+ />
+
               </div>
             </motion.div>
 
