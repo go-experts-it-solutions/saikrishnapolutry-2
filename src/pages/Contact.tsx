@@ -226,7 +226,7 @@ const Contact = () => {
                     <h3 className="font-semibold mb-1 font-['Poppins']">Email Us</h3>
                     <p className="text-sm text-muted-foreground font-['Poppins']">
                       General: info@saikrishnapoultry.com<br />
-                      Sales: sales@saikrishnapoultry.com
+                      Sales: info@saikrishnapoultry.com
                     </p>
                   </div>
                 </CardContent>
@@ -279,7 +279,7 @@ const Contact = () => {
       {/* Factory Address */}
       <Card className="overflow-hidden rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3544988222253!2d78.54009187575546!3d17.441547683437794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99c3177907f7%3A0xcedd81a503d62422!2sSai%20Krishna%20Poultry%20Farm!5e0!3m2!1sen!2sin!4v1733049600000!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.6982912806147!2d78.5570844749345!3d17.378245083507355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb98d0e58275a9%3A0x50c76dcd4e77d44f!2sSai%20Krishna%20Plastic%20Industries!5e0!3m2!1sen!2sin!4v1764830557893!5m2!1sen!2sin"
           style={{ border: 0 }}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -287,11 +287,9 @@ const Contact = () => {
           allowFullScreen
         ></iframe>
         <div className="p-6">
-          <h3 className="text-xl font-semibold font-[Poppins] mb-3">🏭 Factory Address</h3>
+          <h3 className="text-xl font-semibold font-[Poppins] mb-3">Sales Depot-Hyderabad</h3>
           <p className="text-sm text-muted-foreground font-[Poppins] leading-relaxed">
-            Sai Krishna Poultry Equipments,  
-            Dharmaram, Karimnagar,  
-            Telangana, India – 505416.
+            Plot No : 16, Road Number : 2, Mamatanagar Colony, Nagole, Hyderabad- 500068  , Telangana
           </p>
         </div>
       </Card>
@@ -299,7 +297,7 @@ const Contact = () => {
       {/* Head Office */}
       <Card className="overflow-hidden rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.520972766073!2d78.42888657575544!3d17.43377608344149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9789dc32b0c1%3A0xabcd12345789abcd!2sAttapur%2C%20Hyderabad!5e0!3m2!1sen!2sin!4v1733049800000!5m2!1sen!2sin"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.033892585354!2d78.49149677862876!3d17.743042139903984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcc7962c34eaca7%3A0x46790938d3a9bca7!2sSai%20Krishna%20Plastic%20Industries%2C%20Kondapur!5e0!3m2!1sen!2sin!4v1764830919418!5m2!1sen!2sin"
           style={{ border: 0 }}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -307,11 +305,9 @@ const Contact = () => {
           allowFullScreen
         ></iframe>
         <div className="p-6">
-          <h3 className="text-xl font-semibold font-[Poppins] mb-3">🏢 Head Office</h3>
+          <h3 className="text-xl font-semibold font-[Poppins] mb-3">Factory-1</h3>
           <p className="text-sm text-muted-foreground font-[Poppins] leading-relaxed">
-            2nd Floor, Business Center Plaza,  
-            KPHP Road, Kukatpally,  
-            Hyderabad, Telangana – 500072.
+          Industrial Park Kondapur, Kondapur Village, Medak Dist – 502336, Telangana.
           </p>
         </div>
       </Card>
@@ -319,19 +315,17 @@ const Contact = () => {
       {/* Warehouse */}
       <Card className="overflow-hidden rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3807.270539670953!2d78.4279552757549!3d17.39761298345778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb965e3f8a2dd1%3A0x4d6596883536c3a9!2sShadnagar!5e0!3m2!1sen!2sin!4v1733049700000!5m2!1sen!2sin"
-          style={{ border: 0 }}
+          src="
+          https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30279.551890948114!2d79.0588353743164!3d18.440852200000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bccfc90d89128d7%3A0x165237ed5a426eee!2sSai%20Krishna%20Plastic%20Industries!5e0!3m2!1sen!2sin!4v1764831046991!5m2!1sen!2sin"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           className="w-full h-52"
           allowFullScreen
         ></iframe>
         <div className="p-6">
-          <h3 className="text-xl font-semibold font-[Poppins] mb-3">📦 Warehouse</h3>
+          <h3 className="text-xl font-semibold font-[Poppins] mb-3">Factory-2</h3>
           <p className="text-sm text-muted-foreground font-[Poppins] leading-relaxed">
-            Industrial Estate, Shed No. 14,  
-            Bypass Road, Warangal,  
-            Telangana – 506002.
+         Behind Petrol Bunk, Padmanagar, Karimnagar – 505002, Telangana.
           </p>
         </div>
       </Card>

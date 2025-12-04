@@ -451,7 +451,7 @@ const Navbar = () => {
                     onClick={() => setProductsDropdownOpen(false)}
                     className="product-item flex flex-col items-center group cursor-pointer"
                   >
-                    <div className="product-image-container w-28 h-28 rounded-full bg-gray-50 border-2 border-gray-200 flex items-center justify-center mb-3 overflow-hidden shadow-md">
+                    <div className="product-image-container w-28 h-28 rounded-full bg-white  border-2 border-gray-200 flex items-center justify-center mb-3 overflow-hidden shadow-md">
                       <img
                         src={product.files?.[0]?.url || "/favicon.png"}
                         alt={product.name}

@@ -183,7 +183,7 @@ const ProductDetail = () => {
 
       {/* RELATED PRODUCTS */}
       {relatedProducts.length > 0 && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-white text-center">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-heading mb-6 text-center">
               Related Products

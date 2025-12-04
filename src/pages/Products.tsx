@@ -346,7 +346,7 @@ const ProductCard = ({ product, index, navigate, cardsRevealed }) => {
         onClick={() => navigate(`/products/${product._id}`)}
       >
         {/* Image */}
-        <div className="relative h-56 bg-gray-50 overflow-hidden">
+        <div className="relative h-36  overflow-hidden">
           <motion.img
             src={product.files?.[0]?.url || babyChickDrinker}
             alt={product.name}

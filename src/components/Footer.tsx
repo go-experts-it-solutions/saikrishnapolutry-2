@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
 
+
+
+
 const Footer = () => {
+
+  const phoneNumbers = [
+  "9440406200",
+  "9849059508",
+  "9030059508",
+  "9246659508"
+];
   return (
     <footer className="bg-white border-t border-border mt-20 font-['Poppins']">
       <div className="container mx-auto px-4 py-12">
@@ -74,12 +84,22 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start space-x-2">
                 <MapPin size={16} className="text-primary mt-0.5 flex-shrink-0 " />
-                <span className="text-muted-foreground">Industrial Park Kondapur,<br />Kondapur Village, Medak District,<br />Hyderabad, Telangana, India</span>
+                <span className="text-muted-foreground">Industrial Park Kondapur,<br />Kondapur Village, Medak District,<br />Hyderabad-502336, Telangana, India</span>
               </li>
-              <li className="flex items-center space-x-2">
-                <Phone size={16} className="text-primary flex-shrink-0" />
-                <span className="text-muted-foreground">+91 94404 06200</span>
-              </li>
+            <ul className="space-y-2">
+  {phoneNumbers.map((number, index) => (
+    <li key={index} className="flex items-center space-x-2">
+      <Phone size={16} className="text-primary flex-shrink-0" />
+      <a 
+        href={`tel:+91${number}`} 
+        className="text-muted-foreground hover:text-red-600 transition"
+      >
+        +91 {number}
+      </a>
+    </li>
+  ))}
+</ul>
+
               <li className="flex items-center space-x-2">
                 <Mail size={16} className="text-primary flex-shrink-0" />
                 <span className="text-muted-foreground">info@saikrishnapoultry.com</span>
