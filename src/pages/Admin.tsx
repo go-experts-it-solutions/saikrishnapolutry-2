@@ -44,6 +44,15 @@ const menuItems = [
     listRoute: "/admin/getallcategories",
     bgColor: "bg-orange-50 hover:bg-orange-100",
   },
+    {
+    id: 5,
+    title: "Pdfs",
+    description: "Pdfs Mangamenet",
+    icon: <FaList className="text-5xl text-orange-500" />,
+    addRoute: "/admin/add",
+    listRoute: "/admin/pdf",
+    bgColor: "bg-orange-50 hover:bg-orange-100",
+  },
 ];
 
 

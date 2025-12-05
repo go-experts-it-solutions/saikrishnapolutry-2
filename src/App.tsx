@@ -26,6 +26,8 @@ import CategoryProduct from "./pages/CategoryProducts"
 import AdminAddCategory from "./pages/Addcategory";
 import AdminCategoriesList from "./pages/AdminCategoriesList";
 import Catilogues from "./pages/catiloguespage"
+import Adminpdf from "./pages/Adminpdf"
+import AddBrochure from "./pages/AddBrochure";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,7 @@ const App = () => (
           <Route path="/ourspeciality" element={<OurSpeciality />} />
           <Route path="/ourprojects" element={<OurProjects />} />
           <Route path="/admin" element={<Admin />} />
+           <Route path="/admin/add" element={<AddBrochure />} />
         <Route path="/admin/add-product" element={<AdminAddProduct />} />
         <Route path="/admin/add-project" element={<AdminAddProject />} />
         <Route path="/admin/add-contact" element={<AdminAddContact />} />
@@ -62,7 +65,7 @@ const App = () => (
                        <Route path="/products/:category" element={<CategoryProduct />} />
                        
                        <Route path="/allcatilogues" element={< Catilogues/>} />
-
+                              <Route path="/admin/pdf" element={< Adminpdf/>} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           {/* <Route path="*" element={<NotFound />} /> */}
