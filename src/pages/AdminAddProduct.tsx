@@ -10,7 +10,8 @@ const AdminAddProduct = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [specifications, setSpecifications] = useState("");
-  const [category, setCategory] = useState([]); // will store ObjectId
+  const [category, setCategory] = useState(""); // store ObjectId
+  const [priority, setPriority] = useState(0); // ⭐ new priority field
   const [files, setFiles] = useState([]);
   const [categories, setCategories] = useState([]); // list for dropdown
   const [isLoading, setIsLoading] = useState(false);
@@ -59,6 +60,7 @@ const AdminAddProduct = () => {
     formData.append("description", description);
     formData.append("specifications", specifications);
     formData.append("category", category); // ObjectId
+    formData.append("priority", priority); // ⭐ append priority
 
     files.forEach((f) => formData.append("files", f.file));
 
@@ -138,6 +140,22 @@ const AdminAddProduct = () => {
                 <option key={cat._id} value={cat._id}>{cat.name}</option>
               ))}
             </select>
+          </div>
+
+          {/* ⭐ NEW Priority Field */}
+          <div>
+            <label className="block font-semibold mb-1">Priority*</label>
+            <input
+              type="number"
+              value={priority}
+              onChange={e => setPriority(Number(e.target.value))}
+              className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              min={0}
+              required
+            />
+            <p className="text-sm text-gray-500 mt-1">
+              Lower numbers = higher priority (1 = highest)
+            </p>
           </div>
 
           <div>

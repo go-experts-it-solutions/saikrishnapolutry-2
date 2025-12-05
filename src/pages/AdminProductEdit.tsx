@@ -32,7 +32,8 @@ const AdminEditProduct = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [specifications, setSpecifications] = useState("");
-  const [files, setFiles] = useState([]); // [{file, preview, name, type}]
+  const [priority, setPriority] = useState(0); // ⭐ new priority state
+  const [files, setFiles] = useState([]); 
   const [isLoading, setIsLoading] = useState(true);
 
   // Load Product Once
@@ -45,6 +46,7 @@ const AdminEditProduct = () => {
         setDescription(p.description || "");
         setCategory(p.category || "");
         setSpecifications(p.specifications || "");
+        setPriority(p.priority || 0); // ⭐ set priority from backend
         setFiles(
           Array.isArray(p.files)
             ? p.files.map(f => ({
@@ -63,7 +65,6 @@ const AdminEditProduct = () => {
       }
     };
     fetchProduct();
-    // eslint-disable-next-line
   }, [id]);
 
   // Clear previews on unmount
@@ -71,16 +72,13 @@ const AdminEditProduct = () => {
     return () => {
       files.forEach(f => f.preview && !f.isRemote && URL.revokeObjectURL(f.preview));
     };
-    // eslint-disable-next-line
   }, [files]);
 
   // File management
   const handleFileChange = e => {
     const selectedFiles = Array.from(e.target.files).map(file => ({
       file,
-      preview: file.type.startsWith("image/")
-        ? URL.createObjectURL(file)
-        : null,
+      preview: file.type.startsWith("image/") ? URL.createObjectURL(file) : null,
       type: file.type,
       name: file.name,
     }));
@@ -108,13 +106,12 @@ const AdminEditProduct = () => {
     formData.append("description", description);
     formData.append("specifications", specifications);
     formData.append("category", category);
+    formData.append("priority", priority); // ⭐ append priority
 
-    // Only append new uploads, not existing remote files
-    files
-      .filter(f => !f.isRemote)
-      .forEach(f => formData.append("files", f.file));
+    // Only append new uploads
+    files.filter(f => !f.isRemote).forEach(f => formData.append("files", f.file));
 
-    // For existing files, send their IDs in a separate field if your backend expects it
+    // Existing file IDs
     const remainRemote = files.filter(f => f.isRemote).map(f => f.remoteId);
     formData.append("existingFileIds", JSON.stringify(remainRemote));
 
@@ -135,7 +132,6 @@ const AdminEditProduct = () => {
     }
   };
 
-  // Loading state
   if (isLoading)
     return (
       <div className="flex flex-col min-h-screen justify-center items-center bg-gray-50">
@@ -150,7 +146,6 @@ const AdminEditProduct = () => {
       <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
         <AnimatedLine />
 
-        {/* Back Button */}
         <button
           onClick={() => navigate("/admin")}
           className="mb-4 px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg font-semibold transition-colors"
@@ -208,8 +203,24 @@ const AdminEditProduct = () => {
               />
             </motion.div>
 
-            {/* File Input */}
+            {/* Priority ⭐ */}
             <motion.div initial="hidden" animate="visible" exit="hidden" custom={4} variants={fieldAnim}>
+              <label className="block font-semibold mb-1">Priority*</label>
+              <input
+                type="number"
+                value={priority}
+                onChange={e => setPriority(Number(e.target.value))}
+                className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                min={0}
+                required
+              />
+              <p className="text-sm text-gray-500 mt-1">
+                Lower numbers = higher priority (1 = highest)
+              </p>
+            </motion.div>
+
+            {/* Files */}
+            <motion.div initial="hidden" animate="visible" exit="hidden" custom={5} variants={fieldAnim}>
               <label className="block font-semibold mb-1">Files*</label>
               <input
                 type="file"
@@ -221,7 +232,7 @@ const AdminEditProduct = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* File preview/removal */}
+          {/* File preview */}
           {files.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
               {files.map((f, i) => (
