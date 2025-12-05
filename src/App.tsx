@@ -25,7 +25,7 @@ import AdminEditContact from "./pages/AdminEditContact";
 import CategoryProduct from "./pages/CategoryProducts"
 import AdminAddCategory from "./pages/Addcategory";
 import AdminCategoriesList from "./pages/AdminCategoriesList";
-import Catilogues from "./pages/catiloguespage"
+import Catilogues from "./pages/Catiloguespage"
 import Adminpdf from "./pages/Adminpdf"
 import AddBrochure from "./pages/AddBrochure";
 
