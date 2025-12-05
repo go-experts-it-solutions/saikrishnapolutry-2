@@ -33,39 +33,48 @@ const AdminAddProject = () => {
     };
   }, [images]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    if (!title ) {
-      toast.error("Please fill in all required fields");
-      setIsLoading(false);
-      return;
-    }
+  if (!title) {
+    toast.error("Please fill in all required fields");
+    setIsLoading(false);
+    return;
+  }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description || "");
 
-    images.forEach((img) => formData.append("images", img.file));
+  images.forEach((img) => {
+    formData.append("images", img.file);
+  });
 
-    try {
-      const token = localStorage.getItem("token");
-      await axios.post(`${config.API_URL}/api/projects/addproject`, formData, {
+  try {
+    const token = localStorage.getItem("token");
+
+    await axios.post(
+      `${config.API_URL}/api/projects/addproject`,
+      formData,
+      {
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
+          // ❌ REMOVE manual multipart content-type
         },
-      });
+      }
+    );
 
-      toast.success("Project added successfully!");
-      setTimeout(() => navigate("/admin"), 2000);
-    } catch (err) {
-      toast.error(err.response?.data?.error || "Failed to add project");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    toast.success("Project added successfully!");
+    setTimeout(() => navigate("/admin"), 2000);
+
+  } catch (err) {
+    toast.error(err.response?.data?.error || "Failed to add project");
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">

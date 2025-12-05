@@ -27,39 +27,45 @@ const Navbar = () => {
   const PRODUCTS_BY_CATEGORY_API = "https://saikrishnapolutary-backend.onrender.com/api/products/category/";
 
   // Fetch all categories
-  useEffect(() => {
-    fetch(CATEGORIES_API)
-      .then((res) => res.json())
-      .then((data) => {
-        setCategories(data);
-        // Set first category as default selected
-        if (data && data.length > 0) {
-          setSelectedCategory(data[0]);
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching categories:", err);
-        setCategories([]);
-      });
-  }, []);
+useEffect(() => {
+  fetch(CATEGORIES_API)
+    .then((res) => res.json())
+    .then((data) => {
+      if (Array.isArray(data)) {
+        // Sort by priority ascending (higher priority first)
+        const sortedCategories = data.sort((a, b) => a.priority - b.priority);
+        setCategories(sortedCategories);
+        if (sortedCategories.length > 0) setSelectedCategory(sortedCategories[0]);
+      }
+    })
+    .catch((err) => {
+      console.error("Error fetching categories:", err);
+      setCategories([]);
+    });
+}, []);
 
   // Fetch products when category changes
-  useEffect(() => {
-    if (selectedCategory && productsDropdownOpen) {
-      setLoadingProducts(true);
-      fetch(`${PRODUCTS_BY_CATEGORY_API}${selectedCategory._id}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setCategoryProducts(Array.isArray(data) ? data : []);
-          setLoadingProducts(false);
-        })
-        .catch((err) => {
-          console.error("Error fetching products:", err);
+useEffect(() => {
+  if (selectedCategory && productsDropdownOpen) {
+    setLoadingProducts(true);
+    fetch(`${PRODUCTS_BY_CATEGORY_API}${selectedCategory._id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          const sortedProducts = data.sort((a, b) => a.priority - b.priority);
+          setCategoryProducts(sortedProducts);
+        } else {
           setCategoryProducts([]);
-          setLoadingProducts(false);
-        });
-    }
-  }, [selectedCategory, productsDropdownOpen]);
+        }
+        setLoadingProducts(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching products:", err);
+        setCategoryProducts([]);
+        setLoadingProducts(false);
+      });
+  }
+}, [selectedCategory, productsDropdownOpen]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
