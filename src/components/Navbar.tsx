@@ -500,15 +500,16 @@ useEffect(() => {
                 Get Quote
               </Button>
 
-              <Button
-                asChild
-                className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
-              >
-                <a href="/SKPERed.pdf" download>
-                  <Download className="w-3.5 h-3.5 mr-1.5 relative z-10" />
-                  <span className="relative z-10">Catalogue</span>
-                </a>
-              </Button>
+     <Button 
+  asChild
+  className="relative text-sm font-body font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-full px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+>
+  <Link to="/allcatilogues">
+    <Download className="w-3.5 h-3.5 mr-1.5 relative z-10" />
+    <span className="relative z-10">Catalogues</span>
+  </Link>
+</Button>
+
             </div>
 
             {/* Mobile Menu Button */}

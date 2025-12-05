@@ -25,6 +25,7 @@ import AdminEditContact from "./pages/AdminEditContact";
 import CategoryProduct from "./pages/CategoryProducts"
 import AdminAddCategory from "./pages/Addcategory";
 import AdminCategoriesList from "./pages/AdminCategoriesList";
+import Catilogues from "./pages/catiloguespage"
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,8 @@ const App = () => (
                        {/* <Route path="/products/:category" element={<ProductsPage />} /> */}
 
                        <Route path="/products/:category" element={<CategoryProduct />} />
+                       
+                       <Route path="/allcatilogues" element={< Catilogues/>} />
 
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
