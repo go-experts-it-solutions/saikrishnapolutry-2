@@ -57,23 +57,33 @@ const Products = () => {
 
   // Fetch products
   useEffect(() => {
-    const fetchProducts = async () => {
-      if (!selectedCategory) return;
-      setIsLoading(true);
-      try {
-        const url = selectedCategory._id 
-          ? `https://saikrishnapolutary-backend.onrender.com/api/products/category/${selectedCategory._id}`
-          : PRODUCTS_API;
-        const res = await fetch(url);
-        const data = await res.json();
-        const productList = Array.isArray(data) ? data : (data.products || []);
-        setProducts(productList);
-      } catch (err) {
-        console.error("Error fetching products:", err);
-        setProducts([]);
-      }
-      setIsLoading(false);
-    };
+const fetchProducts = async () => {
+  if (!selectedCategory) return;
+  setIsLoading(true);
+  try {
+    const url = selectedCategory._id 
+      ? `https://saikrishnapolutary-backend.onrender.com/api/products/category/${selectedCategory._id}`
+      : PRODUCTS_API;
+
+    const res = await fetch(url);
+    const data = await res.json();
+    const productList = Array.isArray(data) ? data : (data.products || []);
+
+    // ⭐ SORT HERE
+    const sortedProducts = [...productList].sort((a, b) => {
+      const pA = a.priority ?? 9999;
+      const pB = b.priority ?? 9999;
+      return pA - pB;
+    });
+
+    setProducts(sortedProducts);
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    setProducts([]);
+  }
+  setIsLoading(false);
+};
+
     fetchProducts();
   }, [selectedCategory]);
 
